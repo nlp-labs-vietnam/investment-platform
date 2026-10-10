@@ -1,0 +1,32 @@
+# Laravel
+/node_modules
+/public/hot
+/public/storage
+/public/build
+/storage/*.key
+/storage/logs
+/vendor
+.env
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# IDE
+/.idea
+/.vscode
+
+# Archives / backups
+*.zip
+*.sql
+nlpgroup_backup_*.zip
+
+# Export/build artifacts
+/exports/*.ipa
+/exports/*.apk
+
+# OS
+.DS_Store
+Thumbs.db

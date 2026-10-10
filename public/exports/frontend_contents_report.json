@@ -1,0 +1,1342 @@
+{
+    "Hero": [
+        {
+            "db_name": "hero",
+            "theme": "light",
+            "type": "single",
+            "content_id": 1,
+            "translations": {
+                "English": {
+                    "title": "WORLD'S FIRST",
+                    "sub_title": "Real Estate Investment Platform For Everyone",
+                    "another_sub_title": "WITH REAL EARNING",
+                    "short_description": "Buy shares of rental properties, earn monthly income, and watch your money grow",
+                    "button_name": "Start Exploring"
+                },
+                "Tiếng Việt": {
+                    "title": "NỀN TẢNG ĐẦU TIÊN",
+                    "sub_title": "Nền Tảng Đầu Tư Bất Động Sản Cho Tất Cả Mọi Người",
+                    "another_sub_title": "VỚI LỢI NHUẬN THỰC",
+                    "short_description": "Mua cổ phần bất động sản cho thuê, nhận thu nhập hàng tháng và chứng kiến tiền của bạn tăng trưởng",
+                    "button_name": "Bắt đầu khám phá"
+                }
+            }
+        },
+        {
+            "db_name": "hero",
+            "theme": "green",
+            "type": "single",
+            "content_id": 45,
+            "translations": {
+                "English": {
+                    "title": "Unlock the",
+                    "sub_title": "Door to your Dream Property Today and Forever",
+                    "happy_client_title": "12k+",
+                    "happy_client_sub_title": "Happy clients",
+                    "review_title": "46k+",
+                    "review_sub_title": "Reviews",
+                    "welcome_bonus_title": "50",
+                    "welcome_bonus_sub_title": "Welcome Bonus",
+                    "button_name": "start explore now•"
+                },
+                "Tiếng Việt": {
+                    "title": "Mở Khóa",
+                    "sub_title": "Cánh Cửa Đến Bất Động Sản Mơ Ước Của Bạn Hôm Nay Và Mãi Mãi",
+                    "happy_client_title": "12k+",
+                    "happy_client_sub_title": "Khách hàng hài lòng",
+                    "review_title": "46k+",
+                    "review_sub_title": "Đánh giá",
+                    "welcome_bonus_title": "50",
+                    "welcome_bonus_sub_title": "Thưởng chào mừng",
+                    "button_name": "bắt đầu khám phá ngay•"
+                }
+            }
+        }
+    ],
+    "Feature": [
+        {
+            "db_name": "feature",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 2,
+            "translations": {
+                "English": {
+                    "title": "Passive Income",
+                    "short_details": "Earn rental income and receive deposits quarterly"
+                },
+                "Tiếng Việt": {
+                    "title": "Thu Nhập Thụ Động",
+                    "short_details": "Kiếm thu nhập cho thuê và nhận tiền gửi hàng quý"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 3,
+            "translations": {
+                "English": {
+                    "title": "Secure &amp; Cost-efficient",
+                    "short_details": "Digital security is legally compliant and tangible for qualified investors"
+                },
+                "Tiếng Việt": {
+                    "title": "An Toàn &amp; Tiết Kiệm Chi Phí",
+                    "short_details": "Bảo mật kỹ thuật số tuân thủ pháp lý và hữu hình cho các nhà đầu tư đủ tiêu chuẩn"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 4,
+            "translations": {
+                "English": {
+                    "title": "Transparency",
+                    "short_details": "Easily consult the full documentation for each property."
+                },
+                "Tiếng Việt": {
+                    "title": "Minh Bạch",
+                    "short_details": "Dễ dàng tra cứu đầy đủ tài liệu cho từng bất động sản"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 5,
+            "translations": {
+                "English": {
+                    "title": "Support",
+                    "short_details": "We are available 24 hours a day and 7 days a week"
+                },
+                "Tiếng Việt": {
+                    "title": "Hỗ Trợ",
+                    "short_details": "Chúng tôi sẵn sàng phục vụ 24 giờ một ngày và 7 ngày một tuần"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "green",
+            "type": "single",
+            "content_id": 46,
+            "translations": {
+                "English": {
+                    "title": "Boost the Potential of Your Financial Portfolio",
+                    "short_details": "Explore the exceptional features that make our platform the ideal choice for investors, offering benefits designed to maximize returns, enhance your experience, and ensure global financial growth."
+                },
+                "Tiếng Việt": {
+                    "title": "Nâng Cao Tiềm Năng Danh Mục Tài Chính Của Bạn",
+                    "short_details": "Khám phá những tính năng vượt trội giúp nền tảng của chúng tôi trở thành lựa chọn lý tưởng cho các nhà đầu tư, cung cấp các lợi ích được thiết kế để tối đa hóa lợi nhuận, nâng cao trải nghiệm và đảm bảo tăng trưởng tài chính toàn cầu."
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 81,
+            "translations": {
+                "English": {
+                    "title": "Passive Income",
+                    "short_details": "Earn rental income and receive deposits quarterly"
+                },
+                "Tiếng Việt": {
+                    "title": "Thu Nhập Thụ Động",
+                    "short_details": "Kiếm thu nhập cho thuê và nhận tiền gửi hàng quý"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 82,
+            "translations": {
+                "English": {
+                    "title": "Secure &amp; Cost-efficient",
+                    "short_details": "Digital security is legally compliant and tangible for qualified investors"
+                },
+                "Tiếng Việt": {
+                    "title": "An Toàn &amp; Tiết Kiệm Chi Phí",
+                    "short_details": "Bảo mật kỹ thuật số tuân thủ pháp lý và hữu hình cho các nhà đầu tư đủ tiêu chuẩn"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 83,
+            "translations": {
+                "English": {
+                    "title": "Transparency",
+                    "short_details": "Easily consult the full documentation for each property."
+                },
+                "Tiếng Việt": {
+                    "title": "Minh Bạch",
+                    "short_details": "Dễ dàng tra cứu đầy đủ tài liệu cho từng bất động sản"
+                }
+            }
+        },
+        {
+            "db_name": "feature",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 84,
+            "translations": {
+                "English": {
+                    "title": "Support",
+                    "short_details": "We are available 24 hours a day and 7 days a week"
+                },
+                "Tiếng Việt": {
+                    "title": "Hỗ Trợ",
+                    "short_details": "Chúng tôi sẵn sàng phục vụ 24 giờ một ngày và 7 ngày một tuần"
+                }
+            }
+        }
+    ],
+    "About": [
+        {
+            "db_name": "about",
+            "theme": "light",
+            "type": "single",
+            "content_id": 6,
+            "translations": {
+                "English": {
+                    "title": "ABOUT US",
+                    "sub_title": "Welcome to NLP Group",
+                    "short_title": "Finding Great Properties For Investment",
+                    "short_description": "The first tip to finding great properties for investment is to use the yellow page. This is a phone directory that lists every type of business in your area. You can use this to find businesses in your area that may be for sale or renting.Our mission is to empower the world to build wealth through modern real estate investing.Another way to find great properties for investment is to look on eBay. This is a website that sells used merchandise and items that are for sale or for rent. You can use this to find great deals on businesses and properties that are for sale."
+                },
+                "Tiếng Việt": {
+                    "title": "VỀ CHÚNG TÔI",
+                    "sub_title": "Chào Mừng Đến Với NLP Group",
+                    "short_title": "Tìm Kiếm Bất Động Sản Tuyệt Vời Để Đầu Tư",
+                    "short_description": "Chúng tôi cung cấp nền tảng đầu tư bất động sản trực tuyến hàng đầu, giúp bạn tiếp cận thị trường bất động sản một cách dễ dàng và an toàn."
+                }
+            }
+        },
+        {
+            "db_name": "about",
+            "theme": "green",
+            "type": "single",
+            "content_id": 51,
+            "translations": {
+                "English": {
+                    "title": "about us",
+                    "sub_title": "Welcome to NLP Group",
+                    "short_title": "Finding Great Properties For Investment",
+                    "short_description": "The first tip to finding great properties for investment is to use the yellow page. This is a phone directory that lists every type of business in your area. You can use this to find businesses in your area that may be for sale or renting.Our mission is to empower the world to build wealth through modern real estate investing.Another way to find great properties for investment is to look on eBay. This is a website that sells used merchandise and items that are for sale or for rent. You can use this to find great deals on businesses and properties that are for sale.Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam quos similique voluptatibus praesentium veritatis. Nostrum cumque quod est maxime ea, natus placeat veritatis alias eligendi assumenda consequuntur!",
+                    "background_title": "Earning has become simple and available for everyone!",
+                    "background_short_title": "Just Invest, Chaincity will do the rest."
+                },
+                "Tiếng Việt": {
+                    "title": "về chúng tôi",
+                    "sub_title": "Chào Mừng Đến Với NLP Group",
+                    "short_title": "Tìm Kiếm Bất Động Sản Tuyệt Vời Để Đầu Tư",
+                    "short_description": "Chúng tôi cung cấp nền tảng đầu tư bất động sản trực tuyến hàng đầu, giúp bạn tiếp cận thị trường bất động sản một cách dễ dàng và an toàn.",
+                    "background_title": "Kiếm tiền đã trở nên đơn giản và phù hợp với tất cả mọi người!",
+                    "background_short_title": "Chỉ cần đầu tư, Chaincity sẽ lo phần còn lại."
+                }
+            }
+        }
+    ],
+    "Property": [
+        {
+            "db_name": "property",
+            "theme": "light",
+            "type": "single",
+            "content_id": 7,
+            "translations": {
+                "English": {
+                    "title": "FEATURED PROPERTIES",
+                    "sub_title": "All Property Spotlight"
+                },
+                "Tiếng Việt": {
+                    "title": "BẤT ĐỘNG SẢN NỔI BẬT",
+                    "sub_title": "Tiêu Điểm Toàn Bộ Bất Động Sản"
+                }
+            }
+        },
+        {
+            "db_name": "property",
+            "theme": "green",
+            "type": "single",
+            "content_id": 52,
+            "translations": {
+                "English": {
+                    "title": "Featured properties",
+                    "sub_title": "All Property Spotlight"
+                },
+                "Tiếng Việt": {
+                    "title": "Bất động sản nổi bật",
+                    "sub_title": "Tiêu Điểm Toàn Bộ Bất Động Sản"
+                }
+            }
+        }
+    ],
+    "Testimonial": [
+        {
+            "db_name": "testimonial",
+            "theme": "light",
+            "type": "single",
+            "content_id": 8,
+            "translations": {
+                "English": {
+                    "title": "CUSTOMER TESTIMONIALS",
+                    "sub_title": "What's Our Customer Say"
+                },
+                "Tiếng Việt": {
+                    "title": "ĐÁNH GIÁ KHÁCH HÀNG",
+                    "sub_title": "Khách Hàng Của Chúng Tôi Nói Gì"
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 21,
+            "translations": {
+                "English": {
+                    "name": "Maria Jacket",
+                    "designation": "Web Developer",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Maria Jacket",
+                    "designation": "Nhà phát triển Web",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Nền tảng này thực sự dễ sử dụng và mang lại lợi nhuận ổn định cho tôi."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 22,
+            "translations": {
+                "English": {
+                    "name": "Alica Fox",
+                    "designation": "Team Hunter",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Alica Fox",
+                    "designation": "Trưởng Nhóm",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Tôi rất hài lòng với dịch vụ và lợi nhuận từ đầu tư."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 23,
+            "translations": {
+                "English": {
+                    "name": "Donald Trump",
+                    "designation": "THink Tank",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Donald Trump",
+                    "designation": "Chuyên Gia Chiến Lược",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Đây là nền tảng đầu tư đáng tin cậy nhất tôi từng sử dụng."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 24,
+            "translations": {
+                "English": {
+                    "name": "Tom Latham",
+                    "designation": "Web Developer",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Tom Latham",
+                    "designation": "Nhà phát triển Web",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Tôi đặc biệt ấn tượng với tính minh bạch và sự chuyên nghiệp của đội ngũ."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "single",
+            "content_id": 53,
+            "translations": {
+                "English": {
+                    "title": "testimonial",
+                    "sub_title": "What's our Customer say",
+                    "short_description": "chainchity has been a game-changer for my event planning business. The stunning images help me create beautiful presentations that impress my clients every time.",
+                    "background_title": "Testimonials of Trust, Quality, and Exceptional Service in Every Real Estate Experience."
+                },
+                "Tiếng Việt": {
+                    "title": "đánh giá khách hàng",
+                    "sub_title": "Khách Hàng Của Chúng Tôi Nói Gì",
+                    "short_description": "NLP Group đã thay đổi cuộc chơi trong lĩnh vực đầu tư bất động sản của tôi. Những hình ảnh ấn tượng giúp tôi tạo ra các bài thuyết trình đẹp mắt, gây ấn tượng với khách hàng mỗi lần.",
+                    "background_title": "Lời Chứng Thực Về Sự Tin Tưởng, Chất Lượng Và Dịch Vụ Xuất Sắc Trong Mọi Trải Nghiệm Bất Động Sản."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 54,
+            "translations": {
+                "English": {
+                    "name": "Maria Jacket",
+                    "designation": "Web Developer",
+                    "review": "5",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Maria Jacket",
+                    "designation": "Nhà phát triển Web",
+                    "review": "5",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Nền tảng này thực sự dễ sử dụng và mang lại lợi nhuận ổn định cho tôi."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 55,
+            "translations": {
+                "English": {
+                    "name": "Alica Fox",
+                    "designation": "Team Hunter",
+                    "review": "4",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Alica Fox",
+                    "designation": "Trưởng Nhóm",
+                    "review": "4",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Tôi rất hài lòng với dịch vụ và lợi nhuận từ đầu tư."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 56,
+            "translations": {
+                "English": {
+                    "name": "Donald Trump",
+                    "designation": "THink Tank",
+                    "review": "5",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Donald Trump",
+                    "designation": "Chuyên Gia Chiến Lược",
+                    "review": "5",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Đây là nền tảng đầu tư đáng tin cậy nhất tôi từng sử dụng."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 57,
+            "translations": {
+                "English": {
+                    "name": "Maria Jacket",
+                    "designation": "Web Developer",
+                    "review": "3",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Maria Jacket",
+                    "designation": "Nhà phát triển Web",
+                    "review": "3",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Nền tảng cung cấp nhiều lựa chọn bất động sản phù hợp với ngân sách."
+                }
+            }
+        },
+        {
+            "db_name": "testimonial",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 58,
+            "translations": {
+                "English": {
+                    "name": "Tom Latham",
+                    "designation": "Web Developer",
+                    "review": "5",
+                    "description": "We help organizations across the private, public, and social sectors create Change that Matters Welcome fat who window extent eithe formal. Removing welcomed civility or hastened is. Justice elderly but perhaps expense.."
+                },
+                "Tiếng Việt": {
+                    "name": "Tom Latham",
+                    "designation": "Nhà phát triển Web",
+                    "review": "5",
+                    "description": "Chúng tôi hỗ trợ các tổ chức trong khu vực tư nhân, công cộng và xã hội tạo ra sự thay đổi có ý nghĩa. Tôi đặc biệt ấn tượng với tính minh bạch và sự chuyên nghiệp của đội ngũ."
+                }
+            }
+        }
+    ],
+    "Latest Property": [
+        {
+            "db_name": "latest-property",
+            "theme": "light",
+            "type": "single",
+            "content_id": 9,
+            "translations": {
+                "English": {
+                    "title": "Latest Properties",
+                    "sub_title": "Latest Property"
+                },
+                "Tiếng Việt": {
+                    "title": "Bất Động Sản Mới Nhất",
+                    "sub_title": "Bất Động Sản Mới Nhất"
+                }
+            }
+        },
+        {
+            "db_name": "latest_property",
+            "theme": "light",
+            "type": "single",
+            "content_id": 42,
+            "translations": {
+                "English": {
+                    "title": "Latest Properties",
+                    "sub_title": "Latest Property"
+                },
+                "Tiếng Việt": {
+                    "title": "Bất Động Sản Mới Nhất",
+                    "sub_title": "Bất Động Sản Mới Nhất"
+                }
+            }
+        },
+        {
+            "db_name": "latest_property",
+            "theme": "green",
+            "type": "single",
+            "content_id": 59,
+            "translations": {
+                "English": {
+                    "title": "Latest Properties",
+                    "sub_title": "Latest Properties"
+                },
+                "Tiếng Việt": {
+                    "title": "Bất Động Sản Mới Nhất",
+                    "sub_title": "Bất Động Sản Mới Nhất"
+                }
+            }
+        }
+    ],
+    "Statistics": [
+        {
+            "db_name": "statistics",
+            "theme": "light",
+            "type": "single",
+            "content_id": 10,
+            "translations": {
+                "English": {
+                    "title": "WITH CHAINCITY ANYONE CAN INVEST?",
+                    "sub_title": "You Invest. Chaincity Does The Rest"
+                },
+                "Tiếng Việt": {
+                    "title": "BẤT KỲ AI CŨNG CÓ THỂ ĐẦU TƯ VỚI CHAINCITY?",
+                    "sub_title": "Bạn Đầu Tư. Chaincity Lo Phần Còn Lại"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 25,
+            "translations": {
+                "English": {
+                    "title": "10000+",
+                    "description": "Member"
+                },
+                "Tiếng Việt": {
+                    "title": "10000+",
+                    "description": "Thành Viên"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 26,
+            "translations": {
+                "English": {
+                    "title": "3000+",
+                    "description": "Investors"
+                },
+                "Tiếng Việt": {
+                    "title": "3000+",
+                    "description": "Nhà Đầu Tư"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 27,
+            "translations": {
+                "English": {
+                    "title": "25",
+                    "description": "Years Experience"
+                },
+                "Tiếng Việt": {
+                    "title": "25",
+                    "description": "Năm Kinh Nghiệm"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 28,
+            "translations": {
+                "English": {
+                    "title": "30%",
+                    "description": "Return Upto"
+                },
+                "Tiếng Việt": {
+                    "title": "30%",
+                    "description": "Lợi Nhuận Tối Đa"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "green",
+            "type": "single",
+            "content_id": 60,
+            "translations": {
+                "English": {
+                    "title": "With chainchity anyone can invest?",
+                    "sub_title": "You Invest. Chaincity Does The Rest",
+                    "short_details": "Invest with Confidence. Chaincity Handles Everything – From Property Management to Maximizing Your Returns, So You Can Focus on What Matters Most."
+                },
+                "Tiếng Việt": {
+                    "title": "Với Chainchity bất kỳ ai cũng có thể đầu tư?",
+                    "sub_title": "Bạn Đầu Tư. Chaincity Lo Phần Còn Lại",
+                    "short_details": "Đầu tư an tâm. Chaincity xử lý mọi thứ – từ quản lý bất động sản đến tối đa hóa lợi nhuận của bạn, để bạn tập trung vào những điều quan trọng nhất."
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 85,
+            "translations": {
+                "English": {
+                    "title": "10000+",
+                    "description": "Member",
+                    "font_icon": "fa-regular fa-users"
+                },
+                "Tiếng Việt": {
+                    "title": "10000+",
+                    "description": "Thành Viên",
+                    "font_icon": "fa-regular fa-users"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 86,
+            "translations": {
+                "English": {
+                    "title": "3000+",
+                    "description": "Investors",
+                    "font_icon": "fa-sharp fa-regular fa-box"
+                },
+                "Tiếng Việt": {
+                    "title": "3000+",
+                    "description": "Nhà Đầu Tư",
+                    "font_icon": "fa-sharp fa-regular fa-box"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 87,
+            "translations": {
+                "English": {
+                    "title": "25",
+                    "description": "Years Experience",
+                    "font_icon": "fa-regular fa-file-certificate"
+                },
+                "Tiếng Việt": {
+                    "title": "25",
+                    "description": "Năm Kinh Nghiệm",
+                    "font_icon": "fa-regular fa-file-certificate"
+                }
+            }
+        },
+        {
+            "db_name": "statistics",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 88,
+            "translations": {
+                "English": {
+                    "title": "30%",
+                    "description": "Return Upto",
+                    "font_icon": "fa-regular fa-arrow-rotate-left"
+                },
+                "Tiếng Việt": {
+                    "title": "30%",
+                    "description": "Lợi Nhuận Tối Đa",
+                    "font_icon": "fa-regular fa-arrow-rotate-left"
+                }
+            }
+        }
+    ],
+    "News Letter": [
+        {
+            "db_name": "news-letter",
+            "theme": "light",
+            "type": "single",
+            "content_id": 11,
+            "translations": {
+                "English": {
+                    "title": "Subscribe Newslatter",
+                    "sub_title": "TO GET EXCLUSIVE BENEFITS"
+                },
+                "Tiếng Việt": {
+                    "title": "Đăng Ký Bản Tin",
+                    "sub_title": "ĐỂ NHẬN LỢI ÍCH ĐỘC QUYỀN"
+                }
+            }
+        },
+        {
+            "db_name": "news_letter",
+            "theme": "green",
+            "type": "single",
+            "content_id": 65,
+            "translations": {
+                "English": {
+                    "title": "Newsletter",
+                    "sub_title": "Subscribe To Our Mailing List And Stay Up To Date"
+                },
+                "Tiếng Việt": {
+                    "title": "Bản Tin",
+                    "sub_title": "Đăng Ký Danh Sách Gửi Thư Của Chúng Tôi Và Luôn Cập Nhật"
+                }
+            }
+        }
+    ],
+    "FAQ": [
+        {
+            "db_name": "faq",
+            "theme": "light",
+            "type": "single",
+            "content_id": 13,
+            "translations": {
+                "English": {
+                    "title": "ANY QUESTIONS",
+                    "sub_title": "We've Got Answers",
+                    "short_details": "Help agencies to define their new business objectives and then create professional software."
+                },
+                "Tiếng Việt": {
+                    "title": "CÓ CÂU HỎI KHÔNG",
+                    "sub_title": "Chúng Tôi Có Câu Trả Lời",
+                    "short_details": "Hỗ trợ các cơ quan xác định mục tiêu kinh doanh mới và tạo ra phần mềm chuyên nghiệp."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 14,
+            "translations": {
+                "English": {
+                    "title": "Is nlpgroup a long-term investment?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "NLP Group có phải là khoản đầu tư dài hạn không?",
+                    "description": "Có, NLP Group được thiết kế như một nền tảng đầu tư dài hạn bền vững. Chúng tôi tập trung vào các bất động sản có tiềm năng tăng giá và tạo ra thu nhập ổn định theo thời gian cho nhà đầu tư."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 15,
+            "translations": {
+                "English": {
+                    "title": "Is nlpgroup a long-term investment?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "NLP Group có phải là khoản đầu tư dài hạn không?",
+                    "description": "Có, NLP Group được thiết kế như một nền tảng đầu tư dài hạn bền vững. Chúng tôi tập trung vào các bất động sản có tiềm năng tăng giá và tạo ra thu nhập ổn định theo thời gian cho nhà đầu tư."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 16,
+            "translations": {
+                "English": {
+                    "title": "How does pricing work?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "Cách tính giá hoạt động như thế nào?",
+                    "description": "Giá được tính dựa trên giá trị thị trường của bất động sản, chi phí quản lý và phí giao dịch. Chúng tôi cam kết minh bạch hoàn toàn trong cơ cấu phí để bạn luôn biết mình đang trả cho điều gì."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 17,
+            "translations": {
+                "English": {
+                    "title": "Temporibus adipisci ullam quos voluptate officiis ab",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "Làm thế nào để bắt đầu đầu tư?",
+                    "description": "Chỉ cần đăng ký tài khoản, hoàn tất xác minh KYC, nạp tiền vào tài khoản và chọn gói đầu tư phù hợp. Quy trình rất đơn giản và nhanh chóng, không đòi hỏi kinh nghiệm đầu tư trước đó."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "green",
+            "type": "single",
+            "content_id": 66,
+            "translations": {
+                "English": {
+                    "title": "Frequently Ask Question",
+                    "sub_title": "Frequently Ask Question",
+                    "short_details": "Help agencies to define their new business objectives and then create professional software."
+                },
+                "Tiếng Việt": {
+                    "title": "Câu Hỏi Thường Gặp",
+                    "sub_title": "Câu Hỏi Thường Gặp",
+                    "short_details": "Hỗ trợ các cơ quan xác định mục tiêu kinh doanh mới và tạo ra phần mềm chuyên nghiệp."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 73,
+            "translations": {
+                "English": {
+                    "title": "Who can invest with nlpgroup?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "Ai có thể đầu tư với NLP Group?",
+                    "description": "Bất kỳ ai đủ 18 tuổi trở lên đều có thể đầu tư với NLP Group. Chúng tôi chào đón cả nhà đầu tư cá nhân và tổ chức, trong nước và quốc tế, với số vốn đầu tư linh hoạt phù hợp mọi đối tượng."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 74,
+            "translations": {
+                "English": {
+                    "title": "Is nlpgroup a long-term investment?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "NLP Group có phải là khoản đầu tư dài hạn không?",
+                    "description": "Có, NLP Group được thiết kế như một nền tảng đầu tư dài hạn bền vững. Chúng tôi tập trung vào các bất động sản có tiềm năng tăng giá và tạo ra thu nhập ổn định theo thời gian cho nhà đầu tư."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 75,
+            "translations": {
+                "English": {
+                    "title": "How does pricing work?",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "Cách tính giá hoạt động như thế nào?",
+                    "description": "Giá được tính dựa trên giá trị thị trường của bất động sản, chi phí quản lý và phí giao dịch. Chúng tôi cam kết minh bạch hoàn toàn trong cơ cấu phí để bạn luôn biết mình đang trả cho điều gì."
+                }
+            }
+        },
+        {
+            "db_name": "faq",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 76,
+            "translations": {
+                "English": {
+                    "title": "Temporibus adipisci ullam quos voluptate officiis ab",
+                    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus adipisci ullam quos voluptate officiis ab exercitationem? Molestiae deserunt incidunt, inventore cumque explicabo rerum accusantium dolor natus quas eveniet ad molestias!"
+                },
+                "Tiếng Việt": {
+                    "title": "Làm thế nào để bắt đầu đầu tư?",
+                    "description": "Chỉ cần đăng ký tài khoản, hoàn tất xác minh KYC, nạp tiền vào tài khoản và chọn gói đầu tư phù hợp. Quy trình rất đơn giản và nhanh chóng, không đòi hỏi kinh nghiệm đầu tư trước đó."
+                }
+            }
+        }
+    ],
+    "Contact": [
+        {
+            "db_name": "contact-us",
+            "theme": "light",
+            "type": "single",
+            "content_id": 18,
+            "translations": {
+                "English": {
+                    "heading": "GET IN TOUCH",
+                    "sub_heading": "Let's Ask Your Questions",
+                    "title": "Our Office",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "NLP Group Joint Stock Company – Leading real estate investment platform in Vietnam. Business Registration No: 0316942991. Empowering investors with transparent, data-driven solutions."
+                },
+                "Tiếng Việt": {
+                    "heading": "LIÊN HỆ VỚI CHÚNG TÔI",
+                    "sub_heading": "Hãy Đặt Câu Hỏi Của Bạn",
+                    "title": "Văn Phòng Của Chúng Tôi",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "Công ty Cổ phần Tập đoàn NLP – Nền tảng đầu tư bất động sản hàng đầu Việt Nam. Mã số doanh nghiệp: 0316942991. Trao quyền cho nhà đầu tư với các giải pháp minh bạch và dựa trên dữ liệu."
+                }
+            }
+        },
+        {
+            "db_name": "contact",
+            "theme": "light",
+            "type": "single",
+            "content_id": 43,
+            "translations": {
+                "English": {
+                    "heading": "GET IN TOUCH",
+                    "sub_heading": "Let's Ask Your Questions",
+                    "title": "Our Office",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "NLP Group Joint Stock Company – Leading real estate investment platform in Vietnam. Business Registration No: 0316942991. Empowering investors with transparent, data-driven solutions.",
+                    "subscriber_message": "Subscribe To Our Mailing List And Stay Up To Date"
+                },
+                "Tiếng Việt": {
+                    "heading": "LIÊN HỆ VỚI CHÚNG TÔI",
+                    "sub_heading": "Hãy Đặt Câu Hỏi Của Bạn",
+                    "title": "Văn Phòng Của Chúng Tôi",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "Công ty Cổ phần Tập đoàn NLP – Nền tảng đầu tư bất động sản hàng đầu Việt Nam. Mã số doanh nghiệp: 0316942991. Trao quyền cho nhà đầu tư với các giải pháp minh bạch và dựa trên dữ liệu.",
+                    "subscriber_message": "Đăng Ký Danh Sách Gửi Thư Của Chúng Tôi Và Luôn Cập Nhật"
+                }
+            }
+        },
+        {
+            "db_name": "contact",
+            "theme": "green",
+            "type": "single",
+            "content_id": 67,
+            "translations": {
+                "English": {
+                    "heading": "GET IN TOUCH",
+                    "sub_heading": "Let's Ask Your Questions",
+                    "google_map_embed_url": "https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3918.316506823494!2d106.78040867497463!3d10.836945089318735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527d6e1fc4b0d%3A0xd9c5a1b26c0b9b0a!2sMega%20Village%20Khang%20Dien!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "NLP Group Joint Stock Company – Leading real estate investment platform in Vietnam. Business Registration No: 0316942991. Empowering investors with transparent, data-driven solutions.",
+                    "subscriber_message": "Subscribe To Our Mailing List And Stay Up To Date"
+                },
+                "Tiếng Việt": {
+                    "heading": "LIÊN HỆ VỚI CHÚNG TÔI",
+                    "sub_heading": "Hãy Đặt Câu Hỏi Của Bạn",
+                    "google_map_embed_url": "https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3918.316506823494!2d106.78040867497463!3d10.836945089318735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527d6e1fc4b0d%3A0xd9c5a1b26c0b9b0a!2sMega%20Village%20Khang%20Dien!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                    "address": "Số 16, Đường D1, Khu biệt thự Khang Điền (Mega Village), Phường Phú Hữu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
+                    "email": "phuc.luungoc@mbbank.com.vn",
+                    "phone": "+84 936 611 163",
+                    "footer_short_details": "Công ty Cổ phần Tập đoàn NLP – Nền tảng đầu tư bất động sản hàng đầu Việt Nam. Mã số doanh nghiệp: 0316942991. Trao quyền cho nhà đầu tư với các giải pháp minh bạch và dựa trên dữ liệu.",
+                    "subscriber_message": "Đăng Ký Danh Sách Gửi Thư Của Chúng Tôi Và Luôn Cập Nhật"
+                }
+            }
+        }
+    ],
+    "Maintenance Page": [
+        {
+            "db_name": "maintenance-page",
+            "theme": "light",
+            "type": "single",
+            "content_id": 19,
+            "translations": {
+                "English": {
+                    "title": "WE ARE COMING SOON",
+                    "sub_title": "The website under maintenance!",
+                    "short_description": "Someone has kidnapped our site. We are negotiation ransom and will resolve this issue in 24\/7 hours"
+                },
+                "Tiếng Việt": {
+                    "title": "CHÚNG TÔI SẮP RA MẮT",
+                    "sub_title": "Trang web đang được bảo trì!",
+                    "short_description": "Trang web hiện đang được nâng cấp. Chúng tôi sẽ khắc phục sự cố này trong vòng 24\/7 giờ"
+                }
+            }
+        },
+        {
+            "db_name": "maintenance-page",
+            "theme": "green",
+            "type": "single",
+            "content_id": 79,
+            "translations": {
+                "English": {
+                    "title": "WE ARE COMING SOON",
+                    "sub_title": "The website under maintenance!",
+                    "short_description": "Someone has kidnapped our site. We are negotiation ransom and will resolve this issue in 24\/7 hours"
+                },
+                "Tiếng Việt": {
+                    "title": "CHÚNG TÔI SẮP RA MẮT",
+                    "sub_title": "Trang web đang được bảo trì!",
+                    "short_description": "Trang web hiện đang được nâng cấp. Chúng tôi sẽ khắc phục sự cố này trong vòng 24\/7 giờ"
+                }
+            }
+        }
+    ],
+    "Blog": [
+        {
+            "db_name": "blog",
+            "theme": "light",
+            "type": "single",
+            "content_id": 20,
+            "translations": {
+                "English": {
+                    "heading": "OUR BLOGS",
+                    "sub_heading": "Latest News &amp; Articles"
+                },
+                "Tiếng Việt": {
+                    "heading": "BÀI VIẾT CỦA CHÚNG TÔI",
+                    "sub_heading": "Tin Tức &amp; Bài Viết Mới Nhất"
+                }
+            }
+        },
+        {
+            "db_name": "blog",
+            "theme": "green",
+            "type": "single",
+            "content_id": 68,
+            "translations": {
+                "English": {
+                    "heading": "news &amp; blogs",
+                    "sub_heading": "Stay Informed with Our Latest News &amp; Insights",
+                    "short_details": "Explore our blog for expert articles, industry updates, and the latest news to keep you ahead of the curve in the ever-evolving market."
+                },
+                "Tiếng Việt": {
+                    "heading": "tin tức &amp; bài viết",
+                    "sub_heading": "Cập Nhật Với Tin Tức &amp; Góc Nhìn Mới Nhất Của Chúng Tôi",
+                    "short_details": "Khám phá blog của chúng tôi với các bài viết chuyên sâu, cập nhật ngành và tin tức mới nhất để giữ bạn đi trước trong thị trường luôn biến đổi."
+                }
+            }
+        }
+    ],
+    "Social": [
+        {
+            "db_name": "social",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 34,
+            "translations": {
+                "English": {
+                    "name": "Facebook",
+                    "font_icon": "fab fa-facebook-f",
+                    "link": "https:\/\/www.facebook.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Facebook",
+                    "font_icon": "fab fa-facebook-f",
+                    "link": "https:\/\/www.facebook.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 35,
+            "translations": {
+                "English": {
+                    "name": "Twitter",
+                    "font_icon": "fab fa-twitter",
+                    "link": "https:\/\/twitter.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Twitter",
+                    "font_icon": "fab fa-twitter",
+                    "link": "https:\/\/twitter.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 36,
+            "translations": {
+                "English": {
+                    "name": "Linkedin",
+                    "font_icon": "fab fa-linkedin-in",
+                    "link": "https:\/\/bd.linkedin.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Linkedin",
+                    "font_icon": "fab fa-linkedin-in",
+                    "link": "https:\/\/bd.linkedin.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 37,
+            "translations": {
+                "English": {
+                    "name": "Instagram",
+                    "font_icon": "fab fa-instagram",
+                    "link": "https:\/\/www.instagram.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Instagram",
+                    "font_icon": "fab fa-instagram",
+                    "link": "https:\/\/www.instagram.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 69,
+            "translations": {
+                "English": {
+                    "name": "Facebook",
+                    "font_icon": "fab fa-facebook-f",
+                    "link": "https:\/\/www.facebook.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Facebook",
+                    "font_icon": "fab fa-facebook-f",
+                    "link": "https:\/\/www.facebook.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 70,
+            "translations": {
+                "English": {
+                    "name": "Twitter",
+                    "font_icon": "fab fa-twitter",
+                    "link": "https:\/\/twitter.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Twitter",
+                    "font_icon": "fab fa-twitter",
+                    "link": "https:\/\/twitter.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 71,
+            "translations": {
+                "English": {
+                    "name": "Linkedin",
+                    "font_icon": "fab fa-linkedin-in",
+                    "link": "https:\/\/bd.linkedin.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Linkedin",
+                    "font_icon": "fab fa-linkedin-in",
+                    "link": "https:\/\/bd.linkedin.com\/"
+                }
+            }
+        },
+        {
+            "db_name": "social",
+            "theme": "green",
+            "type": "multiple",
+            "content_id": 72,
+            "translations": {
+                "English": {
+                    "name": "Instagram",
+                    "font_icon": "fab fa-instagram",
+                    "link": "https:\/\/www.instagram.com\/"
+                },
+                "Tiếng Việt": {
+                    "name": "Instagram",
+                    "font_icon": "fab fa-instagram",
+                    "link": "https:\/\/www.instagram.com\/"
+                }
+            }
+        }
+    ],
+    "Privacy Policy": [
+        {
+            "db_name": "privacy_policy",
+            "theme": "light",
+            "type": "single",
+            "content_id": 40,
+            "translations": {
+                "English": {
+                    "heading": "Welcome To Our",
+                    "short_title": "Privacy Policy",
+                    "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                },
+                "Tiếng Việt": {
+                    "heading": "Chào Mừng Đến Với Chúng Tôi",
+                    "short_title": "Chính Sách Bảo Mật"
+                }
+            }
+        },
+        {
+            "db_name": "privacy_policy",
+            "theme": "green",
+            "type": "single",
+            "content_id": 77,
+            "translations": {
+                "English": {
+                    "heading": "Privacy Policy for NLP Group Services",
+                    "short_title": "Welcome to NLP Group Services. This Privacy Policy outlines our practices regarding the collection, use, and disclosure of personal information when you use our website and services.",
+                    "description": "Information We CollectWhen you create an account, we may collect your name, contact information, and address.We may collect payment information when you make transactions on our platform.Information you provide when contacting customer support or participating in surveys.How We Use Your InformationTo provide and improve our courier services.Process transactions and send order confirmations.Communicate with you about your account, updates, and promotions.Analyze website usage and improve our services.Information SharingWe do not sell, trade, or rent your personal information to third parties.We may share your information with trusted partners for specific purposes, such as delivery and payment processing.SecurityWe implement industry-standard security measures to protect your personal information.However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.Your ChoicesYou may review, update, or delete your personal information by contacting us. You can opt-out of receiving marketing communications by following the unsubscribe instructions in emails or contacting us directly.Changes to this Privacy PolicyWe may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page with an updated effective date.Contact UsIf you have any questions or concerns about this Privacy Policy, please contact us at user@gmail.com"
+                },
+                "Tiếng Việt": {
+                    "heading": "Chính Sách Bảo Mật Của Dịch Vụ NLP Group",
+                    "short_title": "Chào mừng đến với Dịch Vụ NLP Group. Chính Sách Bảo Mật này trình bày các thực hành của chúng tôi liên quan đến việc thu thập, sử dụng và tiết lộ thông tin cá nhân khi bạn sử dụng trang web và dịch vụ của chúng tôi."
+                }
+            }
+        }
+    ],
+    "Terms Condition": [
+        {
+            "db_name": "terms_condition",
+            "theme": "light",
+            "type": "single",
+            "content_id": 41,
+            "translations": {
+                "English": {
+                    "heading": "Welcome To Our",
+                    "short_title": "Terms &amp; Conditions",
+                    "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                },
+                "Tiếng Việt": {
+                    "heading": "Chào Mừng Đến Với Chúng Tôi",
+                    "short_title": "Điều Khoản &amp; Điều Kiện"
+                }
+            }
+        },
+        {
+            "db_name": "terms_condition",
+            "theme": "green",
+            "type": "single",
+            "content_id": 78,
+            "translations": {
+                "English": {
+                    "heading": "Privacy Policy for NLP Group Services",
+                    "short_title": "Welcome to NLP Group Services. This Privacy Policy outlines our practices regarding the collection, use, and disclosure of personal information when you use our website and services.",
+                    "description": "Information We CollectWhen you create an account, we may collect your name, contact information, and address.We may collect payment information when you make transactions on our platform.Information you provide when contacting customer support or participating in surveys.How We Use Your InformationTo provide and improve our courier services.Process transactions and send order confirmations.Communicate with you about your account, updates, and promotions.Analyze website usage and improve our services.Information SharingWe do not sell, trade, or rent your personal information to third parties.We may share your information with trusted partners for specific purposes, such as delivery and payment processing.SecurityWe implement industry-standard security measures to protect your personal information.However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.Your ChoicesYou may review, update, or delete your personal information by contacting us. You can opt-out of receiving marketing communications by following the unsubscribe instructions in emails or contacting us directly.Changes to this Privacy PolicyWe may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page with an updated effective date.Contact UsIf you have any questions or concerns about this Privacy Policy, please contact us at user@gmail.com"
+                },
+                "Tiếng Việt": {
+                    "heading": "Điều Khoản &amp; Điều Kiện Của Dịch Vụ NLP Group",
+                    "short_title": "Chào mừng đến với Dịch Vụ NLP Group. Chính Sách này trình bày các thực hành của chúng tôi liên quan đến việc thu thập, sử dụng và tiết lộ thông tin cá nhân khi bạn sử dụng trang web và dịch vụ của chúng tôi."
+                }
+            }
+        }
+    ],
+    "heros": [
+        {
+            "db_name": "heros",
+            "theme": "dark",
+            "type": "single",
+            "content_id": 44,
+            "translations": {
+                "English": {
+                    "heading": "WORLD'S FIRST",
+                    "sub_heading": "Real Estate Investment Platform For Everyone"
+                }
+            }
+        }
+    ],
+    "app_onboard": [
+        {
+            "db_name": "app_onboard",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 89,
+            "translations": {
+                "English": {
+                    "title": "Build Wealth In Real Estate",
+                    "subtitle": "Progressively formulate state of the art via exceptional total linkage."
+                }
+            }
+        },
+        {
+            "db_name": "app_onboard",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 90,
+            "translations": {
+                "English": {
+                    "title": "Discover Just What are you Looking for",
+                    "subtitle": "Discover Just What are you Looking for"
+                }
+            }
+        },
+        {
+            "db_name": "app_onboard",
+            "theme": "light",
+            "type": "multiple",
+            "content_id": 91,
+            "translations": {
+                "English": {
+                    "title": "Perfect Choose For Your Future",
+                    "subtitle": "Progressively formulate state of the art via exceptional total linkage."
+                }
+            }
+        }
+    ]
+}

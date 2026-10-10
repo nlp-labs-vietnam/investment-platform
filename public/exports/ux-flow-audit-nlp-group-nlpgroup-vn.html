@@ -1,0 +1,420 @@
+
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UX Flow Audit — NLP Group</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1f2328;
+    background: #ffffff;
+    padding: 32px 16px 48px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* Header */
+  .report-header { border-bottom: 2px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 28px; }
+  .report-header h1 { font-size: 22px; font-weight: 700; color: #1f2328; }
+  .report-header .sub { color: #57606a; font-size: 13px; margin-top: 4px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; }
+  .meta-item { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 14px; font-size: 12px; color: #57606a; }
+  .meta-item strong { color: #1f2328; }
+
+  /* Score bar */
+  .score-section { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .score-section h2 { font-size: 14px; font-weight: 600; color: #57606a; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .score-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 14px 16px; text-align: center; }
+  .score-card .score-num { font-size: 28px; font-weight: 700; line-height: 1; }
+  .score-card .score-label { font-size: 11px; color: #57606a; margin-top: 4px; }
+  .score-good  { color: #2da44e; }
+  .score-warn  { color: #bf8700; }
+  .score-bad   { color: #cf222e; }
+
+  /* Sections */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 15px; font-weight: 700; color: #1f2328;
+    border-left: 3px solid #3b82d4; padding-left: 10px;
+    margin-bottom: 16px;
+  }
+
+  /* Flow diagram using pure CSS */
+  .flow { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 0; margin-bottom: 12px; }
+  .flow-step {
+    background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 8px 12px; font-size: 12px; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .flow-step.ok   { border-color: #2da44e; background: #dafbe1; }
+  .flow-step.warn { border-color: #bf8700; background: #fff8c5; }
+  .flow-step.bad  { border-color: #cf222e; background: #ffebe9; }
+  .flow-arrow { color: #57606a; font-size: 16px; padding: 0 6px; align-self: center; }
+
+  /* Issues table */
+  .issues-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .issues-table th {
+    background: #f7f8fa; border: 1px solid #e5e7eb;
+    padding: 8px 12px; text-align: left; font-weight: 600; color: #57606a;
+    font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .issues-table td { border: 1px solid #e5e7eb; padding: 9px 12px; vertical-align: top; }
+  .issues-table tr:nth-child(even) td { background: #f7f8fa; }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge-critical { background: #ffebe9; color: #cf222e; }
+  .badge-high     { background: #fff8c5; color: #7d4e17; }
+  .badge-medium   { background: #ddf4ff; color: #0550ae; }
+  .badge-low      { background: #dafbe1; color: #116329; }
+
+  /* Recommendation cards */
+  .reco-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .reco-item {
+    background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 12px 16px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .reco-num {
+    min-width: 24px; height: 24px; border-radius: 50%;
+    background: #3b82d4; color: #fff; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .reco-content .reco-title { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+  .reco-content .reco-desc  { font-size: 12px; color: #57606a; }
+  .code { font-family: "SFMono-Regular", Consolas, monospace; background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 4px; padding: 1px 5px; font-size: 11.5px; color: #cf222e; }
+
+  /* Summary box */
+  .summary-box { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; font-size: 13px; line-height: 1.7; margin-bottom: 24px; }
+
+  /* Footer */
+  .report-footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #57606a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  
+  <div class="report-header">
+    <h1>UX Flow Audit — NLP Group</h1>
+    <div class="sub">Kiểm tra luồng trải nghiệm người dùng dựa trên phân tích toàn bộ source code Laravel / Blade</div>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Website:</strong> nlpgroup.vn</div>
+      <div class="meta-item"><strong>Framework:</strong> Laravel + Blade (theme: green)</div>
+      <div class="meta-item"><strong>Phạm vi:</strong> 8 trang + user portal</div>
+      <div class="meta-item"><strong>Phương pháp:</strong> Static code analysis</div>
+    </div>
+  </div>
+
+  
+  <div class="score-section">
+    <h2>Điểm đánh giá tổng thể</h2>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-num score-warn">64</div>
+        <div class="score-label">UX Tổng thể / 100</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num score-warn">70</div>
+        <div class="score-label">Onboarding (Đăng ký / Login)</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num score-good">82</div>
+        <div class="score-label">Navigation (Điều hướng)</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num score-bad">55</div>
+        <div class="score-label">Form UX &amp; Accessibility</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num score-good">78</div>
+        <div class="score-label">Responsive Layout</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num score-warn">68</div>
+        <div class="score-label">SEO / Metadata</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-title">1. Bản đồ luồng trải nghiệm chính</div>
+
+    <p style="font-size:12px;color:#57606a;margin-bottom:12px"><strong>Luồng khách truy cập (Guest Flow)</strong></p>
+    <div class="flow">
+      <div class="flow-step ok">🏠 Trang chủ (/)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">📋 Giải pháp (/solutions)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">📝 Blog (/blog)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step warn">📞 Liên hệ (/contact)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step bad">🔑 Đăng ký (/register)</div>
+    </div>
+
+    <p style="font-size:12px;color:#57606a;margin:14px 0 12px"><strong>Luồng người dùng đã đăng nhập (Authenticated Flow)</strong></p>
+    <div class="flow">
+      <div class="flow-step ok">🔑 Login</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step warn">✉️ Xác minh email/SMS</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step warn">🪪 KYC Verification</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">📊 Dashboard</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">💰 Nạp tiền (Add Fund)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">📈 Đầu tư (Property Market)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step ok">💸 Rút tiền (Payout)</div>
+    </div>
+
+    <p style="font-size:11px;color:#57606a;margin-top:8px">
+      <span style="color:#2da44e">■</span> Tốt  
+      <span style="color:#bf8700">■</span> Cần cải thiện  
+      <span style="color:#cf222e">■</span> Có lỗi
+    </p>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-title">2. Danh sách vấn đề phát hiện</div>
+    <table class="issues-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Mức độ</th>
+          <th>Vị trí</th>
+          <th>Mô tả vấn đề</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="badge badge-critical">Critical</span></td>
+          <td>Contact Form</td>
+          <td>
+            <strong>Lỗi chính tả CTA nghiêm trọng:</strong> Nút gửi liên hệ hiển thị <span class="code">"Send a massage"</span> thay vì <span class="code">"Send a message"</span>. Gây mất tin cậy thương hiệu với khách hàng B2B.
+            <br /><em style="color:#57606a;font-size:11px">File: sections/contact.blade.php:52</em>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="badge badge-critical">Critical</span></td>
+          <td>Contact Form</td>
+          <td>
+            <strong>CSS class bị lỗi syntax:</strong> <span class="code">class="mb  -3 col-12"</span> (có khoảng trắng thừa trong class name) khiến margin-bottom không áp dụng, layout bị vỡ ở trường textarea.
+            <br /><em style="color:#57606a;font-size:11px">File: sections/contact.blade.php:43</em>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>Register Form</td>
+          <td>
+            <strong>Terms &amp; Conditions checkbox không liên kết đến trang điều khoản:</strong> Checkbox <span class="code">id="exampleCheck1"</span> chứa placeholder text, không có href đến <span class="code">/terms-and-conditions</span>. Người dùng không thể đọc điều khoản trước khi đồng ý — vi phạm UX best practice và pháp lý.
+            <br /><em style="color:#57606a;font-size:11px">File: auth/register.blade.php:132–141</em>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>Register Form</td>
+          <td>
+            <strong>Lỗi validate "Confirm Password" không hiển thị đúng:</strong> Cả field <em>Password</em> và <em>Confirm Password</em> đều hiển thị <span class="code">@error('password')</span> — lỗi của confirm password không được phân biệt rõ ràng với người dùng.
+            <br /><em style="color:#57606a;font-size:11px">File: auth/register.blade.php:82–95</em>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>Register Form</td>
+          <td>
+            <strong>Checkbox "Remember Me" dùng label <span class="code">for="exampleCheck1"</span> trùng với register:</strong> Cả Login lẫn Register đều có <span class="code">id="exampleCheck1"</span>, vi phạm quy tắc ID phải duy nhất trong DOM, làm hỏng accessibility và label click.
+            <br /><em style="color:#57606a;font-size:11px">File: auth/login.blade.php:94 &amp; auth/register.blade.php:136</em>
+          </td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>KYC / Verification</td>
+          <td>
+            <strong>Luồng KYC chặn toàn bộ tính năng mà không có hướng dẫn rõ ràng:</strong> Middleware <span class="code">kyc</span> ngăn user truy cập Property Market, Wallet, Referral nhưng trang KYC index chỉ hiện bảng danh sách đơn giản, thiếu thông báo tiến trình, ETA xét duyệt, hoặc trạng thái rõ ràng.
+            <br /><em style="color:#57606a;font-size:11px">File: user/verification_center/index.blade.php</em>
+          </td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Add Fund (Nạp tiền)</td>
+          <td>
+            <strong>Sidebar payment form ẩn hoàn toàn trên mobile (&lt;768px):</strong> CSS <span class="code">.side-bar { display: none !important }</span> ẩn panel sidebar nhưng modal thay thế chỉ hiện sau khi click vào payment gateway — người dùng mobile không biết phải chọn currency/amount ở đâu cho đến khi chọn gateway.
+            <br /><em style="color:#57606a;font-size:11px">File: user/fund/add_fund.blade.php:382–388</em>
+          </td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Layout tổng thể</td>
+          <td>
+            <strong>Preloader bị comment out:</strong> <span class="code">&lt;div id="preloader"&gt;</span> bị comment toàn bộ, nhưng hình ảnh preloader cũ vẫn tham chiếu đến <span class="code">house.png</span> (nhà ở) — không phù hợp với thương hiệu năng lượng mặt trời NLP Group.
+            <br /><em style="color:#57606a;font-size:11px">File: layouts/app.blade.php:44–48</em>
+          </td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Toàn bộ theme</td>
+          <td>
+            <strong>Hình ảnh alt text trống (&gt;30 thẻ):</strong> Hầu hết ảnh nội dung có <span class="code">alt=""</span> rỗng, bao gồm hero images, blog thumbnails, property images. Ảnh có nghĩa nội dung phải có alt text mô tả để đạt WCAG 2.1 AA và hỗ trợ SEO.
+          </td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>SEO Metadata</td>
+          <td>
+            <strong>Title tag bị nối sai:</strong> <span class="code">basicControl()-&gt;site_title</span> bị strip bằng <span class="code">str_replace(site_title, ' ', $pageSeo['page_title'])</span> tạo ra title trống hoặc sai nếu page_title trùng với site_title.
+            <br /><em style="color:#57606a;font-size:11px">File: layouts/app.blade.php:12–16</em>
+          </td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Footer Newsletter</td>
+          <td>
+            <strong>Form newsletter không có CSRF token:</strong> <span class="code">&lt;form action="{{route('subscribe')}}"&gt;</span> thiếu <span class="code">@csrf</span>, dẫn đến lỗi 419 (CSRF mismatch) khi submit.
+            <br /><em style="color:#57606a;font-size:11px">File: partials/footer.blade.php:71–76</em>
+          </td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td>Dashboard</td>
+          <td>
+            <strong>Copy referral dùng <span class="code">document.execCommand("copy")</span> deprecated:</strong> API này đã bị deprecated trên Chrome. Nên dùng <span class="code">navigator.clipboard.writeText()</span>.
+            <br /><em style="color:#57606a;font-size:11px">File: user/dashboard.blade.php:455–465</em>
+          </td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td>Toàn bộ JS</td>
+          <td>
+            <strong>JS bundling thủ công quá nhiều file:</strong> Layout app.blade.php load 12+ script riêng lẻ (jQuery, Bootstrap, Owl, Swiper, Slick, Select2, Fancybox, Parallax, CounterUp, Waypoints, Isotope, AOS). Cần bundle/minify để giảm HTTP requests.
+            <br /><em style="color:#57606a;font-size:11px">File: layouts/app.blade.php:80–93</em>
+          </td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td>Đa ngôn ngữ</td>
+          <td>
+            <strong>Lang switcher redirect về "/" khi từ trang admin:</strong> Logic đúng nhưng thiếu feedback — user không biết ngôn ngữ đã thay đổi sau redirect vì không có toast notification.
+            <br /><em style="color:#57606a;font-size:11px">File: routes/web.php:46–62</em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-title">3. Điểm tích cực đáng ghi nhận</div>
+    <div class="summary-box">
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        <li>✅ <strong>Navigation responsive</strong> — dùng Bootstrap offcanvas cho mobile, có bottom nav riêng (<span class="code">frontend_bottom_nav.blade.php</span>) tối ưu UX mobile.</li>
+        <li>✅ <strong>Password toggle</strong> — có nút show/hide password trên cả Login và Register với logic JS đầy đủ (có fallback null-check).</li>
+        <li>✅ <strong>Social Login</strong> — hỗ trợ Google, Facebook, GitHub với kiểm tra feature flag, không hiển thị nếu chưa cấu hình.</li>
+        <li>✅ <strong>Real-time notifications</strong> — tích hợp Pusher + Vue.js cho push notification, onMessage Firebase foreground handler.</li>
+        <li>✅ <strong>Notiflix toast system</strong> — phản hồi success/error/warning nhất quán qua session flash toàn bộ app.</li>
+        <li>✅ <strong>AOS animations</strong> — hiệu ứng scroll-reveal được dùng hợp lý (fade-up với duration stagger) tạo cảm giác chuyên nghiệp.</li>
+        <li>✅ <strong>SEO metadata đầy đủ</strong> — có og:image, twitter:card, meta robots, theme-color, tất cả từ database động.</li>
+        <li>✅ <strong>Maintenance mode</strong> — có trang bảo trì riêng với middleware <span class="code">maintenanceMode</span> bảo vệ toàn bộ route.</li>
+        <li>✅ <strong>Payment summary preview</strong> — AJAX real-time hiển thị charge, payable amount, base currency trước khi submit.</li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-title">4. Khuyến nghị ưu tiên</div>
+    <ul class="reco-list">
+      <li class="reco-item">
+        <div class="reco-num">1</div>
+        <div class="reco-content">
+          <div class="reco-title">Sửa ngay lỗi "Send a massage" → "Send a message" [Critical]</div>
+          <div class="reco-desc">Sửa tại <span class="code">sections/contact.blade.php:52</span>. Đây là CTA chính của trang Contact — lỗi chính tả trực tiếp ảnh hưởng đến uy tín thương hiệu B2B.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">2</div>
+        <div class="reco-content">
+          <div class="reco-title">Sửa CSS class <span class="code">mb  -3</span> → <span class="code">mb-3</span> trên contact textarea [Critical]</div>
+          <div class="reco-desc">Xóa khoảng trắng thừa tại <span class="code">sections/contact.blade.php:43</span> để textarea không bị sát các field trên.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">3</div>
+        <div class="reco-content">
+          <div class="reco-title">Thêm link Terms &amp; Conditions vào checkbox đăng ký [High]</div>
+          <div class="reco-desc">Thay text "I Agree with the Terms &amp; conditions" bằng link: <span class="code">&lt;a href="/terms-and-conditions" target="_blank"&gt;Terms &amp; Conditions&lt;/a&gt;</span>. Đồng thời đổi <span class="code">id="exampleCheck1"</span> thành ID duy nhất.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">4</div>
+        <div class="reco-content">
+          <div class="reco-title">Cải thiện trang KYC với progress indicator và ETA [High]</div>
+          <div class="reco-desc">Thêm trạng thái (Pending / Approved / Rejected) và thông báo "Hồ sơ của bạn đang được xem xét trong 1–2 ngày làm việc" ngay sau khi nộp KYC để giảm anxiety cho user.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">5</div>
+        <div class="reco-content">
+          <div class="reco-title">Thêm <span class="code">@csrf</span> vào form newsletter trong footer [Medium]</div>
+          <div class="reco-desc">Form subscribe hiện tại sẽ trả về lỗi 419 khi submit. Thêm <span class="code">@csrf</span> ngay sau thẻ <span class="code">&lt;form&gt;</span> tại <span class="code">partials/footer.blade.php:71</span>.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">6</div>
+        <div class="reco-content">
+          <div class="reco-title">Tách error message cho Confirm Password [High]</div>
+          <div class="reco-desc">Thay <span class="code">@error('password')</span> dưới field confirm password bằng <span class="code">@error('password_confirmation')</span> để hiển thị đúng thông báo lỗi cho từng trường.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">7</div>
+        <div class="reco-content">
+          <div class="reco-title">Cập nhật alt text cho ảnh nội dung quan trọng [Medium]</div>
+          <div class="reco-desc">Ưu tiên: hero image, blog thumbnails, property thumbnails. Tối thiểu dùng <span class="code">alt="{{ basicControl()-&gt;site_title }}"</span> hoặc tên property/blog để tăng SEO và WCAG 2.1 compliance.</div>
+        </div>
+      </li>
+      <li class="reco-item">
+        <div class="reco-num">8</div>
+        <div class="reco-content">
+          <div class="reco-title">Thay <span class="code">document.execCommand('copy')</span> bằng Clipboard API [Low]</div>
+          <div class="reco-desc">Dùng <span class="code">navigator.clipboard.writeText(text).then(...)</span> thay cho API cũ đã deprecated để đảm bảo tương thích trình duyệt hiện đại.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-title">5. Tổng kết</div>
+    <div class="summary-box">
+      Platform NLP Group được xây dựng trên nền tảng Laravel vững chắc với kiến trúc theme/section rõ ràng, hệ thống notification real-time và thanh toán đa cổng hoạt động tốt. Tuy nhiên có <strong>2 lỗi Critical</strong> cần vá ngay (chính tả CTA + CSS broken) ảnh hưởng trực tiếp đến ấn tượng đầu tiên của khách hàng doanh nghiệp. Luồng KYC chưa đủ thông tin phản hồi gây ma sát lớn nhất trong hành trình người dùng. Newsletter form có bug CSRF sẽ thất bại 100% lần submit. Sau khi xử lý 8 ưu tiên trên, điểm UX dự kiến tăng lên <strong>80+/100</strong>.
+    </div>
+  </div>
+
+  <div class="report-footer">Made with IBM Bob</div>
+</div>
+</body>
+</html>

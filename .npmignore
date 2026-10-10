@@ -1,0 +1,46 @@
+# PHP / Laravel (không publish lên npm)
+/app/
+/bootstrap/
+/config/
+/database/
+/routes/
+/storage/
+/tests/
+/vendor/
+composer.json
+composer.lock
+artisan
+.htaccess
+.env
+.env.example
+phpunit.xml
+install.sql
+investment_platform.sql
+*.zip
+*.sql
+
+# Laravel build output (không cần publish source, chỉ publish build)
+/resources/views/
+
+# Assets tĩnh (quá nặng, không cần trong npm)
+/assets/
+/public/exports/
+/public/storage/
+
+# Node
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Misc
+.DS_Store
+Thumbs.db
+/.idea
+/.vscode
+/.git
+/.github
+/.snapshots
+/exports/
+Pland.md
+firebase-service.json
+firebase-messaging-sw.js

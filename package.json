@@ -1,9 +1,44 @@
 {
-    "private": true,
+    "name": "@nlp-labs-vietnam/investment-ui",
+    "version": "1.0.0",
+    "description": "Frontend UI assets for NLP Group Investment Platform — Bootstrap 5 + SCSS + Vite",
+    "keywords": [
+        "investment",
+        "solar",
+        "real-estate",
+        "bootstrap",
+        "laravel",
+        "vite",
+        "nlp-group",
+        "vietnam"
+    ],
+    "homepage": "https://nlpgroup.vn",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nlp-labs-vietnam/investment-platform.git"
+    },
+    "bugs": {
+        "url": "https://github.com/nlp-labs-vietnam/investment-platform/issues"
+    },
+    "license": "UNLICENSED",
+    "author": "NLP Group <dev@nlpgroup.vn> (https://nlpgroup.vn)",
     "type": "module",
+    "main": "public/build/assets/app.js",
+    "style": "public/build/assets/app.css",
+    "files": [
+        "public/build/",
+        "resources/js/",
+        "resources/sass/",
+        "resources/css/"
+    ],
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "prepublishOnly": "npm run build"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

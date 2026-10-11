@@ -303,3 +303,32 @@ $(document).ready(function () {
         dropdownParent: $("#formModal"),
     });
 });
+
+// -----------------------------------------------
+// Navbar dropdown-list: mobile collapse toggle
+// (dùng class .dropdown-active nhất quán với light theme)
+// -----------------------------------------------
+$(document).ready(function () {
+    // Với navbar-collapse mobile: click vào nav-link có dropdown-list con
+    $(document).on('click.lightDropdown', '.navbar-collapse .navbar-nav .nav-item > .nav-link', function (e) {
+        var $child = $(this).siblings('.dropdown-list');
+        if (!$child.length) return;
+        // Chỉ kích hoạt khi đang ở trạng thái mobile (navbar-mobile hoặc màn hình nhỏ)
+        if ($(window).width() < 992) {
+            e.preventDefault();
+            $child.toggleClass('dropdown-active');
+            $(this).find('.icon').toggleClass('fa-angle-up fa-angle-down');
+        }
+    });
+
+    // Đóng tất cả dropdown khi click ra ngoài
+    $(document).on('click.lightDropdownOutside', function (e) {
+        if (!$(e.target).closest('.navbar-nav .nav-item').length) {
+            $('.navbar-nav .dropdown-list').removeClass('dropdown-active');
+            $('.navbar-nav .nav-link .icon').removeClass('fa-angle-up').addClass('fa-angle-down');
+        }
+    });
+});
+// -----------------------------------------------
+// Navbar dropdown-list end
+// -----------------------------------------------

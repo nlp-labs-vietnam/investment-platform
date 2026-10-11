@@ -454,6 +454,123 @@ a.btn-custom {
 .navbar .nav-item .nav-link.active::before, .navbar .nav-item .nav-link:hover::before {
   opacity: 1;
 }
+
+/*----------------------------------------------
+  Navbar Dropdown List (Hộp thả NLP Group)
+----------------------------------------------*/
+.navbar .navbar-nav .nav-item {
+  position: relative;
+}
+.navbar .navbar-nav .dropdown-list {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 1050;
+  min-width: 220px;
+  background-color: var(--white);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  pointer-events: none;
+}
+.navbar .navbar-nav .nav-item:hover > .dropdown-list {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+}
+.navbar .navbar-nav .dropdown-list .nav-item {
+  position: static;
+  width: 100%;
+  margin: 0;
+}
+.navbar .navbar-nav .dropdown-list .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  text-transform: none;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s, padding-left 0.15s;
+}
+.navbar .navbar-nav .dropdown-list .nav-link::before {
+  display: none;
+}
+.navbar .navbar-nav .dropdown-list .nav-link::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  flex-shrink: 0;
+  order: -1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.navbar .navbar-nav .dropdown-list .nav-link:hover {
+  background-color: rgba(var(--primary-rgb, 0,128,96), 0.07);
+  color: var(--primary);
+  padding-left: 22px;
+}
+.navbar .navbar-nav .dropdown-list .nav-link:hover::after {
+  opacity: 1;
+}
+.navbar .navbar-nav .dropdown-list .nav-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.navbar .navbar-nav .nav-item:hover > .nav-link .icon {
+  transform: rotate(180deg);
+  color: var(--primary);
+}
+.navbar .navbar-nav .nav-link .icon {
+  transition: transform 0.2s ease;
+  font-size: 11px;
+  margin-left: 3px;
+}
+/* Mobile: ẩn hover dropdown, dùng JS toggle */
+@media (max-width: 991px) {
+  .navbar .navbar-nav .dropdown-list {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .navbar .navbar-nav .nav-item:hover > .dropdown-list {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .navbar .navbar-nav .dropdown-list.dropdown-active {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    position: static !important;
+    transform: none !important;
+    box-shadow: none;
+    border: none;
+    border-left: 3px solid var(--primary);
+    border-radius: 0;
+    padding: 4px 0;
+    margin-left: 16px;
+    min-width: auto;
+    transition: none !important;
+  }
+}
+/*----------------------------------------------
+  Navbar Dropdown List end
+----------------------------------------------*/
+
 .navbar .navbar-text {
   display: flex;
 }

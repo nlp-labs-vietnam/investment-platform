@@ -444,3 +444,32 @@ if (document.querySelector('.login-signup-form')) {
 }
 
 // input field show hide password end
+
+// -----------------------------------------------
+// Navbar dropdown-list: mobile offcanvas toggle
+// -----------------------------------------------
+$(document).ready(function () {
+    // Mobile: click vào nav-link có dropdown-list con → toggle open
+    $('.offcanvas .navbar-nav .nav-item').each(function () {
+        var $item = $(this);
+        var $child = $item.find('> .dropdown-list');
+        if ($child.length) {
+            // Thêm icon toggle cho mobile nếu chưa có
+            $item.find('> .nav-link').css('cursor', 'pointer').on('click.mobileDropdown', function (e) {
+                e.preventDefault();
+                $child.toggleClass('open');
+                $(this).find('.icon').toggleClass('fa-angle-up fa-angle-down');
+            });
+        }
+    });
+
+    // Đóng offcanvas → reset tất cả dropdown
+    $('#offcanvasNavbar').on('hidden.bs.offcanvas', function () {
+        $('.offcanvas .navbar-nav .dropdown-list').removeClass('open');
+        $('.offcanvas .navbar-nav .nav-link .icon')
+            .removeClass('fa-angle-up').addClass('fa-angle-down');
+    });
+});
+// -----------------------------------------------
+// Navbar dropdown-list end
+// -----------------------------------------------

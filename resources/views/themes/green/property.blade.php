@@ -9,25 +9,35 @@
                     <form action="{{ route('property') }}" method="get">
                         <div class="d-none d-lg-block">
                             <div class="sidebar-widget-area" data-aos="fade-up" data-aos-duration="500">
-                                <h5 class="widget-title">@lang('Search Property')</h5>
+                                <h5 class="widget-title">@lang('Tìm kiếm dự án')</h5>
                                 <div class="search-box">
                                     <input type="text" class="form-control" name="name"
                                            value="{{ old('name', request()->name) }}" autocomplete="off"
-                                           placeholder="@lang('What are you looking for?')"/>
+                                           placeholder="@lang('Tên dự án, từ khoá...')"/>
                                 </div>
                                 <div class="mt-15">
                                     <select class="cmn-select2" name="location">
-                                        <option selected disabled>@lang('Select Location')</option>
+                                        <option selected disabled>@lang('Chọn khu vực')</option>
                                         @foreach($addresses as $address)
                                             <option value="{{ $address->id }}"
                                                     @if(request()->location == $address->id) selected @endif>@lang($address->title)</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="mt-15">
+                                    <select class="cmn-select2" name="type">
+                                        <option value="">@lang('Tất cả loại dự án')</option>
+                                        <option value="solar" @if(request()->type == 'solar') selected @endif>☀️ @lang('Điện mặt trời')</option>
+                                        <option value="ev" @if(request()->type == 'ev') selected @endif>🔋 @lang('Trạm sạc EV')</option>
+                                        <option value="bess" @if(request()->type == 'bess') selected @endif>⚡ @lang('Lưu trữ BESS')</option>
+                                        <option value="esg" @if(request()->type == 'esg') selected @endif>🌱 @lang('ESG & Carbon')</option>
+                                        <option value="epc" @if(request()->type == 'epc') selected @endif>🏗️ @lang('Tổng thầu EPC')</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="sidebar-widget-area" data-aos="fade-up" data-aos-duration="500">
-                                <h5 class="widget-title">@lang('Amenities')</h5>
+                                <h5 class="widget-title">@lang('Tính năng dự án')</h5>
                                 <div class="checkbox-categories-area">
                                     <div class="section-inner">
                                         <div class="categories-list">
@@ -53,7 +63,7 @@
                             </div>
 
                             <div class="sidebar-widget-area" data-aos="fade-up" data-aos-duration="500">
-                                <h5 class="widget-title">@lang('Filter By Ratings')</h5>
+                                <h5 class="widget-title">@lang('Lọc theo đánh giá')</h5>
                                 <div class="checkbox-categories-area">
                                     <div class="section-inner">
                                         <div class="categories-list">
@@ -159,7 +169,7 @@
                             </div>
 
                             <button type="submit" class="kew-btn" data-aos="fade-up" data-aos-duration="500">
-                                <span class="kew-text">@lang('filter now')</span>
+                                <span class="kew-text">@lang('Lọc dự án')</span>
                                 <div class="kew-arrow">
                                     <div class="kt-one"><i class="fa-regular fa-arrow-right-long"></i></div>
                                     <div class="kt-two"><i class="fa-regular fa-arrow-right-long"></i></div>
@@ -185,25 +195,35 @@
                             <form action="{{ route('property') }}" method="get">
                                 <div class="offcanvas-body">
                                     <div class="sidebar-widget-area">
-                                        <h5 class="widget-title">@lang('Search Property')</h5>
+                                        <h5 class="widget-title">@lang('Tìm kiếm dự án')</h5>
                                         <div class="search-box">
                                             <input type="text" class="form-control" name="name"
                                                    value="{{ old('name', request()->name) }}" autocomplete="off"
-                                                   placeholder="@lang('What are you looking for?')"/>
+                                                   placeholder="@lang('Tên dự án, từ khoá...')"/>
                                         </div>
                                         <div class="mt-15">
                                             <select class="cmn-select2" name="location">
-                                                <option selected disabled>@lang('Select Location')</option>
+                                                <option selected disabled>@lang('Chọn khu vực')</option>
                                                 @foreach($addresses as $address)
                                                     <option value="{{ $address->id }}"
                                                             @if(request()->location == $address->id) selected @endif>@lang($address->title)</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="mt-15">
+                                            <select class="cmn-select2" name="type">
+                                                <option value="">@lang('Tất cả loại dự án')</option>
+                                                <option value="solar" @if(request()->type == 'solar') selected @endif>☀️ @lang('Điện mặt trời')</option>
+                                                <option value="ev" @if(request()->type == 'ev') selected @endif>🔋 @lang('Trạm sạc EV')</option>
+                                                <option value="bess" @if(request()->type == 'bess') selected @endif>⚡ @lang('Lưu trữ BESS')</option>
+                                                <option value="esg" @if(request()->type == 'esg') selected @endif>🌱 @lang('ESG & Carbon')</option>
+                                                <option value="epc" @if(request()->type == 'epc') selected @endif>🏗️ @lang('Tổng thầu EPC')</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="sidebar-widget-area" data-aos="fade-up" data-aos-duration="500">
-                                        <h5 class="widget-title">@lang('Amenities')</h5>
+                                        <h5 class="widget-title">@lang('Tính năng dự án')</h5>
                                         <div class="checkbox-categories-area">
                                             <div class="section-inner">
                                                 <div class="categories-list">
@@ -231,7 +251,7 @@
                                     </div>
 
                                     <div class="sidebar-widget-area" data-aos="fade-up" data-aos-duration="500">
-                                        <h5 class="widget-title">@lang('Filter By Ratings')</h5>
+                                        <h5 class="widget-title">@lang('Lọc theo đánh giá')</h5>
                                         <div class="checkbox-categories-area">
                                             <div class="section-inner">
                                                 <div class="categories-list">
@@ -337,7 +357,7 @@
                                     </div>
 
                                     <button type="submit" class="kew-btn">
-                                        <span class="kew-text">@lang('filter now')</span>
+                                        <span class="kew-text">@lang('Lọc dự án')</span>
                                         <div class="kew-arrow">
                                             <div class="kt-one"><i class="fa-regular fa-arrow-right-long"></i></div>
                                             <div class="kt-two"><i class="fa-regular fa-arrow-right-long"></i></div>

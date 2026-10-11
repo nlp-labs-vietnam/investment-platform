@@ -252,6 +252,9 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     // Wiki pages
     Route::get('wiki/nlp-labs-vietnam', [\App\Http\Controllers\WikiController::class, 'nlpLabsVietnam'])->name('wiki.nlp-labs-vietnam');
 
+    // Donate page
+    Route::get('donate', [\App\Http\Controllers\DonateController::class, 'index'])->name('donate');
+
     Route::get('blog', [FrontendController::class, 'blog'])->name('blog');
     Route::get('blog-details/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.details');
     Route::get('/blog-category/{id}/{slug?}', [FrontendController::class, 'categoryWiseBlog'])->name('Category.wise.blog');

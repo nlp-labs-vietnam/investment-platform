@@ -258,6 +258,14 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::post('/contact/send', [FrontendController::class, 'contactSend'])->name('contact.send');
 
     Auth::routes();
+
+    // NLP Group ecosystem named routes
+    Route::get('/nlp-energy',       [FrontendController::class, 'page'])->defaults('slug', 'nlp-energy')->name('nlp-energy');
+    Route::get('/nlp-ev-charging',  [FrontendController::class, 'page'])->defaults('slug', 'nlp-ev-charging')->name('nlp-ev-charging');
+    Route::get('/nlp-technology',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-technology')->name('nlp-technology');
+    Route::get('/nlp-esg-carbon',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-esg-carbon')->name('nlp-esg-carbon');
+    Route::get('/ecosystem',        [FrontendController::class, 'page'])->defaults('slug', 'ecosystem')->name('ecosystem');
+
     /*= Frontend Manage Controller =*/
     Route::get("/{slug?}", [FrontendController::class, 'page'])->name('page');
 });

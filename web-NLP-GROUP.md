@@ -10,9 +10,8 @@
 
 **CẤU TRÚC WEBSITE CHÍNH THỨC NLP GROUP**
 
-NLP GROUP  
-│  
-├── TRANG CHỦ  
+
+├── TRANG CHỦ  nlpgroup.vn
 │  
 ├── VỀ NLP GROUP  
 │   │  

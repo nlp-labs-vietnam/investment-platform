@@ -249,8 +249,15 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::post('khalti/payment/verify/{trx}', [\App\Http\Controllers\khaltiPaymentController::class, 'verifyPayment'])->name('khalti.verifyPayment');
     Route::post('khalti/payment/store', [khaltiPaymentController::class, 'storePayment'])->name('khalti.storePayment');
 
-    // Wiki pages
+    // Wiki / About pages
     Route::get('wiki/nlp-labs-vietnam', [\App\Http\Controllers\WikiController::class, 'nlpLabsVietnam'])->name('wiki.nlp-labs-vietnam');
+    Route::get('about', [\App\Http\Controllers\WikiController::class, 'about'])->name('about');
+    Route::get('he-sinh-thai', [\App\Http\Controllers\WikiController::class, 'ecosystem'])->name('ecosystem');
+    Route::get('nlp-energy', [\App\Http\Controllers\WikiController::class, 'nlpEnergy'])->name('nlp-energy');
+    Route::get('nlp-ev-charging', [\App\Http\Controllers\WikiController::class, 'nlpEvCharging'])->name('nlp-ev-charging');
+    Route::get('nlp-technology', [\App\Http\Controllers\WikiController::class, 'nlpTechnology'])->name('nlp-technology');
+    Route::get('nlp-ai-digital', [\App\Http\Controllers\WikiController::class, 'nlpAiDigital'])->name('nlp-ai-digital');
+    Route::get('nlp-esg-carbon', [\App\Http\Controllers\WikiController::class, 'nlpEsgCarbon'])->name('nlp-esg-carbon');
 
     // Donate page
     Route::get('donate', [\App\Http\Controllers\DonateController::class, 'index'])->name('donate');

@@ -259,7 +259,8 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
 
     Auth::routes();
 
-    // NLP Group ecosystem named routes
+    // NLP Group & site named routes
+    Route::get('/about',            [FrontendController::class, 'page'])->defaults('slug', 'about')->name('about');
     Route::get('/nlp-energy',       [FrontendController::class, 'page'])->defaults('slug', 'nlp-energy')->name('nlp-energy');
     Route::get('/nlp-ev-charging',  [FrontendController::class, 'page'])->defaults('slug', 'nlp-ev-charging')->name('nlp-ev-charging');
     Route::get('/nlp-technology',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-technology')->name('nlp-technology');

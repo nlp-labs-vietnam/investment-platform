@@ -265,6 +265,7 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('/nlp-ev-charging',  [FrontendController::class, 'page'])->defaults('slug', 'nlp-ev-charging')->name('nlp-ev-charging');
     Route::get('/nlp-technology',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-technology')->name('nlp-technology');
     Route::get('/nlp-esg-carbon',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-esg-carbon')->name('nlp-esg-carbon');
+    Route::get('/nlp-ai-digital',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-ai-digital')->name('nlp-ai-digital');
     Route::get('/ecosystem',        [FrontendController::class, 'page'])->defaults('slug', 'ecosystem')->name('ecosystem');
 
     /*= Frontend Manage Controller =*/

@@ -28,8 +28,8 @@
                            data-aos-duration="900"> {!! $about['single']['short_description'] !!}</p>
 
                         <div data-aos="fade-up" data-aos-duration="900">
-                            <a href="{{ route('page', 'about') }}" class="kew-btn mt-20">
-                                <span class="kew-text">@lang('Discover more')</span>
+                            <a href="{{ route('about') }}" class="kew-btn mt-20">
+                                <span class="kew-text">@lang('Tìm hiểu thêm về NLP Group')</span>
                                 <div class="kew-arrow">
                                     <div class="kt-one"><i class="fa-regular fa-arrow-right-long"></i></div>
                                     <div class="kt-two"><i class="fa-regular fa-arrow-right-long"></i></div>

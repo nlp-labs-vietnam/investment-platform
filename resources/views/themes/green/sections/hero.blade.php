@@ -57,10 +57,10 @@
                                 <p class="mb-0">@lang($hero['single']['welcome_bonus_sub_title'])</p>
                             </div>
                         </div>
-                        <a href="{{ route('page', 'property') }}" class="round-box-content mt-20 mx-auto"
+                        <a href="{{ route('property') }}" class="round-box-content mt-20 mx-auto"
                            data-aos="fade-up"
                            data-aos-duration="1100">
-                            <span class="curved-circle">@lang('start explore now•')</span>
+                            <span class="curved-circle">@lang('Khám phá dự án •')</span>
                             <div class="inner-icon">
                                 <i class="fa-light fa-arrow-up"></i>
                             </div>

@@ -30,3 +30,9 @@ nlpgroup_backup_*.zip
 # OS
 .DS_Store
 Thumbs.db
+
+# Sensitive credential files — never commit
+/firebase-service.json
+/firebase-messaging-sw.js
+/assets/upload/
+/assets/main-cedar-391910-cd7c5ebfdd8b.json

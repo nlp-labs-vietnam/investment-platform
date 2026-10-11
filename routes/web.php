@@ -27,6 +27,8 @@ use App\Http\Controllers\User\VerificationController;
 use App\Http\Controllers\User\KycVerificationController;
 use App\Http\Controllers\TwoFaSecurityController;
 use App\Http\Controllers\API\PaymentController as ApiPayment;
+use App\Http\Controllers\VietQRController;
+use App\Http\Controllers\NlpGroupCallbackController;
 
 
 /*
@@ -239,6 +241,20 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
 
     Route::post('khalti/payment/verify/{trx}', [\App\Http\Controllers\khaltiPaymentController::class, 'verifyPayment'])->name('khalti.verifyPayment');
     Route::post('khalti/payment/store', [khaltiPaymentController::class, 'storePayment'])->name('khalti.storePayment');
+
+    // VietQR — polling endpoint (frontend checks deposit status every 5s)
+    Route::get('vietqr/check/{trx_id}', [VietQRController::class, 'check'])->name('vietqr.check');
+    // VietQR — webhook IPN từ SePay / Casso (POST, no CSRF)
+    Route::post('ipn/{code}/vietqr', [PaymentController::class, 'gatewayIpn'])
+        ->name('vietqr.ipn')
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+    // NLP Group Native — MB Bank callback + polling
+    Route::post('nlpgroup/callback', [NlpGroupCallbackController::class, 'callback'])
+        ->name('nlpgroup.ipn')
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+    Route::get('nlpgroup/check/{trx_id}', [NlpGroupCallbackController::class, 'check'])
+        ->name('nlpgroup.check');
 
     // Wiki pages
     Route::get('wiki/nlp-labs-vietnam', [\App\Http\Controllers\WikiController::class, 'nlpLabsVietnam'])->name('wiki.nlp-labs-vietnam');

@@ -41,20 +41,32 @@ class SeedNlpPages extends Command
                 continue;
             }
 
-            $detail = $page->manyDetails()->where('language_id', $langId)->first();
+            // Check if already has real content (not placeholder)
+            $hasRealContent = \DB::table('page_details')
+                ->where('page_id', $page->id)
+                ->whereNull('sections')
+                ->whereNotNull('content')
+                ->where('content', '!=', '')
+                ->exists();
 
-            if ($detail && ! $this->option('force')) {
-                // Only update if content is still the placeholder
-                if (! str_starts_with(trim($detail->content ?? ''), '[[')) {
-                    $this->line("  skip  {$slug} (already has real content; use --force to overwrite)");
-                    continue;
-                }
+            if ($hasRealContent && ! $this->option('force')) {
+                $this->line("  skip  {$slug} (already has real content; use --force to overwrite)");
+                continue;
             }
 
-            $page->details()->updateOrCreate(
-                ['language_id' => $langId],
-                ['name' => $page->name ?? $slug, 'content' => $html, 'sections' => null]
-            );
+            // Delete ALL existing page_details rows for this page to avoid duplicates
+            \DB::table('page_details')->where('page_id', $page->id)->delete();
+
+            // Insert fresh
+            \DB::table('page_details')->insert([
+                'page_id'     => $page->id,
+                'language_id' => $langId,
+                'name'        => $page->name ?? $slug,
+                'content'     => $html,
+                'sections'    => null,
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
 
             $this->info("  ✓  {$slug}");
         }

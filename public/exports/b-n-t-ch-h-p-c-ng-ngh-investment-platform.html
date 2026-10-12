@@ -1,0 +1,377 @@
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bản đồ Tích hợp Công nghệ — Investment Platform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; font-size: 14px; line-height: 1.6; background: #ffffff; color: #1f2328; padding: 32px 16px; }
+  .container { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #57606a; font-size: 13px; margin-bottom: 28px; }
+  h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #57606a; margin: 28px 0 10px; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
+
+  /* Domain grid */
+  .domain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 540px) { .domain-grid { grid-template-columns: 1fr; } }
+
+  .card { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 14px 16px; }
+  .card-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue   { background: #3b82d4; }
+  .dot-green  { background: #22c55e; }
+  .dot-orange { background: #f97316; }
+  .dot-purple { background: #7c5cd8; }
+  .dot-red    { background: #ef4444; }
+  .dot-teal   { background: #14b8a6; }
+  .dot-yellow { background: #eab308; }
+  .dot-rose   { background: #f43f5e; }
+  .dot-indigo { background: #6366f1; }
+  .dot-gray   { background: #6b7280; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 11.5px; padding: 2px 8px; border-radius: 12px; border: 1px solid #e5e7eb; background: #fff; color: #1f2328; white-space: nowrap; }
+  .tag.new { border-color: #3b82d4; color: #3b82d4; }
+  .tag.active { background: #3b82d4; color: #fff; border-color: #3b82d4; }
+  .count-badge { font-size: 11px; background: #e5e7eb; border-radius: 10px; padding: 1px 7px; margin-left: auto; color: #57606a; font-weight: 600; }
+
+  /* Flow */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+  .flow-step { font-size: 12px; padding: 3px 10px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 4px; }
+  .flow-arrow { color: #57606a; font-size: 13px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 7px 10px; background: #f7f8fa; border: 1px solid #e5e7eb; font-weight: 600; font-size: 12px; color: #57606a; }
+  td { padding: 6px 10px; border: 1px solid #e5e7eb; vertical-align: top; }
+  tr:nth-child(even) td { background: #fafbfc; }
+
+  /* Stat row */
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .stat-box { flex: 1; min-width: 100px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px 14px; text-align: center; }
+  .stat-num { font-size: 26px; font-weight: 700; color: #3b82d4; }
+  .stat-label { font-size: 11px; color: #57606a; margin-top: 1px; }
+
+  /* Notification pipeline */
+  .pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (max-width: 500px) { .pipeline { grid-template-columns: 1fr 1fr; } }
+  .pipe-card { border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; text-align: center; background: #f7f8fa; }
+  .pipe-icon { font-size: 20px; margin-bottom: 4px; }
+  .pipe-name { font-size: 12px; font-weight: 700; }
+  .pipe-detail { font-size: 11px; color: #57606a; }
+
+  .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #57606a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Bản đồ Tích hợp Công nghệ</h1>
+  <div class="subtitle">NLP Group Investment Platform  ·  Laravel 11 + Vite + Bootstrap 5  ·  @nlp-labs-vietnam/investment-ui</div>
+
+  
+  <div class="stats">
+    <div class="stat-box"><div class="stat-num">36</div><div class="stat-label">Payment Gateways</div></div>
+    <div class="stat-box"><div class="stat-num">7</div><div class="stat-label">Payout Providers</div></div>
+    <div class="stat-box"><div class="stat-num">55</div><div class="stat-label">Eloquent Models</div></div>
+    <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">Notification Channels</div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">SMS Providers</div></div>
+    <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">Translate APIs</div></div>
+  </div>
+
+  
+  <h2>1. Domain Map — Các lĩnh vực nghiệp vụ</h2>
+  <div class="domain-grid">
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-blue"></span>Property &amp; Real Estate <span class="count-badge">9 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Property</span><span class="tag">PropertyShare</span><span class="tag">PropertyOffer</span>
+        <span class="tag">OfferLock</span><span class="tag">OfferReply</span><span class="tag">Amenity</span>
+        <span class="tag">Address</span><span class="tag">Image</span><span class="tag">InvestorReview</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-green"></span>Investment &amp; Fund <span class="count-badge">3 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Investment</span><span class="tag">Fund</span><span class="tag">ManageTime</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-orange"></span>Payment &amp; Deposit <span class="count-badge">3 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Deposit</span><span class="tag">Gateway</span><span class="tag">Transaction</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-purple"></span>Payout &amp; Withdraw <span class="count-badge">3 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Payout</span><span class="tag">PayoutMethod</span><span class="tag">MoneyTransfer</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-red"></span>User &amp; Auth <span class="count-badge">7 models</span></div>
+      <div class="tag-list">
+        <span class="tag">User</span><span class="tag">Admin</span><span class="tag">Role</span>
+        <span class="tag">Kyc / UserKyc</span><span class="tag">UserLogin</span><span class="tag">UserSocial</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-teal"></span>Referral &amp; Rank <span class="count-badge">5 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Rank</span><span class="tag">Referral</span><span class="tag">ReferralBonus</span>
+        <span class="tag">RazorpayContact</span><span class="tag">Favourite</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-yellow"></span>Content &amp; CMS <span class="count-badge">10 models</span></div>
+      <div class="tag-list">
+        <span class="tag">Blog</span><span class="tag">BlogCategory</span><span class="tag">BlogDetails</span>
+        <span class="tag">Content</span><span class="tag">ContentDetails</span><span class="tag">Page</span>
+        <span class="tag">PageDetail</span><span class="tag">ManageMenu</span><span class="tag">Language</span>
+        <span class="tag">Subscriber</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-rose"></span>System &amp; Notification <span class="count-badge">8 models</span></div>
+      <div class="tag-list">
+        <span class="tag">BasicControl</span><span class="tag">NotificationTemplate</span>
+        <span class="tag">InAppNotification</span><span class="tag">FireBaseToken</span>
+        <span class="tag">ManualSmsConfig</span><span class="tag">SmsControl</span>
+        <span class="tag">MaintenanceMode</span><span class="tag">FileStorage</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-indigo"></span>Support <span class="count-badge">4 models</span></div>
+      <div class="tag-list">
+        <span class="tag">SupportTicket</span><span class="tag">SupportTicketMessage</span>
+        <span class="tag">SupportTicketAttachment</span><span class="tag">ContactMessage</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot dot-gray"></span>Storage &amp; Media <span class="count-badge">3 models</span></div>
+      <div class="tag-list">
+        <span class="tag">FileStorage (S3 / local)</span>
+        <span class="tag">Image</span>
+        <span class="tag">Intervention/Image</span>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <h2>2. Payment Gateway Packages (36 providers)</h2>
+  <table>
+    <thead>
+      <tr><th>Nhóm</th><th>Providers</th><th>Composer Package</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Crypto</strong></td>
+        <td>Binance, Blockchain, CoinGate, Coinbase Commerce, CoinPayments, NowPayments</td>
+        <td><code>coingate/coingate-php</code></td>
+      </tr>
+      <tr>
+        <td><strong>Cards / Global</strong></td>
+        <td>Stripe, Authorize.Net, Razorpay, Mollie, 2Checkout, Securionpay, PayU, PaytM</td>
+        <td><code>stripe/stripe-php</code>, <code>razorpay/razorpay</code>, <code>mollie/laravel-mollie</code></td>
+      </tr>
+      <tr>
+        <td><strong>Regional</strong></td>
+        <td>Flutterwave, Paystack, Monnify, CinetPay, Konnect, MercadoPago, Midtrans, Instamojo, Peach, Voguepay, Freekassa</td>
+        <td><code>flutterwavedev/flutterwave-v3</code>, <code>midtrans/midtrans-php</code>, <code>cinetpay/cinetpay-php</code></td>
+      </tr>
+      <tr>
+        <td><strong>E-Wallet / Alt</strong></td>
+        <td>PayPal, Payeer, Perfect Money, Skrill, Cashmaal, Cashonex, FastPay, ImePay, MyPay</td>
+        <td><code>authorizenet/authorizenet</code></td>
+      </tr>
+      <tr>
+        <td><strong>Khalti</strong></td>
+        <td>Khalti (Nepal)</td>
+        <td>Custom HTTP (no package)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  
+  <h2>3. Payout Provider Packages (7 providers)</h2>
+  <div class="tag-list">
+    <span class="tag active">PayPal</span>
+    <span class="tag active">Paystack</span>
+    <span class="tag active">Razorpay</span>
+    <span class="tag active">Flutterwave</span>
+    <span class="tag active">Binance</span>
+    <span class="tag active">Coinbase</span>
+    <span class="tag active">Perfect Money</span>
+  </div>
+
+  
+  <h2>4. Notification Pipeline — 4 Kênh song song</h2>
+  <div class="pipeline">
+    <div class="pipe-card">
+      <div class="pipe-icon">✉️</div>
+      <div class="pipe-name">Email</div>
+      <div class="pipe-detail">Symfony Mailer · SendGrid · Mailgun · Mailchimp · SES · MailerSend · Postmark</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-icon">💬</div>
+      <div class="pipe-name">SMS</div>
+      <div class="pipe-detail">Twilio · Vonage · Infobip · Plivo · Manual API</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-icon">🔔</div>
+      <div class="pipe-name">In-App</div>
+      <div class="pipe-detail">Pusher WebSocket · Laravel Events · InAppNotification Model</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-icon">📲</div>
+      <div class="pipe-name">Push</div>
+      <div class="pipe-detail">Firebase FCM v1 API · Google Auth · FireBaseToken per device</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#57606a;margin-top:8px">Điều phối bởi <strong>Notify</strong> trait — mọi controller chỉ cần <code>use Notify</code> để gửi đồng thời qua tất cả kênh.</div>
+
+  
+  <h2>5. Third-Party API &amp; External Packages</h2>
+  <table>
+    <thead>
+      <tr><th>Nhóm</th><th>Provider / Package</th><th>Mục đích</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Auth</strong></td><td>Laravel Socialite, Google OAuth</td><td>Social login (Google, Facebook…)</td></tr>
+      <tr><td><strong>2FA</strong></td><td><code>pragmarx/google2fa</code></td><td>TOTP xác thực 2 bước</td></tr>
+      <tr><td><strong>reCAPTCHA</strong></td><td><code>anhskohbo/no-captcha</code></td><td>Form protection</td></tr>
+      <tr><td><strong>Translation</strong></td><td>Google Translate (<code>stichoza/google-translate-php</code>), Azure Translate</td><td>Đa ngôn ngữ auto-translate</td></tr>
+      <tr><td><strong>Currency</strong></td><td>CurrencyLayer API</td><td>Tỷ giá thời gian thực</td></tr>
+      <tr><td><strong>Storage</strong></td><td>AWS S3 (<code>aws/aws-sdk-php</code>), Local</td><td>File / media upload</td></tr>
+      <tr><td><strong>Image</strong></td><td><code>intervention/image</code></td><td>Resize / crop ảnh</td></tr>
+      <tr><td><strong>Realtime</strong></td><td>Pusher (<code>pusher/pusher-php-server</code>)</td><td>WebSocket broadcasts</td></tr>
+      <tr><td><strong>Firebase</strong></td><td>FCM v1 + <code>google/auth</code></td><td>Push notifications mobile</td></tr>
+      <tr><td><strong>Browser</strong></td><td><code>hisorange/browser-detect</code></td><td>User agent detection</td></tr>
+      <tr><td><strong>Sanitization</strong></td><td><code>stevebauman/purify</code></td><td>XSS-safe HTML</td></tr>
+      <tr><td><strong>DataTables</strong></td><td><code>yajra/laravel-datatables</code></td><td>Server-side tables</td></tr>
+      <tr><td><strong>Minify</strong></td><td><code>matthiasmullie/minify</code></td><td>CSS/JS minification</td></tr>
+      <tr><td><strong>HTTP</strong></td><td><code>guzzlehttp/guzzle</code></td><td>Outbound API calls</td></tr>
+      <tr><td><strong>Cache/Queue</strong></td><td><code>predis/predis</code> (Redis)</td><td>Queue, session, cache</td></tr>
+    </tbody>
+  </table>
+
+  
+  <h2>6. Request Flow — Luồng xử lý một giao dịch đầu tư</h2>
+  <div class="flow">
+    <span class="flow-step">User Browser</span><span class="flow-arrow">→</span>
+    <span class="flow-step">routes/web.php</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Middleware stack<br /><small>(Auth, KYC, Language, Demo…)</small></span><span class="flow-arrow">→</span>
+    <span class="flow-step">User/DepositController</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Services/Gateway/{provider}</span><span class="flow-arrow">→</span>
+    <span class="flow-step">External Gateway API</span>
+  </div>
+  <div class="flow">
+    <span class="flow-step">Callback / Webhook</span><span class="flow-arrow">→</span>
+    <span class="flow-step">PaymentController</span><span class="flow-arrow">→</span>
+    <span class="flow-step">ProcessInvestmentJob</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Investment + Transaction models</span><span class="flow-arrow">→</span>
+    <span class="flow-step">BonusCommissionJob</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Notify trait<br /><small>(Email + SMS + Push + In-App)</small></span>
+  </div>
+
+  
+  <h2>7. RBAC — 18 Permission Groups</h2>
+  <div class="tag-list">
+    <span class="tag">Dashboard</span>
+    <span class="tag">Manage Property</span>
+    <span class="tag">Manage Investment</span>
+    <span class="tag">Manage Rank</span>
+    <span class="tag">Manage Commission</span>
+    <span class="tag">User Panel</span>
+    <span class="tag">Transactions</span>
+    <span class="tag">Payment Transactions</span>
+    <span class="tag">Withdraw Transactions</span>
+    <span class="tag">KYC Management</span>
+    <span class="tag">Support Ticket</span>
+    <span class="tag">Subscribers</span>
+    <span class="tag">Roles &amp; Permission</span>
+    <span class="tag">Settings Panel</span>
+    <span class="tag">Theme Settings</span>
+    <span class="tag">Manage Blog</span>
+    <span class="tag">Language Settings</span>
+    <span class="tag">Maintenance Mode</span>
+  </div>
+  <div style="font-size:12px;color:#57606a;margin-top:8px">Mỗi group có 4 action-level: <strong>view · add · edit · delete</strong>. Staff có thể được cấp từng nhóm độc lập.</div>
+
+  
+  <h2>8. Frontend Stack</h2>
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th><th>Entry point</th></tr></thead>
+    <tbody>
+      <tr><td>Bundler</td><td>Vite 4 + laravel-vite-plugin</td><td><code>vite.config.js</code></td></tr>
+      <tr><td>CSS Framework</td><td>Bootstrap 5.2 + SCSS</td><td><code>resources/sass/app.scss</code></td></tr>
+      <tr><td>JS</td><td>ES Module + Axios + Popper</td><td><code>resources/js/app.js</code></td></tr>
+      <tr><td>Theme</td><td>2 themes: <em>light</em>, <em>green</em></td><td><code>resources/views/themes/{light,green}/</code></td></tr>
+      <tr><td>Static assets</td><td>Pre-compiled (non-Vite)</td><td><code>assets/{admin,global,themes}/</code></td></tr>
+      <tr><td>Package name</td><td><code>@nlp-labs-vietnam/investment-ui</code></td><td>Publishable to npm</td></tr>
+    </tbody>
+  </table>
+
+  
+  <h2>9. Database Timeline — Migration history</h2>
+  <div class="domain-grid">
+    <div class="card">
+      <div class="card-title"><span class="dot dot-gray"></span>Foundation (2023)</div>
+      <div class="tag-list">
+        <span class="tag">users · admins · roles</span>
+        <span class="tag">basic_controls</span>
+        <span class="tag">gateways · transactions</span>
+        <span class="tag">deposits · payouts</span>
+        <span class="tag">support_tickets</span>
+        <span class="tag">in_app_notifications</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot dot-blue"></span>Real Estate features (Oct–Nov 2024)</div>
+      <div class="tag-list">
+        <span class="tag">amenities · addresses</span>
+        <span class="tag">properties · images</span>
+        <span class="tag">manage_times</span>
+        <span class="tag">ranks · referrals</span>
+        <span class="tag">investments</span>
+        <span class="tag">property_shares · offers</span>
+        <span class="tag">money_transfers</span>
+        <span class="tag">investor_reviews</span>
+        <span class="tag">user_socials</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot dot-green"></span>Localization (2025)</div>
+      <div class="tag-list">
+        <span class="tag">social_ids on users</span>
+        <span class="tag">return_time_columns on properties</span>
+        <span class="tag">morph referral_bonuses</span>
+        <span class="tag new">Vietnamese language seeder</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot dot-orange"></span>Queue &amp; Async Jobs</div>
+      <div class="tag-list">
+        <span class="tag">ProcessInvestmentJob</span>
+        <span class="tag">BonusCommissionJob</span>
+        <span class="tag">UpdatePropertyJob</span>
+        <span class="tag">UserAllRecordDeleteJob</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Made with IBM Bob</div>
+</div>
+</body>
+</html>

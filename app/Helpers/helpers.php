@@ -846,8 +846,8 @@ if (!function_exists('getHeaderMenuData')) {
                     $pageDetails = getPageDetails($key);
                     $child = getHeaderChildMenu($menuItem);
                     $menuIDetails = [
-                        'name' => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name,
-                        'route' => isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
+                        'name' => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $key,
+                        'route' => $pageDetails && isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
                         'child' => $child
                     ];
                 }
@@ -877,23 +877,23 @@ if (!function_exists('getHeaderChildMenu')) {
             if (is_numeric($key)) {
                 $pageDetails = getPageDetails($item);
                 $menuData[] = [
-                    'name' => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $item,
-                    'route' => isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($item)),
+                    'name'  => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $item,
+                    'route' => $pageDetails && isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($item)),
                 ];
             } elseif (is_array($item)) {
                 $pageDetails = getPageDetails($key);
                 $child = getHeaderChildMenu($item);
                 $menuData[] = [
-                    'name' => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $key,
-                    'route' => isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
+                    'name'  => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $key,
+                    'route' => $pageDetails && isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
                     'child' => $child
                 ];
             } else {
                 $pageDetails = getPageDetails($key);
                 $child = getHeaderChildMenu([$item]);
                 $menuData[] = [
-                    'name' => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $key,
-                    'route' => isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
+                    'name'  => $pageDetails->page_name ?? $pageDetails->page_title ?? $pageDetails->name ?? $key,
+                    'route' => $pageDetails && isset($pageDetails->slug) ? route('page', $pageDetails->slug) : ($pageDetails->custom_link ?? staticPagesAndRoutes($key)),
                     'child' => $child
                 ];
             }

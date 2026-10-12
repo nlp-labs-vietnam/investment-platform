@@ -2606,3 +2606,1298 @@ Trong tương lai:
 
 Bottom of Form
 
+
+---
+
+# **PHẦN 8**
+
+# **GIẢI PHÁP (SOLUTIONS)**
+
+## **Giải pháp tích hợp – Kết nối năng lượng, công nghệ và phát triển bền vững**
+
+---
+
+# **1. TỔNG QUAN GIẢI PHÁP NLP GROUP**
+
+NLP Group không chỉ cung cấp từng sản phẩm độc lập, mà xây dựng các **giải pháp tích hợp toàn diện**, kết hợp sức mạnh của toàn bộ hệ sinh thái:
+
+* Năng lượng xanh.
+* Hạ tầng xe điện.
+* Công nghệ phần mềm.
+* Trí tuệ nhân tạo.
+* Phát triển bền vững ESG & Carbon.
+
+Mục tiêu: giúp khách hàng giải quyết các bài toán phức tạp bằng một đối tác duy nhất – NLP Group.
+
+---
+
+# **2. CÁC GIẢI PHÁP TRỌNG TÂM**
+
+---
+
+# **2.1 GIẢI PHÁP NĂNG LƯỢNG XANH**
+
+## **Tối ưu chi phí điện – Chủ động nguồn năng lượng – Hướng tới Net Zero**
+
+### Đối tượng áp dụng:
+
+* Nhà máy sản xuất.
+* Khu công nghiệp.
+* Trung tâm thương mại.
+* Khách sạn.
+* Hộ gia đình.
+* Khu đô thị.
+
+### Giải pháp bao gồm:
+
+* Điện mặt trời áp mái (Solar Rooftop).
+* Hệ thống lưu trữ năng lượng (BESS).
+* Hệ thống quản lý năng lượng thông minh (EMS).
+* Thiết kế – Thi công – Vận hành (EPC + O&M).
+* Giám sát từ xa qua nền tảng IoT.
+* Báo cáo năng lượng và carbon.
+
+### Giá trị mang lại:
+
+* Giảm 20–60% chi phí điện năng.
+* Đảm bảo nguồn điện ổn định.
+* Giảm phát thải CO₂.
+* Tăng điểm ESG doanh nghiệp.
+
+---
+
+# **2.2 GIẢI PHÁP XE ĐIỆN**
+
+## **Xây dựng hạ tầng sạc thông minh – Thúc đẩy giao thông xanh**
+
+### Đối tượng áp dụng:
+
+* Chủ đầu tư bất động sản.
+* Trung tâm thương mại.
+* Khu đô thị, chung cư.
+* Doanh nghiệp vận tải.
+* Bãi đỗ xe, trạm dịch vụ.
+* Tổ chức nhượng quyền trạm sạc.
+
+### Giải pháp bao gồm:
+
+* Trụ sạc AC và DC.
+* Phần mềm quản lý trạm sạc (CSMS).
+* Ứng dụng người dùng sạc xe điện.
+* Tích hợp thanh toán số.
+* Kết nối chuẩn OCPP.
+* Mô hình vận hành và nhượng quyền.
+
+### Giá trị mang lại:
+
+* Tạo thêm dịch vụ và doanh thu cho chủ đầu tư.
+* Nâng cao trải nghiệm khách hàng.
+* Góp phần phát triển giao thông xanh.
+* Mở rộng mạng lưới theo quy mô.
+
+---
+
+# **2.3 GIẢI PHÁP PHẦN MỀM**
+
+## **Số hóa toàn diện – Vận hành thông minh hơn**
+
+### Đối tượng áp dụng:
+
+* Doanh nghiệp vừa và nhỏ.
+* Tập đoàn lớn.
+* Startup công nghệ.
+* Tổ chức phi lợi nhuận.
+* Doanh nghiệp năng lượng và môi trường.
+
+### Giải pháp bao gồm:
+
+* Phát triển phần mềm theo yêu cầu.
+* Website và ứng dụng di động.
+* Hệ thống ERP, CRM.
+* Nền tảng IoT.
+* API tích hợp hệ thống.
+* Cloud platform.
+* SaaS theo mô hình thuê bao.
+
+### Giá trị mang lại:
+
+* Tiết kiệm thời gian và chi phí vận hành.
+* Tăng khả năng quản lý và kiểm soát.
+* Kết nối liền mạch các hệ thống.
+* Sẵn sàng mở rộng và nâng cấp.
+
+---
+
+# **2.4 GIẢI PHÁP TRÍ TUỆ NHÂN TẠO**
+
+## **AI hóa doanh nghiệp – Tự động hóa thông minh**
+
+### Đối tượng áp dụng:
+
+* Doanh nghiệp muốn tự động hóa quy trình.
+* Tổ chức cần phân tích dữ liệu lớn.
+* Nhà máy sản xuất.
+* Doanh nghiệp dịch vụ.
+* Đơn vị cần hỗ trợ ra quyết định dựa trên dữ liệu.
+
+### Giải pháp bao gồm:
+
+* AI Agent và trợ lý thông minh.
+* AI Chatbot chăm sóc khách hàng.
+* Machine Learning dự báo.
+* Computer Vision giám sát.
+* Phân tích dữ liệu (Data Analytics).
+* Tự động hóa quy trình (AI Automation).
+* Xử lý ngôn ngữ tự nhiên (NLP).
+
+### Giá trị mang lại:
+
+* Tăng năng suất lao động.
+* Giảm sai sót và chi phí vận hành.
+* Ra quyết định nhanh và chính xác hơn.
+* Mở ra mô hình kinh doanh mới.
+
+---
+
+# **2.5 GIẢI PHÁP ESG & CARBON**
+
+## **Chuyển đổi xanh toàn diện – Hướng tới Net Zero**
+
+### Đối tượng áp dụng:
+
+* Doanh nghiệp muốn cải thiện chỉ số ESG.
+* Nhà đầu tư quan tâm đến tín chỉ carbon.
+* Chủ rừng, nông trại muốn phát triển dự án carbon.
+* Doanh nghiệp xuất khẩu cần tuân thủ tiêu chuẩn quốc tế.
+* Tổ chức cam kết Net Zero.
+
+### Giải pháp bao gồm:
+
+* Đánh giá và lập báo cáo ESG.
+* Phát triển dự án tín chỉ carbon.
+* Trồng rừng và phục hồi hệ sinh thái.
+* Nông nghiệp bền vững và carbon thấp.
+* Hệ thống MRV (đo lường – báo cáo – thẩm định).
+* Tư vấn lộ trình Net Zero.
+
+### Giá trị mang lại:
+
+* Đáp ứng tiêu chuẩn môi trường quốc tế.
+* Tạo nguồn thu từ tín chỉ carbon.
+* Nâng cao giá trị thương hiệu doanh nghiệp xanh.
+* Chuẩn bị cho thuế carbon và CBAM.
+
+---
+
+# **2.6 GIẢI PHÁP TÍCH HỢP TOÀN DIỆN**
+
+## **Một đối tác – Toàn bộ hệ sinh thái**
+
+NLP Group cung cấp giải pháp kết hợp tất cả các lĩnh vực thành một hệ sinh thái hoàn chỉnh.
+
+### Mô hình điển hình:
+
+#### Khu công nghiệp xanh thông minh
+
+* ☀️ Điện mặt trời áp mái nhà xưởng.
+* 🔋 BESS lưu trữ năng lượng.
+* ⚡ Quản lý năng lượng EMS.
+* 🚗 Trạm sạc xe điện nội khu.
+* 💻 Phần mềm quản lý vận hành.
+* 🤖 AI phân tích dữ liệu năng lượng.
+* 🌱 Đánh giá ESG và báo cáo carbon.
+
+#### Tòa nhà thương mại xanh
+
+* ☀️ Điện mặt trời mái tòa nhà.
+* ⚡ Hệ thống quản lý năng lượng tòa nhà (BMS).
+* 🚗 Trạm sạc xe điện tầng hầm.
+* 📱 Ứng dụng quản lý và tiện ích.
+* 🤖 AI tối ưu vận hành.
+* 🌱 Báo cáo phát triển bền vững.
+
+#### Doanh nghiệp chuyển đổi số + chuyển đổi xanh
+
+* 💻 Hệ thống ERP, CRM.
+* 🤖 AI tự động hóa quy trình.
+* ☀️ Tiết kiệm năng lượng.
+* 🌱 Lộ trình Net Zero.
+* 📊 Dashboard ESG thời gian thực.
+
+---
+
+# **3. QUY TRÌNH TƯ VẤN GIẢI PHÁP**
+
+TIẾP NHẬN NHU CẦU
+    ↓
+ĐÁNH GIÁ HIỆN TRẠNG
+    ↓
+ĐỀ XUẤT GIẢI PHÁP PHÙ HỢP
+    ↓
+BÁO GIÁ & ĐÀM PHÁN
+    ↓
+KÝ KẾT HỢP ĐỒNG
+    ↓
+TRIỂN KHAI
+    ↓
+NGHIỆM THU & BÀN GIAO
+    ↓
+HỖ TRỢ VẬN HÀNH DÀI HẠN
+
+---
+
+# **THÔNG ĐIỆP GIẢI PHÁP**
+
+## **"NLP Group – Một đối tác, toàn bộ hệ sinh thái xanh và số cho doanh nghiệp của bạn."**
+
+---
+
+# **PHẦN 9**
+
+# **DỰ ÁN TIÊU BIỂU (PROJECTS)**
+
+## **Những dự án thực tiễn – Chứng minh giá trị**
+
+---
+
+# **1. TỔNG QUAN DỰ ÁN**
+
+NLP Group triển khai các dự án thực tiễn trong nhiều lĩnh vực, từ năng lượng xanh đến công nghệ số và phát triển bền vững. Mỗi dự án là bằng chứng cụ thể cho năng lực và cam kết của NLP Group.
+
+---
+
+# **2. DỰ ÁN NĂNG LƯỢNG**
+
+## **Hệ thống điện mặt trời áp mái**
+
+### Dự án điện mặt trời nhà xưởng sản xuất
+
+**Quy mô:** Hệ thống 500 kWp – 2 MWp  
+**Địa điểm:** Khu công nghiệp miền Nam  
+**Giải pháp:**
+* Lắp đặt tấm pin năng lượng mặt trời áp mái.
+* Kết nối hệ thống lưu trữ BESS.
+* Tích hợp phần mềm giám sát EMS.
+* Giảm 40–60% chi phí điện hàng tháng.
+
+**Kết quả:**
+* Tiết kiệm chi phí điện đáng kể.
+* Giảm phát thải CO₂.
+* Đạt chứng nhận xanh cho nhà máy.
+
+---
+
+### Dự án điện mặt trời hộ gia đình và nhà phố
+
+**Quy mô:** Hệ thống 5–20 kWp  
+**Địa điểm:** TP. Hồ Chí Minh và các tỉnh thành  
+**Giải pháp:**
+* Khảo sát và tư vấn công suất phù hợp.
+* Lắp đặt trọn gói.
+* Theo dõi sản lượng qua ứng dụng.
+
+**Kết quả:**
+* Giảm hóa đơn tiền điện 50–70%.
+* Thời gian hoàn vốn 4–6 năm.
+
+---
+
+# **3. DỰ ÁN TRẠM SẠC XE ĐIỆN**
+
+## **Hạ tầng sạc thông minh**
+
+### Dự án trạm sạc trung tâm thương mại
+
+**Quy mô:** 10–30 trụ sạc AC + DC  
+**Địa điểm:** Trung tâm thương mại  
+**Giải pháp:**
+* Lắp đặt trụ sạc AC 7kW và DC 50kW.
+* Phần mềm quản lý CSMS.
+* Ứng dụng người dùng.
+* Thanh toán điện tử.
+
+**Kết quả:**
+* Tăng lượt khách hàng sử dụng xe điện.
+* Tạo nguồn thu phí sạc.
+* Nâng cao trải nghiệm dịch vụ.
+
+---
+
+### Dự án trạm sạc khu đô thị và chung cư
+
+**Quy mô:** 20–50 trụ sạc AC  
+**Địa điểm:** Khu đô thị mới  
+**Giải pháp:**
+* Thiết kế hạ tầng điện cho sạc xe.
+* Lắp đặt trụ sạc tầng hầm.
+* Quản lý theo cư dân.
+* Tích hợp ứng dụng smart home.
+
+---
+
+### Dự án trạm sạc cho đội xe doanh nghiệp
+
+**Quy mô:** Hệ thống 5–20 điểm sạc  
+**Đối tượng:** Taxi điện, xe giao hàng, xe công ty  
+**Giải pháp:**
+* Sạc tối ưu theo lịch vận hành.
+* Theo dõi chi phí điện theo xe.
+* Báo cáo vận hành.
+
+---
+
+# **4. DỰ ÁN CÔNG NGHỆ**
+
+## **Giải pháp phần mềm thực tiễn**
+
+### Dự án phần mềm quản lý vận hành nội bộ
+
+**Khách hàng:** Doanh nghiệp sản xuất và phân phối  
+**Giải pháp:**
+* Xây dựng hệ thống ERP theo yêu cầu.
+* Tích hợp quản lý kho, bán hàng, kế toán.
+* Dashboard báo cáo thời gian thực.
+
+**Kết quả:**
+* Giảm 30% thời gian xử lý nghiệp vụ.
+* Loại bỏ sai sót thủ công.
+* Dữ liệu tập trung và minh bạch.
+
+---
+
+### Dự án ứng dụng mobile cho dịch vụ
+
+**Khách hàng:** Doanh nghiệp dịch vụ  
+**Giải pháp:**
+* Ứng dụng iOS và Android.
+* Quản lý đơn hàng, khách hàng.
+* Tích hợp thanh toán trực tuyến.
+* Thông báo đẩy tự động.
+
+---
+
+# **5. DỰ ÁN AI**
+
+## **Ứng dụng trí tuệ nhân tạo thực tiễn**
+
+### Dự án AI Chatbot chăm sóc khách hàng
+
+**Khách hàng:** Doanh nghiệp dịch vụ  
+**Giải pháp:**
+* Chatbot AI hiểu ngôn ngữ tự nhiên tiếng Việt.
+* Tư vấn sản phẩm tự động.
+* Xử lý khiếu nại cơ bản.
+* Chuyển giao nhân viên khi cần.
+
+**Kết quả:**
+* Phục vụ 24/7.
+* Giảm 50% tải cho nhân viên CSKH.
+* Tăng độ hài lòng khách hàng.
+
+---
+
+### Dự án AI phân tích dữ liệu năng lượng
+
+**Khách hàng:** Nhà máy sản xuất  
+**Giải pháp:**
+* Thu thập dữ liệu tiêu thụ điện theo thời gian thực.
+* AI phân tích xu hướng và phát hiện lãng phí.
+* Dự báo nhu cầu điện.
+* Đề xuất tối ưu vận hành.
+
+**Kết quả:**
+* Giảm 15–25% tiêu thụ điện không cần thiết.
+* Cảnh báo sớm sự cố thiết bị.
+
+---
+
+# **6. DỰ ÁN ESG**
+
+## **Phát triển xanh tạo giá trị bền vững**
+
+### Dự án trồng rừng và tín chỉ carbon
+
+**Địa điểm:** Các tỉnh Tây Nguyên và miền Trung  
+**Quy mô:** Hàng nghìn hecta rừng  
+**Giải pháp:**
+* Khảo sát và lập kế hoạch trồng rừng.
+* Triển khai theo tiêu chuẩn quốc tế.
+* Hệ thống MRV theo dõi hấp thụ carbon.
+* Đăng ký và phát hành tín chỉ carbon.
+
+**Giá trị:**
+* Phục hồi hệ sinh thái tự nhiên.
+* Tạo thu nhập cho cộng đồng địa phương.
+* Nguồn tín chỉ carbon có giá trị kinh tế.
+
+---
+
+### Dự án tư vấn ESG doanh nghiệp
+
+**Khách hàng:** Doanh nghiệp xuất khẩu  
+**Giải pháp:**
+* Đánh giá hiện trạng ESG.
+* Xây dựng chính sách môi trường – xã hội – quản trị.
+* Lập báo cáo bền vững theo chuẩn GRI/TCFD.
+* Lộ trình cam kết Net Zero.
+
+---
+
+# **7. MÔ HÌNH TRÌNH BÀY DỰ ÁN**
+
+Mỗi dự án trên website được trình bày với:
+
+* **Ảnh dự án** thực tế.
+* **Thông tin khách hàng** (nếu được phép).
+* **Quy mô và địa điểm**.
+* **Giải pháp đã triển khai**.
+* **Kết quả và giá trị đạt được**.
+* **Lời nhận xét của khách hàng** (testimonial).
+
+---
+
+# **THÔNG ĐIỆP DỰ ÁN**
+
+## **"Mỗi dự án là một câu chuyện thành công – Mỗi khách hàng là một đối tác dài hạn."**
+
+---
+
+# **PHẦN 10**
+
+# **ĐỐI TÁC (PARTNERS)**
+
+## **Hợp tác để tạo ra những giá trị vượt trội**
+
+---
+
+# **1. TRIẾT LÝ HỢP TÁC CỦA NLP GROUP**
+
+NLP Group xây dựng mạng lưới đối tác chiến lược dựa trên nguyên tắc:
+
+* **Cùng chia sẻ giá trị** – Hợp tác mang lại lợi ích cho tất cả các bên.
+* **Tin tưởng lâu dài** – Xây dựng quan hệ bền vững, không chỉ giao dịch một lần.
+* **Bổ trợ năng lực** – Mỗi đối tác mang thế mạnh riêng để tạo ra giải pháp hoàn chỉnh hơn.
+* **Đổi mới cùng nhau** – Cùng phát triển các giải pháp mới đáp ứng xu hướng thị trường.
+
+---
+
+# **2. CÁC NHÓM ĐỐI TÁC**
+
+---
+
+## **2.1 ĐỐI TÁC CÔNG NGHỆ**
+
+### Nhà cung cấp nền tảng công nghệ
+
+NLP Group hợp tác với các đơn vị cung cấp:
+
+* Nền tảng điện toán đám mây (Cloud).
+* Công cụ phát triển phần mềm.
+* Nền tảng IoT.
+* Nền tảng AI và Machine Learning.
+* Giải pháp bảo mật dữ liệu.
+
+### Giá trị hợp tác:
+
+* Tiếp cận công nghệ tiên tiến nhất.
+* Hỗ trợ kỹ thuật chuyên sâu.
+* Giá ưu đãi cho đối tác chính thức.
+* Đồng phát triển giải pháp mới.
+
+---
+
+## **2.2 ĐỐI TÁC THIẾT BỊ**
+
+### Nhà sản xuất và cung cấp thiết bị
+
+NLP Group hợp tác với các nhà sản xuất:
+
+#### Thiết bị năng lượng mặt trời
+
+* Tấm pin quang điện.
+* Inverter (biến tần).
+* Hệ thống giá đỡ.
+* Thiết bị đo lường.
+
+#### Thiết bị lưu trữ năng lượng
+
+* Pin lithium (BESS).
+* Hệ thống quản lý pin (BMS).
+* Tủ điện tích hợp.
+
+#### Thiết bị trạm sạc xe điện
+
+* Trụ sạc AC và DC.
+* Module sạc công suất cao.
+* Thiết bị bảo vệ điện.
+
+### Yêu cầu đối tác thiết bị:
+
+* Chất lượng sản phẩm đạt chuẩn quốc tế.
+* Bảo hành và hỗ trợ kỹ thuật.
+* Cung ứng ổn định.
+* Giá cạnh tranh.
+
+---
+
+## **2.3 ĐỐI TÁC TRIỂN KHAI**
+
+### Đơn vị thi công và lắp đặt
+
+NLP Group hợp tác với các nhà thầu và đơn vị thi công chuyên nghiệp:
+
+* Lắp đặt hệ thống điện mặt trời.
+* Thi công hạ tầng điện.
+* Lắp đặt trạm sạc xe điện.
+* Xây dựng nhà xưởng xanh.
+
+### Yêu cầu đối tác triển khai:
+
+* Có kinh nghiệm và năng lực kỹ thuật.
+* Đội ngũ kỹ sư được chứng nhận.
+* Tuân thủ tiêu chuẩn an toàn.
+* Cam kết tiến độ và chất lượng.
+
+---
+
+## **2.4 ĐỐI TÁC CHIẾN LƯỢC**
+
+### Doanh nghiệp và tổ chức cùng mục tiêu phát triển xanh
+
+NLP Group tìm kiếm các đối tác chiến lược trong các lĩnh vực:
+
+* Phát triển bất động sản xanh.
+* Khu công nghiệp sinh thái.
+* Quỹ đầu tư ESG.
+* Tổ chức tài chính xanh.
+* Hiệp hội doanh nghiệp.
+* Đơn vị tư vấn và đào tạo.
+
+### Mô hình hợp tác chiến lược:
+
+* Liên doanh phát triển dự án.
+* Chia sẻ thị trường.
+* Hợp tác nghiên cứu và phát triển.
+* Đồng thương hiệu.
+
+---
+
+## **2.5 ĐỐI TÁC QUỐC TẾ**
+
+### Kết nối toàn cầu – Ứng dụng tại Việt Nam
+
+NLP Group hướng tới hợp tác với các đối tác quốc tế trong:
+
+* Chuyển giao công nghệ năng lượng.
+* Phát triển hệ thống sạc xe điện chuẩn quốc tế.
+* Nền tảng AI và phần mềm toàn cầu.
+* Thị trường tín chỉ carbon quốc tế.
+* Tiêu chuẩn ESG và báo cáo bền vững.
+
+### Mục tiêu:
+
+Đưa các công nghệ và tiêu chuẩn quốc tế vào ứng dụng thực tiễn tại Việt Nam, đồng thời mang những giải pháp của NLP Group ra thị trường khu vực.
+
+---
+
+# **3. CHƯƠNG TRÌNH ĐỐI TÁC**
+
+## **Cùng NLP Group phát triển hệ sinh thái xanh**
+
+### Quyền lợi đối tác:
+
+* Hỗ trợ kỹ thuật và đào tạo.
+* Tài liệu và công cụ bán hàng.
+* Ưu tiên tiếp cận dự án mới.
+* Hợp tác marketing và truyền thông.
+* Hoa hồng và lợi nhuận chia sẻ.
+
+### Quy trình trở thành đối tác:
+
+ĐĂNG KÝ THÔNG TIN
+    ↓
+ĐÁNH GIÁ NĂNG LỰC
+    ↓
+ĐÀM PHÁN ĐIỀU KHOẢN
+    ↓
+KÝ KẾT THỎA THUẬN
+    ↓
+ONBOARDING & ĐÀO TẠO
+    ↓
+TRIỂN KHAI HỢP TÁC
+
+---
+
+# **THÔNG ĐIỆP ĐỐI TÁC**
+
+## **"Hợp tác để tạo ra những giá trị lớn hơn – Cùng xây dựng tương lai xanh cho Việt Nam."**
+
+---
+
+# **PHẦN 11**
+
+# **TIN TỨC (NEWS)**
+
+## **Cập nhật – Chia sẻ – Kết nối**
+
+---
+
+# **1. TỔNG QUAN TRANG TIN TỨC**
+
+Trang Tin tức của NLP Group là nơi:
+
+* Cập nhật hoạt động nội bộ và dự án của NLP Group.
+* Chia sẻ kiến thức và xu hướng ngành.
+* Kết nối cộng đồng quan tâm đến năng lượng xanh, xe điện, AI và ESG.
+
+---
+
+# **2. CÁC CHUYÊN MỤC TIN TỨC**
+
+---
+
+## **2.1 TIN NLP GROUP**
+
+Cập nhật các hoạt động của NLP Group:
+
+* Ra mắt sản phẩm và dịch vụ mới.
+* Dự án tiêu biểu vừa hoàn thành.
+* Hợp tác và ký kết đối tác.
+* Sự kiện và triển lãm.
+* Giải thưởng và công nhận.
+* Thay đổi tổ chức và nhân sự.
+
+---
+
+## **2.2 TIN NĂNG LƯỢNG**
+
+Kiến thức và xu hướng năng lượng xanh:
+
+### Chính sách năng lượng
+
+* Cập nhật chính sách điện mặt trời tại Việt Nam.
+* Quy định mới về năng lượng tái tạo.
+* Giá FIT và hỗ trợ từ nhà nước.
+
+### Xu hướng công nghệ
+
+* Tấm pin mặt trời thế hệ mới.
+* Pin lưu trữ năng lượng tiên tiến.
+* Quản lý năng lượng thông minh.
+
+### Hướng dẫn thực tiễn
+
+* Cách tính toán công suất điện mặt trời.
+* Lựa chọn inverter phù hợp.
+* Bảo trì và vệ sinh tấm pin.
+
+---
+
+## **2.3 TIN XE ĐIỆN**
+
+Cập nhật thị trường xe điện và hạ tầng sạc:
+
+### Thị trường xe điện Việt Nam
+
+* Các mẫu xe điện mới ra mắt.
+* Chính sách ưu đãi thuế xe điện.
+* Thị phần và tăng trưởng xe điện.
+
+### Hạ tầng sạc
+
+* Phát triển mạng lưới sạc toàn quốc.
+* Tiêu chuẩn và kết nối trạm sạc.
+* Công nghệ sạc nhanh mới.
+
+### Xu hướng giao thông xanh
+
+* Xe buýt điện và vận tải công cộng xanh.
+* Chính sách phát triển giao thông điện hóa.
+
+---
+
+## **2.4 TIN CÔNG NGHỆ**
+
+Cập nhật công nghệ số và chuyển đổi số:
+
+### Chuyển đổi số doanh nghiệp
+
+* Kinh nghiệm triển khai ERP, CRM thực tế.
+* Xu hướng SaaS và Cloud.
+* Bảo mật dữ liệu doanh nghiệp.
+
+### IoT và kết nối
+
+* Ứng dụng IoT trong sản xuất.
+* Smart building và smart city.
+* Quản lý thiết bị từ xa.
+
+---
+
+## **2.5 TIN AI**
+
+Cập nhật trí tuệ nhân tạo và ứng dụng thực tiễn:
+
+### AI tại Việt Nam
+
+* Xu hướng ứng dụng AI trong doanh nghiệp.
+* Chính sách phát triển AI quốc gia.
+* Startup AI Việt Nam.
+
+### Công nghệ AI mới
+
+* Mô hình ngôn ngữ lớn (LLM).
+* AI tạo sinh (Generative AI).
+* AI trong năng lượng và môi trường.
+
+### Hướng dẫn ứng dụng AI
+
+* Bắt đầu với AI cho doanh nghiệp vừa và nhỏ.
+* Chatbot AI cho chăm sóc khách hàng.
+* Tự động hóa quy trình với AI.
+
+---
+
+## **2.6 TIN ESG**
+
+Cập nhật phát triển bền vững và tín chỉ carbon:
+
+### Chính sách và tiêu chuẩn
+
+* Quy định ESG mới tại Việt Nam và quốc tế.
+* CBAM – Thuế carbon biên giới châu Âu.
+* Tiêu chuẩn báo cáo bền vững GRI, TCFD.
+
+### Thị trường carbon
+
+* Diễn biến giá tín chỉ carbon toàn cầu.
+* Tiến độ xây dựng thị trường carbon Việt Nam.
+* Cơ hội từ tín chỉ carbon cho doanh nghiệp.
+
+### Net Zero
+
+* Cam kết Net Zero của các doanh nghiệp lớn.
+* Công nghệ giảm phát thải mới.
+* Câu chuyện thành công chuyển đổi xanh.
+
+---
+
+# **3. ĐỊNH DẠNG NỘI DUNG TIN TỨC**
+
+Mỗi bài viết bao gồm:
+
+* **Tiêu đề** hấp dẫn, rõ ràng.
+* **Ảnh thumbnail** chất lượng cao.
+* **Ngày đăng** và tên tác giả.
+* **Chuyên mục** (tag).
+* **Tóm tắt** 2–3 câu đầu.
+* **Nội dung đầy đủ** có cấu trúc tiêu đề, đoạn văn.
+* **Kết luận** và lời kêu gọi hành động (CTA).
+* **Nút chia sẻ** mạng xã hội.
+* **Bài viết liên quan**.
+
+---
+
+# **THÔNG ĐIỆP TIN TỨC**
+
+## **"Cập nhật kiến thức – Nắm bắt xu hướng – Dẫn đầu trong kỷ nguyên xanh."**
+
+---
+
+# **PHẦN 12**
+
+# **THƯ VIỆN (LIBRARY / MEDIA)**
+
+## **Kho tài nguyên số của NLP Group**
+
+---
+
+# **1. TỔNG QUAN THƯ VIỆN**
+
+Thư viện NLP Group là kho tài nguyên số cung cấp:
+
+* Hình ảnh dự án và hoạt động.
+* Video giới thiệu và hướng dẫn.
+* Hồ sơ năng lực công ty.
+* Catalogue sản phẩm và dịch vụ.
+* Tài liệu kỹ thuật.
+* File tải xuống cho khách hàng và đối tác.
+
+---
+
+# **2. CÁC DANH MỤC THƯ VIỆN**
+
+---
+
+## **2.1 HÌNH ẢNH**
+
+### Album hình ảnh theo chủ đề:
+
+#### Dự án năng lượng
+
+* Hệ thống điện mặt trời nhà dân.
+* Hệ thống điện mặt trời nhà xưởng.
+* Thi công và lắp đặt.
+* Nghiệm thu và bàn giao.
+
+#### Trạm sạc xe điện
+
+* Trụ sạc AC và DC.
+* Trạm sạc hoàn chỉnh.
+* Màn hình vận hành CSMS.
+* Ứng dụng người dùng.
+
+#### Công nghệ và AI
+
+* Đội ngũ phát triển phần mềm.
+* Dashboard và giao diện hệ thống.
+* Demo sản phẩm công nghệ.
+
+#### ESG và môi trường
+
+* Dự án trồng rừng.
+* Nông nghiệp bền vững.
+* Hoạt động cộng đồng xanh.
+
+#### Hoạt động NLP Group
+
+* Sự kiện và hội nghị.
+* Ký kết hợp tác.
+* Đào tạo và teambuilding.
+
+---
+
+## **2.2 VIDEO**
+
+### Danh mục video:
+
+#### Video giới thiệu
+
+* Giới thiệu NLP Group (Corporate Video).
+* Giới thiệu từng đơn vị thành viên.
+* Thông điệp từ ban lãnh đạo.
+
+#### Video dự án
+
+* Quy trình thi công điện mặt trời.
+* Lắp đặt trạm sạc xe điện.
+* Demo phần mềm ERP/CRM.
+* AI Chatbot demo.
+
+#### Video hướng dẫn
+
+* Cách sử dụng ứng dụng sạc xe điện.
+* Hướng dẫn vận hành hệ thống EMS.
+* Cách đọc báo cáo ESG.
+
+#### Testimonial khách hàng
+
+* Khách hàng chia sẻ về dự án điện mặt trời.
+* Doanh nghiệp nói về chuyển đổi số.
+
+---
+
+## **2.3 HỒ SƠ NĂNG LỰC**
+
+### Tài liệu giới thiệu công ty:
+
+* **Hồ sơ NLP Group** – Tổng quan tập đoàn.
+* **Hồ sơ NLP Energy** – Năng lực năng lượng xanh.
+* **Hồ sơ NLP EV Charging** – Năng lực trạm sạc.
+* **Hồ sơ NLP Technology** – Năng lực công nghệ.
+* **Hồ sơ NLP AI & Digital** – Năng lực AI.
+* **Hồ sơ NLP ESG & Carbon** – Năng lực ESG.
+
+Định dạng: PDF chất lượng cao, có thể tải xuống.
+
+---
+
+## **2.4 CATALOGUE**
+
+### Danh mục sản phẩm và dịch vụ:
+
+* **Catalogue điện mặt trời** – Các loại tấm pin, inverter.
+* **Catalogue BESS** – Hệ thống pin lưu trữ.
+* **Catalogue trụ sạc** – Các dòng trụ sạc AC/DC.
+* **Catalogue phần mềm** – Các giải pháp phần mềm.
+* **Catalogue AI** – Các giải pháp AI.
+* **Catalogue ESG** – Dịch vụ tư vấn bền vững.
+
+---
+
+## **2.5 TÀI LIỆU KỸ THUẬT**
+
+### Tài liệu dành cho kỹ thuật viên và đối tác:
+
+* Tiêu chuẩn lắp đặt hệ thống điện mặt trời.
+* Hướng dẫn kết nối OCPP cho trạm sạc.
+* Tài liệu API tích hợp phần mềm.
+* Sơ đồ kết nối hệ thống EMS.
+* Thông số kỹ thuật thiết bị.
+
+Lưu ý: Một số tài liệu yêu cầu đăng nhập đối tác để tải xuống.
+
+---
+
+## **2.6 TẢI XUỐNG**
+
+### File tải xuống công khai:
+
+* Brochure giới thiệu NLP Group (PDF).
+* Bảng câu hỏi thường gặp FAQ (PDF).
+* Hướng dẫn lựa chọn hệ thống điện mặt trời (PDF).
+* Checklist chuẩn bị lắp đặt trạm sạc (PDF).
+* Template báo cáo ESG cơ bản (Excel).
+* Infographic hệ sinh thái NLP Group (PNG).
+
+---
+
+# **THÔNG ĐIỆP THƯ VIỆN**
+
+## **"Kiến thức minh bạch – Tài nguyên sẵn sàng – Hỗ trợ đối tác toàn diện."**
+
+---
+
+# **PHẦN 13**
+
+# **TUYỂN DỤNG (CAREER)**
+
+## **Cùng NLP Group kiến tạo tương lai xanh**
+
+---
+
+# **1. VÌ SAO GIA NHẬP NLP GROUP?**
+
+NLP Group là môi trường làm việc dành cho những người:
+
+* Đam mê công nghệ và đổi mới.
+* Quan tâm đến phát triển bền vững.
+* Muốn tạo ra tác động tích cực cho xã hội.
+* Có tinh thần khởi nghiệp và dám thử thách.
+
+### Chúng tôi cung cấp:
+
+* **Môi trường làm việc sáng tạo** – Không gian mở, khuyến khích ý tưởng mới.
+* **Cơ hội học hỏi liên tục** – Đào tạo nội bộ, hỗ trợ học chứng chỉ chuyên môn.
+* **Lộ trình phát triển rõ ràng** – Thăng tiến dựa trên năng lực và kết quả.
+* **Thu nhập cạnh tranh** – Lương cứng + thưởng hiệu suất + phúc lợi đầy đủ.
+* **Văn hóa đội nhóm tích cực** – Đồng nghiệp là người hỗ trợ, không phải đối thủ.
+* **Ý nghĩa công việc** – Đóng góp vào tương lai xanh của Việt Nam.
+
+---
+
+# **2. GIÁ TRỊ VĂN HÓA TUYỂN DỤNG**
+
+## **"Chúng tôi tuyển dụng thái độ – Đào tạo kỹ năng – Phát triển sự nghiệp"**
+
+NLP Group tin rằng:
+
+* Con người là tài sản quý giá nhất.
+* Mỗi cá nhân đóng góp vào sứ mệnh chung.
+* Sự đa dạng tạo nên sức mạnh.
+* Học hỏi không ngừng là chìa khóa tăng trưởng.
+
+---
+
+# **3. VỊ TRÍ ĐANG TUYỂN DỤNG**
+
+---
+
+## **3.1 KHỐI KỸ THUẬT**
+
+### NLP Energy
+
+* Kỹ sư thiết kế hệ thống điện mặt trời.
+* Kỹ sư thi công lắp đặt năng lượng mặt trời.
+* Kỹ sư vận hành và bảo trì hệ thống điện.
+* Chuyên viên tư vấn năng lượng.
+
+### NLP EV Charging
+
+* Kỹ sư hạ tầng điện trạm sạc.
+* Kỹ sư cấu hình và vận hành CSMS.
+* Chuyên viên kỹ thuật trụ sạc.
+
+---
+
+## **3.2 KHỐI CÔNG NGHỆ**
+
+### NLP Technology
+
+* Lập trình viên Backend (Node.js / Python / Java).
+* Lập trình viên Frontend (React / Vue.js).
+* Lập trình viên Mobile (React Native / Flutter).
+* Kỹ sư DevOps / Cloud.
+* Kỹ sư kiểm thử (QA/QC).
+* Business Analyst (BA).
+* UI/UX Designer.
+
+### NLP AI & Digital
+
+* Kỹ sư AI / Machine Learning.
+* Kỹ sư xử lý dữ liệu (Data Engineer).
+* Chuyên viên phân tích dữ liệu (Data Analyst).
+* Kỹ sư Computer Vision.
+* Chuyên viên NLP (Natural Language Processing).
+
+---
+
+## **3.3 KHỐI KINH DOANH**
+
+* Giám đốc kinh doanh (Sales Director).
+* Trưởng nhóm kinh doanh dự án.
+* Chuyên viên kinh doanh năng lượng.
+* Chuyên viên kinh doanh giải pháp công nghệ.
+* Chuyên viên kinh doanh trạm sạc xe điện.
+* Chuyên viên phát triển đối tác.
+
+---
+
+## **3.4 KHỐI MARKETING**
+
+* Trưởng phòng Marketing.
+* Chuyên viên Content Marketing.
+* Chuyên viên Digital Marketing (SEO, Ads).
+* Chuyên viên thiết kế đồ họa.
+* Chuyên viên quay dựng video.
+* Chuyên viên quan hệ công chúng (PR).
+
+---
+
+## **3.5 KHỐI VẬN HÀNH & HỖ TRỢ**
+
+* Chuyên viên hành chính – nhân sự.
+* Kế toán tổng hợp / dự án.
+* Chuyên viên pháp lý hợp đồng.
+* Chuyên viên quản lý dự án (PM).
+* Trợ lý ban giám đốc.
+
+---
+
+# **4. QUY TRÌNH TUYỂN DỤNG**
+
+NỘP HỒ SƠ ỨNG TUYỂN
+    ↓
+LỌC HỒ SƠ (3–5 ngày làm việc)
+    ↓
+PHỎNG VẤN SƠ BỘ (Online hoặc trực tiếp)
+    ↓
+BÀI KIỂM TRA / THỰC TẾ (nếu cần)
+    ↓
+PHỎNG VẤN CHUYÊN SÂU
+    ↓
+ĐỀ NGHỊ CÔNG VIỆC (Offer)
+    ↓
+ONBOARDING
+
+---
+
+# **5. PHÚC LỢI**
+
+* Lương cạnh tranh theo năng lực thị trường.
+* Thưởng hiệu suất hàng quý và cuối năm.
+* Bảo hiểm xã hội, bảo hiểm y tế đầy đủ.
+* Bảo hiểm sức khỏe bổ sung.
+* Ngày phép năm theo quy định và cộng thêm.
+* Đào tạo kỹ năng và chứng chỉ chuyên môn.
+* Du lịch hàng năm.
+* Teambuilding và sự kiện nội bộ.
+* Môi trường làm việc linh hoạt (hybrid).
+
+---
+
+# **6. CÁCH ỨNG TUYỂN**
+
+### Gửi hồ sơ qua:
+
+* **Email:** career@nlpgroup.vn
+* **Website:** nlpgroup.vn/tuyen-dung
+* **LinkedIn:** NLP Group Vietnam
+
+### Hồ sơ bao gồm:
+
+* CV cập nhật (tiếng Việt hoặc tiếng Anh).
+* Thư xin việc (Cover Letter) nếu có.
+* Portfolio hoặc sản phẩm đã làm (cho vị trí kỹ thuật và sáng tạo).
+* Chứng chỉ liên quan.
+
+---
+
+# **THÔNG ĐIỆP TUYỂN DỤNG**
+
+## **"Bạn không chỉ tìm một công việc – Bạn đang chọn tham gia vào sứ mệnh xây dựng tương lai xanh."**
+
+---
+
+# **PHẦN 14**
+
+# **LIÊN HỆ (CONTACT)**
+
+## **Kết nối với NLP Group**
+
+---
+
+# **1. THÔNG TIN LIÊN HỆ**
+
+## **NLP GROUP**
+
+### Trụ sở chính
+
+* **Địa chỉ:** [Địa chỉ trụ sở chính – Cần cập nhật]
+* **Điện thoại:** [Số điện thoại – Cần cập nhật]
+* **Email:** info@nlpgroup.vn
+* **Website:** www.nlpgroup.vn
+
+### Giờ làm việc
+
+* Thứ Hai – Thứ Sáu: 8:00 – 17:30
+* Thứ Bảy: 8:00 – 12:00
+* Chủ Nhật: Nghỉ
+
+---
+
+# **2. CÁC PHÒNG BAN LIÊN HỆ**
+
+## **Kinh doanh & Tư vấn giải pháp**
+
+* **Email:** sales@nlpgroup.vn
+* **Điện thoại:** [Hotline kinh doanh]
+* **Phạm vi:** Tư vấn giải pháp năng lượng, trạm sạc, phần mềm, AI, ESG.
+
+---
+
+## **Hỗ trợ kỹ thuật**
+
+* **Email:** support@nlpgroup.vn
+* **Điện thoại:** [Hotline kỹ thuật]
+* **Phạm vi:** Hỗ trợ vận hành, xử lý sự cố, bảo trì.
+
+---
+
+## **Hợp tác & Đối tác**
+
+* **Email:** partner@nlpgroup.vn
+* **Phạm vi:** Đăng ký hợp tác, nhượng quyền trạm sạc, đối tác chiến lược.
+
+---
+
+## **Tuyển dụng**
+
+* **Email:** career@nlpgroup.vn
+* **Phạm vi:** Nộp hồ sơ ứng tuyển, thực tập sinh.
+
+---
+
+## **Truyền thông & Báo chí**
+
+* **Email:** media@nlpgroup.vn
+* **Phạm vi:** Phỏng vấn, thông cáo báo chí, hợp tác truyền thông.
+
+---
+
+# **3. BIỂU MẪU LIÊN HỆ**
+
+## **Gửi yêu cầu tư vấn**
+
+Khách hàng có thể điền form trực tuyến với các thông tin:
+
+* Họ và tên.
+* Số điện thoại.
+* Email.
+* Tên công ty (nếu có).
+* Lĩnh vực quan tâm:
+  * [ ] Giải pháp năng lượng xanh
+  * [ ] Trạm sạc xe điện
+  * [ ] Giải pháp phần mềm
+  * [ ] Giải pháp AI
+  * [ ] Tư vấn ESG & Carbon
+  * [ ] Hợp tác đối tác
+  * [ ] Khác
+* Nội dung yêu cầu.
+
+**Cam kết:** NLP Group phản hồi trong vòng 24 giờ làm việc.
+
+---
+
+# **4. VĂN PHÒNG ĐẠI DIỆN**
+
+## **Văn phòng tại TP. Hồ Chí Minh**
+
+* **Địa chỉ:** [Địa chỉ văn phòng HCM – Cần cập nhật]
+* **Điện thoại:** [Số điện thoại HCM]
+* **Phụ trách:** Khu vực miền Nam
+
+---
+
+## **Văn phòng tại Hà Nội**
+
+* **Địa chỉ:** [Địa chỉ văn phòng HN – Cần cập nhật]
+* **Điện thoại:** [Số điện thoại HN]
+* **Phụ trách:** Khu vực miền Bắc
+
+---
+
+## **Văn phòng tại Đà Nẵng**
+
+* **Địa chỉ:** [Địa chỉ văn phòng ĐN – Cần cập nhật]
+* **Điện thoại:** [Số điện thoại ĐN]
+* **Phụ trách:** Khu vực miền Trung
+
+---
+
+# **5. KẾT NỐI MẠNG XÃ HỘI**
+
+* **Facebook:** facebook.com/nlpgroup.vn
+* **LinkedIn:** linkedin.com/company/nlp-group-vietnam
+* **YouTube:** youtube.com/@nlpgroup
+* **Zalo OA:** [Zalo Official Account NLP Group]
+* **TikTok:** tiktok.com/@nlpgroup.vn
+
+---
+
+# **6. BẢN ĐỒ VỊ TRÍ**
+
+Tích hợp Google Maps hiển thị vị trí:
+
+* Trụ sở chính NLP Group.
+* Văn phòng khu vực.
+* Showroom và trung tâm demo.
+
+---
+
+# **THÔNG ĐIỆP LIÊN HỆ**
+
+## **"Hãy để NLP Group đồng hành cùng bạn trong hành trình chuyển đổi xanh và chuyển đổi số."**
+
+---
+
+# **KẾT LUẬN – TOÀN BỘ NỘI DUNG WEBSITE NLP GROUP**
+
+## **Tổng kết 14 phần nội dung chính:**
+
+| # | Phần | Mô tả |
+|---|------|-------|
+| 1 | Trang chủ | Giới thiệu tổng quan, hệ sinh thái, điểm khác biệt |
+| 2 | Về NLP Group | Lịch sử, tầm nhìn, sứ mệnh, giá trị cốt lõi, cơ cấu |
+| 3 | NLP Energy | Điện mặt trời, BESS, EMS, EPC, O&M |
+| 4 | NLP EV Charging | Trụ sạc, CSMS, OCPP, app, nhượng quyền |
+| 5 | NLP Technology | Phần mềm, website, mobile, ERP, CRM, IoT, cloud |
+| 6 | NLP AI & Digital | AI Agent, chatbot, ML, CV, NLP, tự động hóa |
+| 7 | NLP ESG & Carbon | Rừng, nông nghiệp bền vững, tín chỉ carbon, Net Zero |
+| 8 | Giải pháp | 6 giải pháp tích hợp toàn diện |
+| 9 | Dự án tiêu biểu | Dự án năng lượng, sạc, công nghệ, AI, ESG |
+| 10 | Đối tác | Đối tác công nghệ, thiết bị, triển khai, chiến lược, quốc tế |
+| 11 | Tin tức | 6 chuyên mục: NLP Group, Năng lượng, Xe điện, Công nghệ, AI, ESG |
+| 12 | Thư viện | Hình ảnh, video, hồ sơ, catalogue, tài liệu kỹ thuật |
+| 13 | Tuyển dụng | Vị trí tuyển dụng, phúc lợi, quy trình, văn hóa |
+| 14 | Liên hệ | Thông tin liên lạc, form tư vấn, văn phòng, mạng xã hội |
+
+---
+
+## **NLP GROUP – Kiến tạo hệ sinh thái đổi mới bền vững**
+
+**Năng lượng xanh • Xe điện • Công nghệ • Trí tuệ nhân tạo • Phát triển bền vững**
+
+*www.nlpgroup.vn*
+
+---

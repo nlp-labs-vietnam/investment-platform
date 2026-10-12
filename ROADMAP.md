@@ -12,13 +12,17 @@
 | Website `nlpgroup.vn` | ✅ Online (HTTP 200) |
 | Laravel app & database | ✅ Hoạt động |
 | Giao diện theme `green` | ✅ Đang chạy |
-| Nội dung web-NLP-GROUP.md | ✅ Đầy đủ 7 phần |
+| Nội dung web-NLP-GROUP.md | ✅ Đầy đủ 14 phần |
 | Route các trang hệ sinh thái | ✅ Đã định nghĩa |
 | Agent skills (4 skills) | ✅ Đã tạo |
 | Permission `storage/logs` | ✅ Đã sửa |
-| Pages trong DB (slug có nội dung) | ⚠️ Mới có: `/`, `about`, `contact`, `solutions`, `faq`, `blog` |
-| Pages NLP ecosystem trong DB | ❌ Chưa có: `nlp-energy`, `nlp-ev-charging`, `nlp-technology`, `nlp-esg-carbon`, `ecosystem` |
-| SEO metadata đã chuẩn hóa | ✅ Có trong `Pland.md` — chờ import |
+| Pages NLP ecosystem (`nlp-energy`, `nlp-ev-charging`, `nlp-technology`, `nlp-ai-digital`, `nlp-esg-carbon`, `ecosystem`) | ✅ Nội dung HTML đầy đủ, HTTP 200 |
+| Trang `solutions` | ✅ Nội dung 6 giải pháp, HTTP 200 |
+| SEO metadata 6 pages NLP | ✅ Đã seed (meta_title, meta_description, og_description, keywords) |
+| Navigation menu header | ✅ Dropdown Hệ Sinh Thái + Dropdown Giải Pháp |
+| Footer menu | ✅ useful_link + support_link đầy đủ |
+| Column `manage_menus.menu_items` | ✅ Đã alter VARCHAR(255) → TEXT |
+| Artisan commands | ✅ `nlp:seed-pages`, `nlp:seed-seo` |
 
 ---
 
@@ -68,23 +72,25 @@ Dùng bảng đã chuẩn hóa trong [`Pland.md`](Pland.md) để update các fi
 
 ### 2.2 Navigation menu
 
-- [ ] Menu chính: Trang chủ · Về NLP Group · Hệ sinh thái · Giải pháp · Dự án · Đối tác · Tin tức · Liên hệ
-- [ ] Dropdown Hệ sinh thái: 5 lĩnh vực
-- [ ] Dropdown Giải pháp: 6 loại
+- [x] Menu chính: Trang chủ · Về NLP Group · Hệ sinh thái · Giải pháp · Tin tức · Liên hệ
+- [x] Dropdown Hệ sinh thái: 5 lĩnh vực
+- [x] Dropdown Giải pháp: 5 lĩnh vực liên kết tới ecosystem pages
+- [x] Fix null-safe crash khi page name không tồn tại trong DB
 
 ### 2.3 Footer
 
-- [ ] Logo + tagline NLP Group
-- [ ] Links nhanh theo cấu trúc site
-- [ ] Thông tin liên hệ: địa chỉ, hotline, email
-- [ ] Social media links
-- [ ] Bản quyền © NLP Group
+- [x] Logo + tagline NLP Group
+- [x] Links nhanh: Trang chủ, Về, Giải Pháp, Blog, Hỏi Đáp, Liên Hệ
+- [x] Hệ Sinh Thái NLP + 5 đơn vị thành viên
+- [ ] Thông tin liên hệ: địa chỉ, hotline, email (cần cập nhật trong Content)
+- [ ] Social media links (cần cập nhật trong Content)
+- [x] Bản quyền © NLP Group
 
 ### 2.4 Section feature.blade.php
 
-- [ ] Kiểm tra 4 card hệ sinh thái hiển thị đúng hình ảnh
-- [ ] Link "Tìm hiểu thêm" trỏ đúng route
-- [ ] Nút "Xem toàn bộ hệ sinh thái NLP" → `/ecosystem`
+- [x] Link "Tìm hiểu thêm" trỏ đúng route (nlp-energy, nlp-ev-charging, nlp-technology, nlp-esg-carbon)
+- [x] Nút "Xem toàn bộ hệ sinh thái NLP" → `/ecosystem`
+- [ ] Kiểm tra hình ảnh 4 card hệ sinh thái (cần upload ảnh thực tế)
 
 ---
 

@@ -282,7 +282,9 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('/nlp-technology',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-technology')->name('nlp-technology');
     Route::get('/nlp-esg-carbon',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-esg-carbon')->name('nlp-esg-carbon');
     Route::get('/nlp-ai-digital',   [FrontendController::class, 'page'])->defaults('slug', 'nlp-ai-digital')->name('nlp-ai-digital');
-    Route::get('/ecosystem',        [FrontendController::class, 'page'])->defaults('slug', 'ecosystem')->name('ecosystem');
+    Route::get('/ecosystem',            [FrontendController::class, 'page'])->defaults('slug', 'ecosystem')->name('ecosystem');
+    Route::get('/nlp-ev-products',      [FrontendController::class, 'page'])->defaults('slug', 'nlp-ev-products')->name('nlp-ev-products');
+    Route::get('/nlp-energy-products',  [FrontendController::class, 'page'])->defaults('slug', 'nlp-energy-products')->name('nlp-energy-products');
 
     /*= Frontend Manage Controller =*/
     Route::get("/{slug?}", [FrontendController::class, 'page'])->name('page');

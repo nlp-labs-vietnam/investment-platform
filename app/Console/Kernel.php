@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\BinanceCron;
 use App\Console\Commands\BlockIoIPN;
+use App\Console\Commands\GenerateSitemap;
 use App\Console\Commands\MainCron;
 use App\Console\Commands\PayoutCryptoCurrencyUpdateCron;
 use App\Console\Commands\PayoutCurrencyUpdateCron;
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
         PayoutCryptoCurrencyUpdateCron::class,
         WarmCacheCommand::class,
         PruneStaleFileCache::class,
+        GenerateSitemap::class,
     ];
 
     /**
@@ -77,11 +79,12 @@ class Kernel extends ConsoleKernel
                 ->{$basicControl->currency_layer_auto_update_at}();
         }
         if ($basicControl->coin_market_cap_auto_update == 1) {
-            $schedule->command('crypto-currency:update')->{$basicControl->coin_market_cap_auto_update_at}();
-            $schedule->command('payout-crypto-currency:update')->{$basicControl->coin_market_cap_auto_update_at}();
+            $schedule->command('payout-currency:update')->{$basicControl->coin_market_cap_auto_update_at}();
+            $schedule->command('app:payout-crypto-currency-update-cron')->{$basicControl->coin_market_cap_auto_update_at}();
         }
 
-
+        // Regenerate sitemap weekly (Sunday 04:00)
+        $schedule->command('nlp:generate-sitemap')->weeklyOn(0, '04:00');
 
     }
 

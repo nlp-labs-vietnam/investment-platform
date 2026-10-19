@@ -23,3 +23,5 @@
 
 
 
+
+@include(template().'partials.schema_jsonld')

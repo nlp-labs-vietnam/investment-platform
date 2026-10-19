@@ -3940,17 +3940,7 @@ Padding bottom
 /*----------------------------------------------
 01. Nav section start
 ----------------------------------------------*/
-.navbar.active {
-  background-color: rgb(var(--white));
-  box-shadow: var(--shadow1);
-  z-index: 999;
-}
-.navbar.active .navbar-nav .nav-link {
-  color: var(--heading-color);
-}
-.navbar.active .navbar-nav .nav-link::after {
-  background-color: var(--heading-color);
-}
+/* .navbar.active → see "NLP Group — Navbar & Dropdown Menu (v2)" block below */
 .navbar.active .get-start-btn {
   background-color: rgb(var(--primary-color));
 }
@@ -3958,125 +3948,25 @@ Padding bottom
   color: rgb(var(--primary-color));
   background-color: var(--btn-hover-bg);
 }
-.navbar.active .dropdown-toggle i {
-  color: var(--heading-color);
-}
-.navbar.active .navbar-toggler {
-  color: var(--body-color);
-}
 
-.navbar {
-  padding: 10px 15px;
-  z-index: 999;
-  background-color: rgb(var(--white));
-  border-bottom: 1px solid var(--border-color1);
-}
-.navbar .container {
-  position: relative;
-}
-.navbar .navbar-toggler {
-  font-size: 18px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border-color1);
-  box-shadow: none;
-  border-radius: 6px;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  color: rgb(var(--primary-color));
-}
-.navbar .navbar-toggler:hover {
-  background-color: rgb(var(--primary-color), 0.1);
-  color: rgb(var(--primary-color));
-}
+/* .navbar base & responsive → see "NLP Group — Navbar & Dropdown Menu (v2)" block below */
 .navbar .navbar-nav {
   text-align: left;
 }
-.navbar .navbar-nav .nav-link {
-  font-size: 16px;
-  color: var(--heading-color);
-  text-transform: capitalize;
-  padding: 12px 15px;
-  transition: var(--transition);
-  border-radius: 0;
-  position: relative;
-  font-weight: 600;
-}
-.navbar .navbar-nav .nav-link:hover, .navbar .navbar-nav .nav-link.active {
-  color: rgb(var(--primary-color));
-  font-weight: 600;
-}
 .navbar .navbar-nav .nav-link i {
   margin-right: 5px;
-  color: rgb(var(--primary-color));
-}
-.navbar .nav-right {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--heading-color);
-}
-.navbar .nav-right .custom-nav {
-  display: flex;
-  align-items: center;
-  gap: 15px;
 }
 .navbar .toggle-btn {
   font-size: 20px;
   cursor: pointer;
 }
-
 .transparent {
   background-color: transparent;
 }
-
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-toggler {
     display: none !important;
   }
-  .navbar .navbar-nav .nav-link::after {
-    background-color: rgb(var(--primary-color));
-  }
-}
-@media (max-width: 991px) {
-  .navbar {
-    padding: 15px;
-  }
-  .navbar.active {
-    padding: 15px;
-  }
-  .navbar .navbar-nav .nav-link {
-    padding: 15px;
-  }
-  .navbar .nav-right {
-    position: absolute;
-    right: 65px;
-  }
-}
-@media (max-width: 767px) {
-  .navbar {
-    padding: 10px 5px;
-  }
-  .navbar.active {
-    padding: 10px 5px;
-  }
-  .navbar .navbar-toggler {
-    display: none;
-  }
-  .navbar .nav-right {
-    position: absolute;
-    right: 12px;
-  }
-}
-.rtl .navbar-nav.ms-auto {
-  margin-right: auto;
-  margin-left: 0 !important;
-}
-.rtl .navbar .navbar-nav .nav-link i {
-  margin-right: 0;
-  margin-left: 5px;
 }
 
 /*----------------------------------------------
@@ -6360,60 +6250,146 @@ Investor profile section end
 ----------------------------------------------*/
 
 /*----------------------------------------------
-  Navbar Dropdown List (Hộp thả NLP Group)
+  NLP Group — Navbar & Dropdown Menu (v2)
 ----------------------------------------------*/
-/* Wrapper nav-item cần position relative để hộp thả định vị đúng */
+
+/* ── 1. Navbar base ─────────────────────────── */
+.navbar {
+  padding: 0 15px;
+  z-index: 1000;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.navbar .container {
+  position: relative;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── 2. Logo ────────────────────────────────── */
+.navbar .navbar-brand img {
+  max-height: 42px;
+  width: auto;
+}
+
+/* ── 3. Top-level nav links ─────────────────── */
 .navbar .navbar-nav .nav-item {
   position: relative;
 }
-
-/* Hộp thả */
-.navbar .navbar-nav .dropdown-list {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1080;                    /* cao hơn navbar z-index:999 */
-  min-width: 240px;
-  background-color: rgb(var(--white));
-  border: 1px solid var(--border-color1);
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
-  padding: 8px 0;
-  list-style: none;
-  margin: 0;
-  transform: translateY(6px);
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
-  pointer-events: none;
-  /* Ngăn navbar overflow:hidden cắt dropdown */
-  will-change: opacity, transform;
+.navbar .navbar-nav > .nav-item > .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a2a3a;
+  padding: 0 14px;
+  height: 64px;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-transform: none;
+  border-bottom: 3px solid transparent;
+  transition: color .18s, border-color .18s;
+  white-space: nowrap;
+}
+.navbar .navbar-nav > .nav-item > .nav-link:hover,
+.navbar .navbar-nav > .nav-item > .nav-link.active {
+  color: rgb(var(--primary-color));
+  border-bottom-color: rgb(var(--primary-color));
 }
 
-/* Bridge — dải vô hình lấp khoảng cách giữa link và hộp thả */
+/* chevron icon */
+.navbar .navbar-nav .nav-link .icon {
+  font-size: 11px;
+  opacity: .7;
+  transition: transform .2s ease, opacity .2s;
+  margin-left: 2px;
+  margin-top: 1px;
+}
+.navbar .navbar-nav .nav-item:hover > .nav-link .icon {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: rgb(var(--primary-color));
+}
+
+/* ── 4. Dropdown container ──────────────────── */
+.navbar .navbar-nav .dropdown-list {
+  /* hidden state */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(.98);
+
+  /* layout */
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1100;
+  min-width: 220px;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+
+  /* visual */
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.13), 0 2px 8px rgba(0,0,0,.06);
+
+  /* animation */
+  transition:
+    opacity .18s cubic-bezier(.4,0,.2,1),
+    transform .18s cubic-bezier(.4,0,.2,1),
+    visibility 0s linear .18s;
+}
+
+/* caret / beak arrow */
+.navbar .navbar-nav .dropdown-list::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-left: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0,0,0,.1);
+  transform: rotate(45deg);
+  border-radius: 2px 0 0 0;
+}
+
+/* hover-bridge — invisible gap-filler so mouse can reach dropdown */
 .navbar .navbar-nav .nav-item::after {
   content: '';
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  height: 10px;
+  height: 12px;
   display: none;
 }
 .navbar .navbar-nav .nav-item:hover::after {
   display: block;
 }
 
-/* Hiện hộp khi hover vào nav-item cha */
-.navbar .navbar-nav .nav-item:hover > .dropdown-list {
+/* ── 5. Dropdown open state ─────────────────── */
+.navbar .navbar-nav .nav-item:hover > .dropdown-list,
+.navbar .navbar-nav .nav-item:focus-within > .dropdown-list {
   visibility: visible;
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0s;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity .18s cubic-bezier(.4,0,.2,1),
+    transform .18s cubic-bezier(.4,0,.2,1),
+    visibility 0s linear 0s;
 }
 
-/* Items trong hộp thả */
+/* ── 6. Dropdown items ──────────────────────── */
 .navbar .navbar-nav .dropdown-list .nav-item {
   position: static;
   width: 100%;
@@ -6421,90 +6397,608 @@ Investor profile section end
 .navbar .navbar-nav .dropdown-list .nav-item::after {
   display: none !important;
 }
+.navbar .navbar-nav .dropdown-list .nav-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
 
 .navbar .navbar-nav .dropdown-list .nav-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
-  font-size: 14px;
+  padding: 10px 18px 10px 16px;
+  height: auto;
+  font-size: 13.5px;
   font-weight: 500;
-  color: var(--heading-color);
-  white-space: nowrap;
+  color: #2d3748;
+  border-bottom: none;
   border-radius: 0;
-  transition: background-color 0.15s, color 0.15s, padding-left 0.15s;
+  white-space: nowrap;
+  transition: background .14s, color .14s, padding-left .14s;
 }
 
+/* bullet dot */
 .navbar .navbar-nav .dropdown-list .nav-link::before {
   content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: rgb(var(--primary-color));
   flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgb(var(--primary-color));
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: opacity .14s;
 }
 
-.navbar .navbar-nav .dropdown-list .nav-link:hover {
-  background-color: rgba(var(--primary-color), 0.07);
+.navbar .navbar-nav .dropdown-list .nav-link:hover,
+.navbar .navbar-nav .dropdown-list .nav-link.active {
+  background: rgba(var(--primary-color), .07);
   color: rgb(var(--primary-color));
-  padding-left: 24px;
+  padding-left: 20px;
+  border-bottom: none;
 }
-
-.navbar .navbar-nav .dropdown-list .nav-link:hover::before {
+.navbar .navbar-nav .dropdown-list .nav-link:hover::before,
+.navbar .navbar-nav .dropdown-list .nav-link.active::before {
   opacity: 1;
 }
 
-/* Mũi tên xoay khi hover */
-.navbar .navbar-nav .nav-item:hover > .nav-link .icon {
-  transform: rotate(180deg);
+/* first/last item rounding */
+.navbar .navbar-nav .dropdown-list .nav-item:first-child .nav-link {
+  border-radius: 12px 12px 0 0;
+}
+.navbar .navbar-nav .dropdown-list .nav-item:last-child .nav-link {
+  border-radius: 0 0 12px 12px;
+}
+
+/* ── 7. Scrolled / active state ─────────────── */
+.navbar.active {
+  padding: 0 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 16px rgba(0,0,0,.1);
+}
+.navbar.active .navbar-nav .nav-link::after {
+  background-color: rgb(var(--primary-color));
+}
+
+/* ── 8. Right-side nav (login/user) ─────────── */
+.navbar .nav-right {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a2a3a;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.navbar .nav-right .custom-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar .nav-right .cmn-btn {
+  padding: 8px 20px;
+  font-size: 13px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* ── 9. Navbar toggler (≤ 991px) ───────────── */
+.navbar .navbar-toggler {
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: none;
+  border-radius: 8px;
+  transition: background .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   color: rgb(var(--primary-color));
 }
-
-.navbar .navbar-nav .nav-link .icon {
-  transition: transform 0.2s ease;
-  font-size: 12px;
-  margin-left: 4px;
+.navbar .navbar-toggler:hover {
+  background: rgba(var(--primary-color), .08);
 }
 
-/* Đường kẻ ngăn cách cuối menu dropdown (tùy chọn) */
-.navbar .navbar-nav .dropdown-list .nav-item:not(:last-child) {
-  border-bottom: 1px solid rgba(0,0,0,0.04);
-}
-
-/* Mobile: ẩn dropdown hover, dùng JS toggle trong offcanvas */
+/* ── 10. Mobile offcanvas menu ──────────────── */
 @media (max-width: 991px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+  .navbar .container {
+    min-height: 56px;
+  }
+  .navbar .navbar-nav > .nav-item > .nav-link {
+    height: auto;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    border-left: none;
+    font-size: 15px;
+  }
+  .navbar .navbar-nav > .nav-item > .nav-link:hover,
+  .navbar .navbar-nav > .nav-item > .nav-link.active {
+    border-bottom-color: rgba(0,0,0,.06);
+    border-left: 3px solid rgb(var(--primary-color));
+    padding-left: 14px;
+  }
+
+  /* disable desktop hover-dropdown on mobile */
   .navbar .navbar-nav .dropdown-list {
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    transform: none !important;
+    transition: none !important;
+    position: absolute !important;
   }
-
-  .navbar .navbar-nav .nav-item:hover > .dropdown-list {
+  .navbar .navbar-nav .nav-item:hover > .dropdown-list,
+  .navbar .navbar-nav .nav-item:focus-within > .dropdown-list {
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
   }
 
-  /* Mobile offcanvas: class .open do JS thêm vào */
-  .offcanvas .navbar-nav .dropdown-list.open {
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+  /* mobile toggle: .open class added by JS */
+  .offcanvas .navbar-nav .dropdown-list {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
     position: static !important;
     transform: none !important;
     box-shadow: none;
     border: none;
     border-left: 3px solid rgb(var(--primary-color));
     border-radius: 0;
-    padding: 4px 0;
-    margin-left: 16px;
+    padding: 0;
+    margin: 0 0 4px 20px;
     min-width: auto;
-    transition: none !important;
+    transition: max-height .25s ease, opacity .2s ease, visibility 0s linear .25s !important;
+  }
+  .offcanvas .navbar-nav .dropdown-list.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    max-height: 400px;
+    padding: 4px 0;
+    transition: max-height .25s ease, opacity .2s ease, visibility 0s linear 0s !important;
+  }
+
+  /* rotate chevron when open */
+  .offcanvas .navbar-nav .nav-item.open > .nav-link .icon {
+    transform: rotate(180deg);
+    color: rgb(var(--primary-color));
+  }
+
+  /* mobile dropdown item style */
+  .offcanvas .navbar-nav .dropdown-list .nav-link {
+    padding: 9px 16px;
+    font-size: 13.5px;
+    color: #555;
+    border-bottom: 1px solid rgba(0,0,0,.04);
+    border-left: none;
+  }
+  .offcanvas .navbar-nav .dropdown-list .nav-link:hover {
+    color: rgb(var(--primary-color));
+    background: rgba(var(--primary-color), .05);
+    padding-left: 20px;
+  }
+
+  .navbar .nav-right {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    translate: 0 -50%;
   }
 }
+
+@media (max-width: 767px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+  .navbar .navbar-brand img {
+    max-height: 36px;
+  }
+  .navbar .nav-right {
+    right: 54px;
+  }
+}
+
+/* ── 11. RTL support ────────────────────────── */
+.rtl .navbar-nav.ms-auto {
+  margin-right: auto;
+  margin-left: 0 !important;
+}
+.rtl .navbar .navbar-nav .nav-link i {
+  margin-right: 0;
+  margin-left: 5px;
+}
+.rtl .navbar .dropdown-list {
+  left: auto;
+  right: 50%;
+  translate: 50% 0;
+}
+.rtl .navbar .dropdown-list::before {
+  left: auto;
+  right: 50%;
+  translate: 50% 0;
+}
+.rtl .navbar .nav-right {
+  margin-left: 0;
+  margin-right: auto;
+}
+
 /*----------------------------------------------
-  Navbar Dropdown List end
+  NLP Group — Navbar & Dropdown Menu end
+----------------------------------------------*/
+
+
+/*----------------------------------------------
+  NLP Group — Icon Tag System (.nlp-icon)
+  Thay thế emoji bằng FA6 Pro icon nhất quán
+  Tông màu đồng bộ theo từng lĩnh vực
+----------------------------------------------*/
+
+/* ── Base icon tag ──────────────────────────── */
+.nlp-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 6px;
+  vertical-align: middle;
+  margin-right: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+  font-size: .85em;
+}
+.nlp-icon i {
+  font-size: inherit;
+  line-height: 1;
+}
+
+/* Khi dùng trong heading/title — lớn hơn */
+h1 .nlp-icon, h2 .nlp-icon, h3 .nlp-icon {
+  width: 1.4em;
+  height: 1.4em;
+  font-size: 1em;
+  border-radius: 8px;
+}
+
+/* Khi dùng trong table cell — nhỏ gọn */
+td .nlp-icon, th .nlp-icon {
+  width: 1.4em;
+  height: 1.4em;
+  font-size: .8em;
+}
+
+/* ── Tông màu theo lĩnh vực ─────────────────── */
+
+/* Solar / Năng lượng — vàng cam */
+.nlp-icon--solar {
+  background: #fff7e6;
+  color: #d97706;
+}
+
+/* Battery / Pin lưu trữ — xanh lam đậm */
+.nlp-icon--battery {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Bolt / Điện — xanh lam sáng */
+.nlp-icon--bolt {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+/* Tool / Công cụ kỹ thuật — xám xanh */
+.nlp-icon--tool {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* Chart / Biểu đồ — tím */
+.nlp-icon--chart {
+  background: #f5f3ff;
+  color: #6d28d9;
+}
+
+/* Plug / Sạc cắm — xanh lam */
+.nlp-icon--plug {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Screen / Màn hình — xám trung tính */
+.nlp-icon--screen {
+  background: #f8fafc;
+  color: #334155;
+}
+
+/* Mobile — xanh lam nhạt */
+.nlp-icon--mobile {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+/* Truck / Vận chuyển — cam nhạt */
+.nlp-icon--truck {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+/* Partner / Đối tác — xanh lá nhạt */
+.nlp-icon--partner {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* Laptop / Công nghệ — xanh ngọc */
+.nlp-icon--laptop {
+  background: #ecfeff;
+  color: #0e7490;
+}
+
+/* Globe / Mạng — xanh lam */
+.nlp-icon--globe {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Factory / Nhà máy — xám đậm */
+.nlp-icon--factory {
+  background: #f1f5f9;
+  color: #374151;
+}
+
+/* Link / Kết nối — tím nhạt */
+.nlp-icon--link {
+  background: #faf5ff;
+  color: #7c3aed;
+}
+
+/* Cloud / Đám mây — xanh nhạt */
+.nlp-icon--cloud {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+/* Package / Gói phần mềm — xám xanh */
+.nlp-icon--package {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* Rocket / Tăng trưởng — đỏ cam */
+.nlp-icon--rocket {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+/* AI / Robot — tím xanh */
+.nlp-icon--ai {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+/* Chat / Chatbot — xanh lam */
+.nlp-icon--chat {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Eye / Giám sát — xanh ngọc */
+.nlp-icon--eye {
+  background: #ecfeff;
+  color: #0891b2;
+}
+
+/* Gear / Cài đặt — xám */
+.nlp-icon--gear {
+  background: #f8fafc;
+  color: #475569;
+}
+
+/* Tree / Cây xanh ESG — xanh lá đậm */
+.nlp-icon--tree {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+/* Leaf / Lá cây — xanh lá */
+.nlp-icon--leaf {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Wind / Gió — xanh nhạt */
+.nlp-icon--wind {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+/* Building / Tòa nhà — xám xanh */
+.nlp-icon--building {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* Target / Mục tiêu — đỏ nhạt */
+.nlp-icon--target {
+  background: #fff1f2;
+  color: #dc2626;
+}
+
+/* Check / Xác nhận — xanh lá */
+.nlp-icon--check {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+/* Idea / Ý tưởng — vàng */
+.nlp-icon--idea {
+  background: #fefce8;
+  color: #ca8a04;
+}
+
+/* Star / Nổi bật — vàng cam */
+.nlp-icon--star {
+  background: #fff7ed;
+  color: #d97706;
+}
+
+/* List / Danh sách — xanh lam nhạt */
+.nlp-icon--list {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Pin / Địa điểm — đỏ */
+.nlp-icon--pin {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Work / Công việc — tím */
+.nlp-icon--work {
+  background: #faf5ff;
+  color: #7c3aed;
+}
+
+/* Money / Lương thưởng — xanh lá */
+.nlp-icon--money {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* Mail / Email — xanh lam */
+.nlp-icon--mail {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* ── Responsive: icon nhỏ hơn trên mobile ───── */
+@media (max-width: 575px) {
+  .nlp-icon {
+    width: 1.4em;
+    height: 1.4em;
+    font-size: .8em;
+    border-radius: 5px;
+  }
+}
+
+/*----------------------------------------------
+  NLP Group — Icon Tag System end
+----------------------------------------------*/
+
+/*----------------------------------------------
+  NLP Group — Icon Animation Effects
+  Tương đương SF Symbols symbolEffect (iOS 17+)
+  Classes: .nlp-icon--pulse | --bounce | --spin
+           --beat | --shake | --fade
+----------------------------------------------*/
+
+/* ── Keyframe definitions ───────────────────── */
+
+/* pulse — nhấp nháy opacity, tương tự .pulse trong SF Symbols */
+@keyframes nlp-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .35; }
+}
+
+/* bounce — nảy nhẹ theo chiều Y */
+@keyframes nlp-bounce {
+  0%, 100% { transform: translateY(0); }
+  30%       { transform: translateY(-5px); }
+  60%       { transform: translateY(-2px); }
+}
+
+/* spin — xoay liên tục, tương tự .rotate trong SF Symbols */
+@keyframes nlp-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* beat — scale phóng to thu nhỏ, tương tự .bounce trong SF Symbols */
+@keyframes nlp-beat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+
+/* shake — rung trái phải */
+@keyframes nlp-shake {
+  0%, 100%  { transform: translateX(0); }
+  20%        { transform: translateX(-4px); }
+  40%        { transform: translateX(4px); }
+  60%        { transform: translateX(-3px); }
+  80%        { transform: translateX(3px); }
+}
+
+/* fade — xuất hiện mờ dần, tương tự .appear trong SF Symbols */
+@keyframes nlp-fade {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .2; }
+}
+
+/* ── Animation modifier classes ────────────── */
+
+/* pulse: liên tục, 2s, ease-in-out */
+.nlp-icon--pulse i {
+  animation: nlp-pulse 2s ease-in-out infinite;
+}
+
+/* bounce: liên tục, 1.4s, ease */
+.nlp-icon--bounce i {
+  animation: nlp-bounce 1.4s ease infinite;
+}
+
+/* spin: liên tục, 2s, linear */
+.nlp-icon--spin i {
+  animation: nlp-spin 2s linear infinite;
+  display: inline-block;
+}
+
+/* beat: liên tục, 1s, ease-in-out */
+.nlp-icon--beat i {
+  animation: nlp-beat 1s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* shake: chạy 1 lần, kích hoạt bằng hover */
+.nlp-icon--shake:hover i {
+  animation: nlp-shake .5s ease;
+}
+
+/* fade: liên tục, 2.4s, ease-in-out */
+.nlp-icon--fade i {
+  animation: nlp-fade 2.4s ease-in-out infinite;
+}
+
+/* ── Hover-triggered (dùng khi không muốn chạy liên tục) ── */
+.nlp-icon--pulse-hover:hover i {
+  animation: nlp-pulse 1.2s ease-in-out 2;
+}
+.nlp-icon--bounce-hover:hover i {
+  animation: nlp-bounce .8s ease 1;
+}
+.nlp-icon--beat-hover:hover i {
+  animation: nlp-beat .6s ease-in-out 2;
+  display: inline-block;
+}
+
+/* ── Respect user preference: giảm chuyển động ── */
+@media (prefers-reduced-motion: reduce) {
+  .nlp-icon--pulse i,
+  .nlp-icon--bounce i,
+  .nlp-icon--spin i,
+  .nlp-icon--beat i,
+  .nlp-icon--fade i {
+    animation: none;
+  }
+}
+
+/*----------------------------------------------
+  NLP Group — Icon Animation Effects end
 ----------------------------------------------*/

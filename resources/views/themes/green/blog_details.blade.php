@@ -19,7 +19,7 @@
                                 </li>
 
                                 <li class="item">
-                                    <span class="icon"><i class="fal fa-clock"></i></span>
+                                    <span class="icon"><i class="fa-light fa-clock"></i></span>
                                     <span>{{ dateTime($singleBlog->created_at) }}</span>
                                 </li>
 
@@ -45,7 +45,7 @@
                                 <div class="search-box">
                                     <input type="text" name="search" id="search" class="form-control"
                                            placeholder="@lang('Search here')...">
-                                    <button type="submit" class="search-btn"><i class="far fa-search"></i></button>
+                                    <button type="submit" class="search-btn"><i class="fa-regular fa-magnifying-glass"></i></button>
                                 </div>
                             </div>
                         </form>

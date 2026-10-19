@@ -113,7 +113,7 @@
                                                              id='captcha_image'>
                                                         <a class="input-group-append input-group-text"
                                                            href='javascript: refreshCaptcha();'>
-                                                            <i class="fas fa-sync  "></i>
+                                                            <i class="fa-solid fa-rotate  "></i>
                                                         </a>
                                                     </div>
                                                 </div>

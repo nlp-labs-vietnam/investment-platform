@@ -109,7 +109,7 @@
                                             @elseif(optional($offerProperty->propertyShare)->status == 0 && $offerProperty->payment_status == 0)
                                                 <li>
                                                     <a class="dropdown-item btn disabled">
-                                                        <i class="fal fa-shopping-cart"></i> @lang('Sold out')
+                                                        <i class="fa-light fa-cart-shopping"></i> @lang('Sold out')
                                                     </a>
                                                 </li>
                                             @endif
@@ -117,7 +117,7 @@
                                             <li>
                                                 <a class="dropdown-item"
                                                    href="{{ route('user.offerConversation', $offerProperty->id) }}">
-                                                    <i class="fal fa-envelope"
+                                                    <i class="fa-light fa-envelope"
                                                        aria-hidden="true"></i> @lang('Conversation')
                                                 </a>
                                             </li>
@@ -127,7 +127,7 @@
                                                     class="dropdown-item btn notiflix-confirm"
                                                     data-bs-toggle="modal" data-bs-target="#delete-modal"
                                                     data-route="{{route('user.propertyOfferRemove', $offerProperty->id)}}">
-                                                    <i class="fal fa-trash"></i>
+                                                    <i class="fa-light fa-trash"></i>
                                                     @lang('Remove')
                                                 </button>
                                             </li>
@@ -172,7 +172,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">@lang('Remove Confirmation')</h5>
                     <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                             aria-label="Close">
-                        <i class="fal fa-times"></i>
+                        <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>
 
@@ -205,7 +205,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">@lang('Property Offer Details')</h5>
                         <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
 

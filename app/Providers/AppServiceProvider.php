@@ -6,7 +6,9 @@ use App\Models\ContentDetails;
 use App\Models\Language;
 use App\Models\ManageMenu;
 use App\Services\SidebarDataService;
+use App\Support\Icons\NlpIcon;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -105,6 +107,16 @@ class AppServiceProvider extends ServiceProvider
                         config('services.mandrill.key')
                     )
                 );
+            });
+
+            // ── Blade directive: @nlpicon('solar') hoặc @nlpicon('solar','pulse') ──
+            Blade::directive('nlpicon', function ($expression) {
+                return "<?php echo \\App\\Support\\Icons\\NlpIcon::html({$expression}); ?>";
+            });
+
+            // ── Blade directive: @nlpiconanim('ai','pulse') ──
+            Blade::directive('nlpiconanim', function ($expression) {
+                return "<?php echo \\App\\Support\\Icons\\NlpIcon::animated({$expression}); ?>";
             });
 
         } catch (\Exception $e) {

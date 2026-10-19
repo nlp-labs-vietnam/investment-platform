@@ -19,7 +19,7 @@
 
         <li>
             <a class="dropdown-item d-flex align-items-center" href="{{route('user.dashboard')}}">
-                <i class="fal fa-border-all"></i>
+                <i class="fa-light fa-border-all"></i>
                 <span>{{trans('Dashboard')}}</span>
             </a>
         </li>
@@ -31,7 +31,7 @@
         </li>
         <li>
             <a class="dropdown-item d-flex align-items-center" href="{{route('user.twostep.security')}}">
-                <i class="fal fa-lock"></i>
+                <i class="fa-light fa-lock"></i>
                 <span>@lang('2FA Security')</span>
             </a>
         </li>

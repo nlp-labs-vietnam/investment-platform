@@ -142,7 +142,7 @@
                     <div class="modal-header modal-header-custom">
                         <h4 class="modal-title" id="editModalLabel">@lang('Confirmation')</h4>
                         <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
                     <form method="post" action="{{ route('user.ticket.reply', $ticket->id) }}">

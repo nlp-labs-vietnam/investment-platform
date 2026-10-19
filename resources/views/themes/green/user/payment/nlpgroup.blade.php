@@ -64,7 +64,7 @@
                                  class="position-absolute top-0 start-0 w-100 h-100 d-none
                                         d-flex align-items-center justify-content-center rounded"
                                  style="background:rgba(25,135,84,.85);">
-                                <i class="fa fa-check-circle text-white" style="font-size:64px;"></i>
+                                <i class="fa fa-circle-check text-white" style="font-size:64px;"></i>
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@
                         {{-- Success badge --}}
                         <div id="nlpgroup-success" class="mb-2" style="display:none;">
                             <span class="badge bg-success fs-6 px-3 py-2">
-                                <i class="fa fa-check-circle me-1"></i>
+                                <i class="fa fa-circle-check me-1"></i>
                                 @lang('Payment Confirmed!')
                             </span>
                         </div>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Icons\NlpIcon;
+use App\Http\Controllers\Internal\IconShowcaseController;
 use App\Http\Controllers\Auth\LoginController as UserLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FrontendController;
@@ -285,6 +287,22 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('/ecosystem',            [FrontendController::class, 'page'])->defaults('slug', 'ecosystem')->name('ecosystem');
     Route::get('/nlp-ev-products',      [FrontendController::class, 'page'])->defaults('slug', 'nlp-ev-products')->name('nlp-ev-products');
     Route::get('/nlp-energy-products',  [FrontendController::class, 'page'])->defaults('slug', 'nlp-energy-products')->name('nlp-energy-products');
+    Route::get('/san-pham-nlp',         [FrontendController::class, 'page'])->defaults('slug', 'san-pham-nlp')->name('san-pham-nlp');
+    Route::get('/tuyen-dung',           [FrontendController::class, 'page'])->defaults('slug', 'tuyen-dung')->name('tuyen-dung');
+
+    // ── NLP Icon tokens API — cho iOS app và JS consumers ──────────
+    Route::get('/api/nlp-icons', function () {
+        return response()->json(NlpIcon::all())
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Cache-Control', 'public, max-age=86400, stale-while-revalidate=3600');
+    })->name('nlp.icons.json');
+
+    // ── Công cụ nội bộ: Design Token Showcase ──────────────────────
+    // Truy cập: /_internal/icons (chỉ dùng trong môi trường dev/staging)
+    Route::prefix('_internal')->name('internal.')->group(function () {
+        Route::get('/icons', [IconShowcaseController::class, 'index'])
+            ->name('icons.showcase');
+    });
 
     /*= Frontend Manage Controller =*/
     Route::get("/{slug?}", [FrontendController::class, 'page'])->name('page');

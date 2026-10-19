@@ -455,7 +455,7 @@
                 $(_this).text('Copied');
                 setTimeout(function () {
                     $(_this).text('');
-                    $(_this).html('<i class="fas fa-copy"></i>');
+                    $(_this).html('<i class="fa-solid fa-copy"></i>');
                 }, 500);
             });
         });
@@ -482,7 +482,7 @@
                 $(_this).text('Copied');
                 setTimeout(function () {
                     $(_this).text('');
-                    $(_this).html('<i class="fal fa-copy"></i>');
+                    $(_this).html('<i class="fa-light fa-copy"></i>');
                 }, 500);
             });
         });

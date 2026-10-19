@@ -449,26 +449,44 @@ if (document.querySelector('.login-signup-form')) {
 // Navbar dropdown-list: mobile offcanvas toggle
 // -----------------------------------------------
 $(document).ready(function () {
-    // Mobile: click vào nav-link có dropdown-list con → toggle open
+
+    // Mobile: click vào nav-link có dropdown con → toggle .open
     $('.offcanvas .navbar-nav .nav-item').each(function () {
-        var $item = $(this);
+        var $item  = $(this);
         var $child = $item.find('> .dropdown-list');
-        if ($child.length) {
-            // Thêm icon toggle cho mobile nếu chưa có
-            $item.find('> .nav-link').css('cursor', 'pointer').on('click.mobileDropdown', function (e) {
-                e.preventDefault();
-                $child.toggleClass('open');
-                $(this).find('.icon').toggleClass('fa-angle-up fa-angle-down');
+        if (!$child.length) return;
+
+        var $link = $item.find('> .nav-link');
+        $link.css('cursor', 'pointer').on('click.mobileDropdown', function (e) {
+            e.preventDefault();
+
+            var isOpen = $child.hasClass('open');
+
+            // đóng tất cả anh chị em trước
+            $item.siblings('.nav-item').each(function () {
+                $(this).removeClass('open')
+                    .find('> .dropdown-list').removeClass('open');
+                $(this).find('> .nav-link .icon')
+                    .removeClass('fa-angle-up').addClass('fa-angle-down');
             });
-        }
+
+            // toggle item hiện tại
+            $child.toggleClass('open', !isOpen);
+            $item.toggleClass('open', !isOpen);
+            $link.find('.icon')
+                .toggleClass('fa-angle-up', !isOpen)
+                .toggleClass('fa-angle-down', isOpen);
+        });
     });
 
     // Đóng offcanvas → reset tất cả dropdown
     $('#offcanvasNavbar').on('hidden.bs.offcanvas', function () {
         $('.offcanvas .navbar-nav .dropdown-list').removeClass('open');
+        $('.offcanvas .navbar-nav .nav-item').removeClass('open');
         $('.offcanvas .navbar-nav .nav-link .icon')
             .removeClass('fa-angle-up').addClass('fa-angle-down');
     });
+
 });
 // -----------------------------------------------
 // Navbar dropdown-list end

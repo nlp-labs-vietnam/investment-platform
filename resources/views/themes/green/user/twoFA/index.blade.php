@@ -120,7 +120,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="planModalLabel">@lang('Verify Your OTP')</h4>
                     <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fal fa-times"></i>
+                        <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>
 
@@ -152,7 +152,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="planModalLabel">@lang('Verify Your OTP to Disable')</h4>
                     <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fal fa-times"></i>
+                        <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>
                 <form action="{{route('user.twoStepDisable')}}" method="POST" class="m-0">
@@ -183,7 +183,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="planModalLabel">@lang('Re-generate Confirmation')</h4>
                     <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fal fa-times"></i>
+                        <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>
                 <form action="{{route('user.twoStepRegenerate')}}" method="POST" class="m-0">

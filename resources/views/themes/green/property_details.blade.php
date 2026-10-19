@@ -50,10 +50,10 @@
                         <span>{{ $singlePropertyDetails->is_invest_type == 0 ? trans('(Fixed Invest)') : trans('(Invest Range)') }}</span>
                     </h3>
                     @if($singlePropertyDetails->available_funding == 0 && $singlePropertyDetails->expire_date > now() && $singlePropertyDetails->is_available_funding == 1)
-                        <span class="invest-completed-details"><i class="fa-regular fa-check-circle"></i> @lang('Investment Completed')</span>
+                        <span class="invest-completed-details"><i class="fa-regular fa-circle-check"></i> @lang('Investment Completed')</span>
                     @elseif($singlePropertyDetails->expire_date < now())
                         <span class="invest-completed-details bg-danger"><i
-                                class="fa-regular fa-times-circle"></i> @lang('Investment Time Expired')</span>
+                                class="fa-regular fa-circle-xmark"></i> @lang('Investment Time Expired')</span>
                     @endif
 
                 </div>
@@ -181,7 +181,7 @@
 
                             <div class="frontend-not-data-found" v-if="item.feedArr.length<1" v-cloak="">
                                 <p class="text-center not-found-times" v-cloak="">
-                                    <i class="fad fa-file-times not-found-times" v-cloak=""></i>
+                                    <i class="fa-duotone fa-file-times not-found-times" v-cloak=""></i>
                                 </p>
                                 <h5 class="text-center m-0 " v-cloak="">@lang("No Review Found")</h5>
 

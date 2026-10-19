@@ -8,12 +8,12 @@
                 @if($singlePropertyOffer->offered_from != Auth::id())
                     <a href="{{ route('user.offerList', $singlePropertyOffer->property_share_id) }}"
                        class="btn btn-sm bgPrimary text-white mr-2">
-                        <span><i class="fas fa-arrow-left font-12"></i> @lang('Back')</span>
+                        <span><i class="fa-solid fa-arrow-left font-12"></i> @lang('Back')</span>
                     </a>
                 @else
                     <a href="{{ route('user.propertyMarket', 'my-offered-properties') }}"
                        class="btn btn-sm bgPrimary text-white mr-2">
-                        <span><i class="fas fa-arrow-left font-12"></i> @lang('Back')</span>
+                        <span><i class="fa-solid fa-arrow-left font-12"></i> @lang('Back')</span>
                     </a>
                 @endif
             </div>
@@ -25,7 +25,7 @@
                             <div class="row g-4">
                                 <div class="col-lg-7">
                                     <div class="inbox_right_side__profile__info__phone d-flex">
-                                        <i class="far fa-question custom--mar"></i>
+                                        <i class="fa-regular fa-question custom--mar"></i>
                                         <p class="ms-2"> @lang($singlePropertyOffer->description) </p>
                                     </div>
 
@@ -59,7 +59,7 @@
                                                             class="dropdown-toggle"
                                                             data-bs-toggle="dropdown"
                                                             aria-expanded="false">
-                                                            <i class="fal fa-cog"></i>
+                                                            <i class="fa-light fa-gear"></i>
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-menu-right">
@@ -70,7 +70,7 @@
                                                                     <li>
                                                                         <a class="dropdown-item btn acceptOffer"
                                                                            data-route="{{ route('user.offerAccept', $singlePropertyOffer->id) }}">
-                                                                            <i class="fal fa-check-circle"></i> @lang('Accept Offer')
+                                                                            <i class="fa-light fa-circle-check"></i> @lang('Accept Offer')
                                                                         </a>
                                                                     </li>
                                                                 @endif
@@ -79,7 +79,7 @@
                                                                     <li>
                                                                         <a class="dropdown-item btn acceptOffer"
                                                                            data-route="{{ route('user.offerAccept', $singlePropertyOffer->id) }}">
-                                                                            <i class="fal fa-check-circle"></i> @lang('Accept Offer')
+                                                                            <i class="fa-light fa-circle-check"></i> @lang('Accept Offer')
                                                                         </a>
                                                                     </li>
                                                                 @endif
@@ -87,7 +87,7 @@
                                                                     <li>
                                                                         <a class="dropdown-item btn rejectOffer"
                                                                            data-route="{{ route('user.offerReject', $singlePropertyOffer->id) }}">
-                                                                            <i class="fal fa-times-circle"></i> @lang('Reject Offer')
+                                                                            <i class="fa-light fa-circle-xmark"></i> @lang('Reject Offer')
                                                                         </a>
                                                                     </li>
                                                                 @endif
@@ -99,7 +99,7 @@
                                                                        data-route="{{ route('user.paymentLockUpdate', $singlePropertyOffer->lockInfo()->id) }}"
                                                                        data-lockamount="{{ $singlePropertyOffer->lockInfo()->lock_amount }}"
                                                                        data-duration="{{ $singlePropertyOffer->lockInfo()->duration }}">
-                                                                        <i class="fal fa-lock"></i> @lang('Payment Lock Info')
+                                                                        <i class="fa-light fa-lock"></i> @lang('Payment Lock Info')
                                                                     </a>
                                                                 </li>
                                                             @elseif($singlePropertyOffer->lockInfo() && optional($singlePropertyOffer->offerlock)->status == 1 && $singlePropertyOffer->lockInfo()->status == 1)
@@ -107,14 +107,14 @@
                                                                     <a class="dropdown-item btn paymentCompletedInfo"
                                                                        data-lockamount="{{ $singlePropertyOffer->lockInfo()->lock_amount }}"
                                                                        data-duration="{{ $singlePropertyOffer->lockInfo()->duration }}">
-                                                                        <i class="fal fa-check-double"></i> @lang('Payment Completed')
+                                                                        <i class="fa-light fa-check-double"></i> @lang('Payment Completed')
                                                                     </a>
                                                                 </li>
 
                                                             @elseif($singlePropertyOffer->offerlock && $singlePropertyOffer->lockInfo() == null)
                                                                 <li>
                                                                     <button class="dropdown-item btn disabled">
-                                                                        <i class="fal fa-lock"></i> @lang('Already Locked')
+                                                                        <i class="fa-light fa-lock"></i> @lang('Already Locked')
                                                                     </button>
 
                                                                 </li>
@@ -122,7 +122,7 @@
                                                                 <li>
                                                                     <a class="dropdown-item btn paymentLock"
                                                                        data-route="{{ route('user.paymentLock', $singlePropertyOffer->id) }}">
-                                                                        <i class="fal fa-lock"></i> @lang('Lock Payment')
+                                                                        <i class="fa-light fa-lock"></i> @lang('Lock Payment')
                                                                     </a>
                                                                 </li>
                                                             @endif
@@ -138,7 +138,7 @@
                                                                 class="dropdown-toggle"
                                                                 data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i class="fal fa-cog"></i>
+                                                                <i class="fa-light fa-gear"></i>
                                                             </button>
 
                                                             <ul class="dropdown-menu dropdown-menu-right">
@@ -147,7 +147,7 @@
                                                                        data-route="{{ route('user.paymentLockConfirm', $singlePropertyOffer->lockInfo()->id) }}"
                                                                        data-payableamount="{{ $singlePropertyOffer->lockInfo()->lock_amount }}"
                                                                        data-payableduration="{{ $singlePropertyOffer->lockInfo()->duration }}">
-                                                                        <i class="fal fa-money-check-alt"></i> @lang('Payment Information')
+                                                                        <i class="fa-light fa-money-check"></i> @lang('Payment Information')
                                                                     </a>
                                                                 </li>
 
@@ -155,7 +155,7 @@
                                                                     <a class="dropdown-item btn paymentLockCancel"
                                                                        data-route="{{ route('user.paymentLockCancel', $singlePropertyOffer->lockInfo()->id) }}">
                                                                         <i aria-hidden="true"
-                                                                           class="fal fa-times-circle"></i> @lang('Cancel Payment')
+                                                                           class="fa-light fa-circle-xmark"></i> @lang('Cancel Payment')
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -169,7 +169,7 @@
                                                                 class="dropdown-toggle"
                                                                 data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i class="fal fa-cog"></i>
+                                                                <i class="fa-light fa-gear"></i>
                                                             </button>
 
                                                             <ul class="dropdown-menu dropdown-menu-right">
@@ -177,7 +177,7 @@
                                                                     <a class="dropdown-item btn buyerPaymentCompletedInfo"
                                                                        data-payableamount="{{ $singlePropertyOffer->lockInfo()->lock_amount }}"
                                                                        data-payableduration="{{ $singlePropertyOffer->lockInfo()->duration }}">
-                                                                        <i class="fal fa-check-double"></i> @lang('Payment Completed Info')
+                                                                        <i class="fa-light fa-check-double"></i> @lang('Payment Completed Info')
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -232,7 +232,7 @@
                                         <div class="typing-area">
                                             <div class="img-preview" v-if="file.name">
                                                 <button class="delete" @click="removeImage">
-                                                    <i class="fal fa-times"></i>
+                                                    <i class="fa-light fa-xmark"></i>
                                                 </button>
                                                 <img id="attachment" :src="photo" class="img-fluid"/>
                                             </div>
@@ -243,7 +243,7 @@
                                             <div class="input-group">
                                                 <div>
                                                     <button class="upload-img send-file-btn">
-                                                        <i class="fal fa-paperclip" aria-hidden="true"></i>
+                                                        <i class="fa-light fa-paperclip" aria-hidden="true"></i>
                                                         <input class="form-control" id="upload" accept="image/*"
                                                                type="file" @change="handleFileUpload( $event )"/>
                                                     </button>
@@ -259,7 +259,7 @@
                                                           placeholder="@lang('Type your message...')"></textarea>
 
                                                 <button @click.prevent="sendMessage" class="submit-btn">
-                                                    <i class="fal fa-paper-plane reply-submit-btn"
+                                                    <i class="fa-light fa-paper-plane reply-submit-btn"
                                                        aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -432,7 +432,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">@lang('Accept Confirmation')</h5>
                         <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
 
@@ -461,7 +461,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">@lang('Reject Confirmation')</h5>
                         <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
 
@@ -492,7 +492,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">@lang('Lock Payment')</h5>
                             <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                <i class="fal fa-times"></i>
+                                <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
@@ -547,7 +547,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">@lang('Payment Lock Infromation')</h5>
                             <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                <i class="fal fa-times"></i>
+                                <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
@@ -610,7 +610,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">@lang('Payment Infromation')</h5>
                             <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                <i class="fal fa-times"></i>
+                                <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
@@ -662,7 +662,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">@lang('Payment Infromation')</h5>
                             <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                <i class="fal fa-times"></i>
+                                <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
@@ -735,7 +735,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">@lang('Payment Infromation')</h5>
                             <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                <i class="fal fa-times"></i>
+                                <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
@@ -784,7 +784,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">@lang('Confirmation')</h5>
                         <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
 

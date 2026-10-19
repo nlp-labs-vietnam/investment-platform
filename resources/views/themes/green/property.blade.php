@@ -27,11 +27,11 @@
                                 <div class="mt-15">
                                     <select class="cmn-select2" name="type">
                                         <option value="">@lang('Tất cả loại dự án')</option>
-                                        <option value="solar" @if(request()->type == 'solar') selected @endif>☀️ @lang('Điện mặt trời')</option>
-                                        <option value="ev" @if(request()->type == 'ev') selected @endif>🔋 @lang('Trạm sạc EV')</option>
-                                        <option value="bess" @if(request()->type == 'bess') selected @endif>⚡ @lang('Lưu trữ BESS')</option>
-                                        <option value="esg" @if(request()->type == 'esg') selected @endif>🌱 @lang('ESG & Carbon')</option>
-                                        <option value="epc" @if(request()->type == 'epc') selected @endif>🏗️ @lang('Tổng thầu EPC')</option>
+                                        <option value="solar" @if(request()->type == 'solar') selected @endif>[ Solar ] @lang('Điện mặt trời')</option>
+                                        <option value="ev" @if(request()->type == 'ev') selected @endif>[ EV ] @lang('Trạm sạc EV')</option>
+                                        <option value="bess" @if(request()->type == 'bess') selected @endif>[ BESS ] @lang('Lưu trữ BESS')</option>
+                                        <option value="esg" @if(request()->type == 'esg') selected @endif>[ ESG ] @lang('ESG & Carbon')</option>
+                                        <option value="epc" @if(request()->type == 'epc') selected @endif>[ EPC ] @lang('Tổng thầu EPC')</option>
                                     </select>
                                 </div>
                             </div>
@@ -213,11 +213,11 @@
                                         <div class="mt-15">
                                             <select class="cmn-select2" name="type">
                                                 <option value="">@lang('Tất cả loại dự án')</option>
-                                                <option value="solar" @if(request()->type == 'solar') selected @endif>☀️ @lang('Điện mặt trời')</option>
-                                                <option value="ev" @if(request()->type == 'ev') selected @endif>🔋 @lang('Trạm sạc EV')</option>
-                                                <option value="bess" @if(request()->type == 'bess') selected @endif>⚡ @lang('Lưu trữ BESS')</option>
-                                                <option value="esg" @if(request()->type == 'esg') selected @endif>🌱 @lang('ESG & Carbon')</option>
-                                                <option value="epc" @if(request()->type == 'epc') selected @endif>🏗️ @lang('Tổng thầu EPC')</option>
+                                                <option value="solar" @if(request()->type == 'solar') selected @endif>[ Solar ] @lang('Điện mặt trời')</option>
+                                                <option value="ev" @if(request()->type == 'ev') selected @endif>[ EV ] @lang('Trạm sạc EV')</option>
+                                                <option value="bess" @if(request()->type == 'bess') selected @endif>[ BESS ] @lang('Lưu trữ BESS')</option>
+                                                <option value="esg" @if(request()->type == 'esg') selected @endif>[ ESG ] @lang('ESG & Carbon')</option>
+                                                <option value="epc" @if(request()->type == 'epc') selected @endif>[ EPC ] @lang('Tổng thầu EPC')</option>
                                             </select>
                                         </div>
                                     </div>

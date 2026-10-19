@@ -64,7 +64,7 @@
                                                                            data-id="{{ $user->id }}"
                                                                         >
                                                                             @if(count(getDirectReferralUsers($user->id)) > 0)
-                                                                                <i class="far fa-circle-down color-primary"></i>
+                                                                                <i class="fa-regular fa-circle-down color-primary"></i>
                                                                             @endif
                                                                             @lang($user->username)
                                                                         </a>
@@ -169,7 +169,7 @@
                             <tr id="user-${directReferralUser.id}" data-level="${currentLevel}">
                                 <td data-label="@lang('Username')" style="padding-left: ${currentLevel * 35}px;">
                                     <a class="${directReferralUser.count_direct_referral > 0 ? 'nextDirectReferral' : ''}" href="javascript:void(0)" style="border-bottom: none !important;" data-id="${directReferralUser.id}">
-                                        ${directReferralUser.count_direct_referral > 0 ? ' <i class="far fa-circle-down color-primary"></i>' : ''}
+                                        ${directReferralUser.count_direct_referral > 0 ? ' <i class="fa-regular fa-circle-down color-primary"></i>' : ''}
                                         ${directReferralUser.username}
                                     </a>
                                 </td>

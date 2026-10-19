@@ -26,7 +26,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('user.password.setting') }}">
-                        <i class="fal fa-key" aria-hidden="true"></i>
+                        <i class="fa-light fa-key" aria-hidden="true"></i>
                         @lang('Password Settings')
                     </a>
                 </li>
@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="my-1 me-1">
                                     <button class="cmn-btn add-new btn-custom-danger remove_social_link_input_field" type="button">
-                                        <i class="fa fa-times"></i>
+                                        <i class="fa fa-xmark"></i>
                                     </button>
                                 </div>
                             </div>`;

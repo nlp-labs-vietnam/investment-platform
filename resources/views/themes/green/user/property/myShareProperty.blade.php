@@ -146,7 +146,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">@lang('Remove Confirmation')</h5>
                     <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                             aria-label="Close">
-                        <i class="fal fa-times"></i>
+                        <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>
 
@@ -179,7 +179,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">@lang('Update Share Amount')</h5>
                         <button type="button" class="close-btn close_invest_modal" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <i class="fal fa-times"></i>
+                            <i class="fa-light fa-xmark"></i>
                         </button>
                     </div>
 

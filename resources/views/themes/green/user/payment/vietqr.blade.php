@@ -54,7 +54,7 @@
                         {{-- Status badge --}}
                         <div id="vietqr-status" class="mb-2" style="display:none;">
                             <span class="badge bg-success fs-6 px-3 py-2">
-                                <i class="fa fa-check-circle me-1"></i> @lang('Payment Confirmed!')
+                                <i class="fa fa-circle-check me-1"></i> @lang('Payment Confirmed!')
                             </span>
                         </div>
 

@@ -2,9 +2,9 @@
     <div class="rate-area badges">
         <a href="javascript:void(0)" class="item save wishList" id="{{$key}}" data-property="{{ $property->id }}">
             @if($property->favoritedByUser)
-                <i class="fas fa-heart save{{$key}}"></i>
+                <i class="fa-solid fa-heart save{{$key}}"></i>
             @else
-                <i class="fal fa-heart save{{$key}}"></i>
+                <i class="fa-light fa-heart save{{$key}}"></i>
             @endif
         </a>
     </div>

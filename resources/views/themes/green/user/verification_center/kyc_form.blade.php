@@ -24,7 +24,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.password.setting') }}">
-                        <i class="fal fa-key" aria-hidden="true"></i>
+                        <i class="fa-light fa-key" aria-hidden="true"></i>
                         @lang('Password Settings')
                     </a>
                 </li>

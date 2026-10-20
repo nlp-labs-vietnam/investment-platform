@@ -1,12 +1,31 @@
 {
-    "name": "laravel/laravel",
+    "name": "nlp-labs-vietnam/investment-platform",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "NLP Group Investment Platform — Solar energy & real-estate investment system built on Laravel.",
     "keywords": [
+        "investment",
+        "solar",
+        "real-estate",
         "laravel",
-        "framework"
+        "nlp-group",
+        "vietnam",
+        "ev-charging",
+        "esg"
     ],
-    "license": "MIT",
+    "homepage": "https://nlpgroup.vn",
+    "authors": [
+        {
+            "name": "NLP Group",
+            "email": "dev@nlpgroup.vn",
+            "homepage": "https://nlpgroup.vn",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nlp-labs-vietnam/investment-platform/issues",
+        "source": "https://github.com/nlp-labs-vietnam/investment-platform"
+    },
+    "license": "UNLICENSED",
     "require": {
         "php": "^8.1",
         "anhskohbo/no-captcha": "^3.6",

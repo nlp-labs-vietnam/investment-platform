@@ -90,6 +90,48 @@
 
 @stack('script')
 
+<script>
+(function () {
+    'use strict';
+
+    function revealPropertyCard(img) {
+        var wrapper = img.closest('.property-real-item');
+        if (!wrapper) return;
+        var skeleton = wrapper.previousElementSibling;
+        // Fade-in real card
+        wrapper.style.visibility = 'visible';
+        wrapper.style.position   = '';
+        wrapper.style.pointerEvents = '';
+        wrapper.classList.remove('is-loading');
+        wrapper.style.opacity = '0';
+        wrapper.style.transition = 'opacity .35s ease';
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                wrapper.style.opacity = '1';
+            });
+        });
+        // Remove skeleton
+        if (skeleton && skeleton.classList.contains('property-skeleton-item')) {
+            skeleton.style.transition = 'opacity .25s ease';
+            skeleton.style.opacity = '0';
+            setTimeout(function () { skeleton.remove(); }, 260);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.property-thumb').forEach(function (img) {
+            if (img.complete && img.naturalWidth > 0) {
+                // Already cached / loaded
+                revealPropertyCard(img);
+            } else {
+                img.addEventListener('load',  function () { revealPropertyCard(img); });
+                img.addEventListener('error', function () { revealPropertyCard(img); });
+            }
+        });
+    });
+}());
+</script>
+
 @auth
     <script>
         'use strict';

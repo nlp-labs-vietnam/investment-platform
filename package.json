@@ -47,8 +47,5 @@
         "laravel-vite-plugin": "^1.3.0",
         "sass": "^1.56.1",
         "vite": "^6.4.4"
-    },
-    "dependencies": {
-        "@nlp-labs-vietnam/investment-ui": "^1.0.0"
     }
 }

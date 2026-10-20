@@ -1,7 +1,38 @@
 
-<div class="property-box">
+{{-- Skeleton placeholder (iOS shimmer) – ẩn đi sau khi ảnh nạp xong --}}
+<div class="property-skeleton property-skeleton-item" aria-hidden="true">
+    <div class="sk-img skeleton-box"></div>
+    <div class="sk-body">
+        <div class="sk-line sk-tag skeleton-box"></div>
+        <div class="sk-line sk-title skeleton-box" style="margin-top:8px;"></div>
+        <div class="sk-line sk-addr skeleton-box"></div>
+        <div class="sk-amenities">
+            <span class="skeleton-box"></span>
+            <span class="skeleton-box"></span>
+            <span class="skeleton-box"></span>
+        </div>
+        <div class="sk-line sk-btn skeleton-box"></div>
+        <div class="sk-plan">
+            <div class="sk-plan-item">
+                <h5 class="skeleton-box"></h5>
+                <span class="skeleton-box"></span>
+            </div>
+            <div class="sk-plan-item">
+                <h5 class="skeleton-box"></h5>
+                <span class="skeleton-box"></span>
+            </div>
+            <div class="sk-plan-item">
+                <h5 class="skeleton-box"></h5>
+                <span class="skeleton-box"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Real property card (ẩn cho đến khi ảnh load xong) --}}
+<div class="property-box is-loading property-real-item">
     <div class="img-box">
-        <img class="img-fluid"
+        <img class="img-fluid property-thumb"
              src="{{ getFile($property->driver, $property->thumbnail) }}"
              alt="@lang('property thumbnail')"/>
         <div class="content">
@@ -101,4 +132,3 @@
         </div>
     </div>
 </div>
-

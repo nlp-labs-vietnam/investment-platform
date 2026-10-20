@@ -1,0 +1,45 @@
+# CODEOWNERS
+# nlp-labs-vietnam · GitHub CODEOWNERS
+# Tham khảo: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Cú pháp: <pattern>  <owner(s)>
+# Được đọc từ trên xuống — rule cuối cùng khớp sẽ thắng.
+# --------------------------------------------------------
+
+# ── Project Lead: Review tất cả thay đổi trong toàn bộ dự án ────────────────
+*                                   @Dennis-nham
+
+# ── @thekingbao: Infrastructure · Frontend · UI/UX · Docs ───────────────────
+/docs/                              @thekingbao @Dennis-nham
+/apps/docs/                         @thekingbao @Dennis-nham
+/apps/showcase/                     @thekingbao
+/frontend/                          @thekingbao @Dennis-nham
+/infrastructure/                    @thekingbao @Dennis-nham
+/.github/                           @thekingbao @Dennis-nham
+/packages/tokens/                   @thekingbao
+/packages/icons/                    @thekingbao
+/packages/core/                     @thekingbao
+/packages/react/                    @thekingbao
+/packages/vue/                      @thekingbao
+turbo.json                          @thekingbao @Dennis-nham
+pnpm-workspace.yaml                 @thekingbao @Dennis-nham
+*.md                                @thekingbao @Dennis-nham
+
+# ── @nhamlapquoc: Core NLP · AI Models · Data Pipeline ──────────────────────
+/core-nlp/                          @nhamlapquoc @Dennis-nham
+/models/                            @nhamlapquoc @Dennis-nham
+/pipeline/                          @nhamlapquoc
+/data/                              @nhamlapquoc
+/services/nlp-*/                    @nhamlapquoc
+/services/sentiment/                @nhamlapquoc
+/research/                          @nhamlapquoc
+/notebooks/                         @nhamlapquoc
+
+# ── @wikialisalabs: Satellite Packages · Parsers · Tooling ──────────────────
+/packages/wikialisa-labs/           @wikialisalabs @Dennis-nham
+/packages/blade/                    @wikialisalabs
+/tools/                             @wikialisalabs
+/parsers/                           @wikialisalabs
+/education/                         @wikialisalabs
+/standards/                         @wikialisalabs
+.npmrc                              @wikialisalabs @Dennis-nham

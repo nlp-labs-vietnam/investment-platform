@@ -43,6 +43,11 @@
 | 10 bài blog EV (id 1–10) | ✅ Nội dung đầy đủ 2000–3900 ký tự/bài (command `nlp:seed-content`) |
 | Trang `/tuyen-dung` | ✅ 7 vị trí thực tế: Backend, AI/ML, Điện, BD Manager, Tư vấn Solar, ESG, Marketing |
 | Ảnh 4 card hệ sinh thái | ✅ SVG placeholder 800×500 (`storage/app/public/contents/nlp-*-card.svg`) — DB đã cập nhật |
+| Admin panel branding | ✅ NLP KPI banner + sidebar icons + accent màu xanh `#2d6a4f` |
+| CS Hub B2B SOP | ✅ `public/chatbot-ai/nlp_b2b_cs_assistant.html` — 28 kịch bản, 7 nhóm, route `/cs-hub` |
+| **Cache → Redis** | ✅ `CACHE_DRIVER=redis` (db1) · `QUEUE_CONNECTION=redis` (db0) · `SESSION_DRIVER=redis` (db2) |
+| **Mail failover** | ✅ `MAIL_MAILER=failover` — chain: SMTP → MailerSend → log · `MAILERSEND_API_KEY` cần điền |
+| **Vue 2 upgrade** | ✅ `vue.min.js` nâng từ 2.6.12 → **2.7.16 LTS** · Migration plan: `docs/VUE_MIGRATION_PLAN.md` |
 
 ---
 
@@ -234,10 +239,27 @@
 
 ### 6.2 Bảo mật
 
-- [ ] Xác nhận `APP_ENV=production`, `APP_DEBUG=false` trong `.env`
-- [ ] CSRF protection đã bật (Laravel default ✅)
+- [x] Xác nhận `APP_ENV=production`, `APP_DEBUG=false` trong `.env`
+- [x] CSRF protection đã bật (Laravel default ✅)
 - [ ] Rate limiting trên form liên hệ
 - [ ] Cập nhật dependency định kỳ (`composer update`)
+
+### 6.5 Performance & Drivers ✅
+
+- [x] Cache driver: `file` → **Redis db1** (`CACHE_DRIVER=redis`)
+- [x] Queue driver: `database` → **Redis db0** (`QUEUE_CONNECTION=redis`)
+- [x] Session driver: `file` → **Redis db2** (`SESSION_DRIVER=redis`, connection `session`)
+- [x] Redis DB separation: db0=default · db1=cache · db2=session (tránh key collision)
+- [x] Vue 2: `2.6.12` (EOL) → **`2.7.16` LTS** (`assets/global/js/vue.min.js`)
+- [ ] Vue 2 → Alpine.js/Vue 3 migration (xem `docs/VUE_MIGRATION_PLAN.md`)
+
+### 6.6 Email ⚠️ Cần hoàn thiện
+
+- [x] `MAIL_MAILER=failover` — chain: SMTP → MailerSend → log
+- [x] `config/mail.php` failover chain đã tinh gọn
+- [ ] **[ACTION REQUIRED]** Điền `MAILERSEND_API_KEY` tại https://app.mailersend.com/api-tokens
+- [ ] **[ACTION REQUIRED]** Cập nhật `MAIL_HOST` thành SMTP server thực tế (Zoho/Google Workspace/AWS SES)
+- [ ] Test gửi email thực tế: `php artisan tinker` → `Mail::to('test@nlpgroup.vn')->send(...)`
 
 ### 6.3 Storage permissions (đã fix)
 

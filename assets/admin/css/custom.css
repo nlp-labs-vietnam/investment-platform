@@ -1495,3 +1495,90 @@
         order: 999;
     }
 }
+
+
+/* ============================================================
+   NLP Group Admin — Brand Override
+   Primary accent: #2d6a4f (NLP Green)
+   Applied: sidebar active states, buttons, links, badges
+   ============================================================ */
+
+:root {
+    --nlp-green:       #2d6a4f;
+    --nlp-green-light: #6ee7b7;
+    --nlp-green-dark:  #1a3c2e;
+    --nlp-green-pale:  #f0fdf4;
+    --nlp-green-border:#bbf7d0;
+}
+
+/* Sidebar active nav item */
+.navbar-vertical .nav-link.active,
+.navbar-vertical .nav-link.active:focus,
+.navbar-vertical .nav-link.active:hover {
+    color: var(--nlp-green) !important;
+    background-color: var(--nlp-green-pale) !important;
+}
+
+.navbar-vertical .nav-link.active::before {
+    background-color: var(--nlp-green) !important;
+}
+
+/* Primary buttons */
+.btn-primary {
+    background-color: var(--nlp-green) !important;
+    border-color:     var(--nlp-green) !important;
+    color: #fff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--nlp-green-dark) !important;
+    border-color:     var(--nlp-green-dark) !important;
+}
+
+/* Soft-primary badges / backgrounds */
+.bg-soft-primary { background-color: var(--nlp-green-pale) !important; }
+.text-primary     { color: var(--nlp-green) !important; }
+.border-primary   { border-color: var(--nlp-green) !important; }
+.link-primary, a.text-primary { color: var(--nlp-green) !important; }
+
+/* Sidebar dark mode: logo area accent line */
+.navbar-dark.navbar-vertical .navbar-brand::after {
+    background: var(--nlp-green-light) !important;
+}
+
+/* KPI banner sidebar footer label */
+.navbar-vertical-footer .dropdown-header {
+    color: var(--nlp-green-light) !important;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+/* Dashboard card hover accent */
+.card.card-hover-shadow:hover {
+    border-color: var(--nlp-green-border) !important;
+    box-shadow: 0 4px 16px rgba(45, 106, 79, 0.12) !important;
+}
+
+/* Step indicator / progress bars */
+.bg-primary { background-color: var(--nlp-green) !important; }
+.progress-bar { background-color: var(--nlp-green) !important; }
+
+/* Pagination active */
+.page-item.active .page-link {
+    background-color: var(--nlp-green) !important;
+    border-color:     var(--nlp-green) !important;
+}
+
+/* Form focus ring */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--nlp-green) !important;
+    box-shadow: 0 0 0 0.2rem rgba(45, 106, 79, 0.15) !important;
+}
+
+/* Legend indicator */
+.legend-indicator.bg-primary { background-color: var(--nlp-green) !important; }
+
+/* Dropdown-header icon emoji spacing */
+.dropdown-header { letter-spacing: 0.01em; }

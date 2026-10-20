@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLP Group — CS Hub B2B</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; font-size: 14px; background: #f7f8fa; color: #1f2328; }
+
+  /* ── Layout ── */
+  #app { display: flex; height: 100vh; overflow: hidden; }
+
+  /* ── Sidebar ── */
+  #sidebar { width: 300px; min-width: 260px; display: flex; flex-direction: column; background: #fff; border-right: 1px solid #e5e7eb; overflow: hidden; }
+  #sidebar-header { padding: 16px; background: linear-gradient(135deg,#1a3c2e 0%,#2d6a4f 100%); flex-shrink: 0; }
+  #sidebar-header h1 { color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  #sidebar-header p  { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 3px; }
+  #sidebar-groups { flex: 1; overflow-y: auto; padding: 12px; }
+  #sidebar-groups::-webkit-scrollbar { width: 4px; }
+  #sidebar-groups::-webkit-scrollbar-thumb { background: #d1fae5; border-radius: 99px; }
+  .group-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #2d6a4f; margin: 16px 0 6px; display: flex; align-items: center; gap: 4px; }
+  .group-label:first-child { margin-top: 4px; }
+  .sop-btn { display: block; width: 100%; text-align: left; padding: 8px 12px; margin-bottom: 4px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #374151; font-size: 13px; cursor: pointer; transition: background .15s, border-color .15s; }
+  .sop-btn:hover  { background: #f9fafb; border-color: #d1fae5; }
+  .sop-btn.active { background: #f0fdf4; border-color: #6ee7b7; color: #1a3c2e; font-weight: 600; }
+  #sidebar-footer { padding: 10px; text-align: center; border-top: 1px solid #f3f4f6; font-size: 11px; color: #9ca3af; flex-shrink: 0; }
+
+  /* ── Main panel ── */
+  #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #main-content { flex: 1; padding: 24px; overflow-y: auto; }
+  #main-content::-webkit-scrollbar { width: 4px; }
+  #main-content::-webkit-scrollbar-thumb { background: #d1fae5; border-radius: 99px; }
+
+  /* Empty state */
+  #empty-state { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #9ca3af; }
+  #empty-state svg { width: 56px; height: 56px; margin-bottom: 16px; color: #d1fae5; }
+  #empty-state p { font-size: 15px; font-weight: 500; color: #6b7280; }
+  #empty-state small { font-size: 12px; margin-top: 4px; }
+
+  /* Selected state */
+  #selected-panel { max-width: 680px; margin: 0 auto; display: none; }
+  #selected-panel.visible { display: block; }
+  .panel-title { font-size: 18px; font-weight: 700; color: #1a3c2e; border-bottom: 2px solid #d1fae5; padding-bottom: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+
+  /* Form */
+  #form-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .form-section-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #6b7280; margin-bottom: 14px; display: flex; align-items: center; gap: 5px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid.single { grid-template-columns: 1fr; }
+  .form-field label { display: block; font-size: 11.5px; font-weight: 500; color: #374151; margin-bottom: 4px; }
+  .form-field input { width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 13px; background: #fafafa; outline: none; transition: border-color .15s, box-shadow .15s; color: #1f2328; }
+  .form-field input:focus { border-color: #6ee7b7; box-shadow: 0 0 0 3px rgba(110,231,183,.2); background: #fff; }
+
+  /* Output */
+  #output-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; }
+  #output-text { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; white-space: pre-wrap; font-family: inherit; font-size: 13.5px; line-height: 1.7; color: #1f2328; min-height: 80px; }
+  #copy-btn { margin-top: 14px; float: right; display: flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 8px; border: none; background: #2d6a4f; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: background .15s; }
+  #copy-btn:hover { background: #1a3c2e; }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  /* ── Checklist footer ── */
+  #checklist-bar { flex-shrink: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 12px 20px; }
+  .checklist-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-start; gap: 12px; }
+  .checklist-icon { padding: 8px; border-radius: 8px; background: #fef3c7; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .checklist-title { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #374151; margin-bottom: 8px; }
+  .checklist-items { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .checklist-items label { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: #6b7280; cursor: pointer; }
+  .checklist-items input[type=checkbox] { accent-color: #2d6a4f; width: 13px; height: 13px; }
+
+  /* Toast */
+  #toast { position: fixed; top: 16px; right: 16px; background: #2d6a4f; color: #fff; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.15); opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 999; }
+  #toast.show { opacity: 1; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    #sidebar { width: 100%; position: fixed; top: 0; left: -100%; transition: left .3s; z-index: 100; }
+    #sidebar.open { left: 0; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── SIDEBAR ── -->
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <h1>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#6ee7b7"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        NLP Group CS Hub
+      </h1>
+      <p>B2B Customer Support — SOP v1.0</p>
+    </div>
+    <div id="sidebar-groups"></div>
+    <div id="sidebar-footer">nlpgroup.vn · info@nlpgroup.vn</div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div id="main">
+    <div id="main-content">
+
+      <!-- Empty state -->
+      <div id="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z"/></svg>
+        <p>Chọn kịch bản hỗ trợ bên trái</p>
+        <small id="total-count"></small>
+      </div>
+
+      <!-- Selected panel -->
+      <div id="selected-panel">
+        <div class="panel-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"/></svg>
+          <span id="panel-title-text"></span>
+        </div>
+
+        <!-- Form -->
+        <div id="form-card" style="display:none">
+          <div class="form-section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 2 12h2a8 8 0 1 1 3.93 6.93Z"/></svg>
+            Điền biến số
+          </div>
+          <div id="form-grid" class="form-grid"></div>
+        </div>
+
+        <!-- Output -->
+        <div id="output-card">
+          <div class="form-section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Nội dung gửi khách
+          </div>
+          <div id="output-text"></div>
+          <div class="clearfix">
+            <button id="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy tin nhắn
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+
+    <!-- ── CHECKLIST BAR ── -->
+    <div id="checklist-bar">
+      <div class="checklist-inner">
+        <div class="checklist-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="checklist-title">CS Checklist trước khi gửi</div>
+          <div class="checklist-items" id="checklist-items"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /main -->
+
+</div><!-- /app -->
+
+<!-- Toast -->
+<div id="toast">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  Đã sao chép vào clipboard!
+</div>
+
+<script>
+// ============================================================
+// SOP DATA — NLP Group B2B
+// ============================================================
+const sopData = [
+  {
+    group: "Nhóm 0: Tiếp nhận & Phân loại",
+    emoji: "📞",
+    items: [
+      { id:'g0_1', title:"Chào hỏi ban đầu (Inbound)", text:"Xin chào! Tôi là {{cs_name}} từ NLP Group.\nCảm ơn anh/chị đã liên hệ với chúng tôi. Anh/chị có thể cho tôi biết nhu cầu hiện tại để tôi hỗ trợ tốt nhất?\n\n📌 NLP Group cung cấp:\n• Hệ thống điện mặt trời áp mái (50 kW – 5 MW)\n• Trạm sạc EV (AC 7–22 kW / DC 30–480 kW)\n• Giải pháp AI & Chuyển đổi số\n• Tư vấn ESG & Tín chỉ carbon\n\nAnh/chị muốn tìm hiểu về lĩnh vực nào?", inputs:[{key:'cs_name',label:'Tên CS / BD phụ trách'}] },
+      { id:'g0_2', title:"Phân loại & Chuyển hướng", text:"Cảm ơn anh/chị {{client_name}} đã chia sẻ!\n\nDựa trên nhu cầu, tôi sẽ kết nối anh/chị với chuyên gia phụ trách:\n• 🔋 Điện mặt trời / BESS → Team NLP Energy\n• ⚡ Trạm sạc EV / Nhượng quyền → Team NLP EV Charging\n• 🤖 Phần mềm / AI → Team NLP Technology\n• 🌿 ESG / Carbon → Team NLP ESG\n\nAnh/chị vui lòng chờ {{wait_time}} phút, chuyên gia sẽ liên hệ ngay.", inputs:[{key:'client_name',label:'Tên khách hàng / Công ty'},{key:'wait_time',label:'Thời gian chờ (phút)'}] },
+      { id:'g0_3', title:"Thu thập thông tin cơ bản", text:"Để tư vấn chính xác nhất, anh/chị vui lòng cung cấp:\n\n1. Tên công ty / tổ chức\n2. Ngành nghề kinh doanh chính\n3. Quy mô: số nhân viên / diện tích mặt bằng\n4. Địa chỉ triển khai dự án (tỉnh/thành phố)\n5. Ngân sách dự kiến (nếu có)\n6. Thời gian mong muốn triển khai\n\nThông tin này sẽ giúp đội ngũ NLP chuẩn bị đề xuất phù hợp nhất." },
+      { id:'g0_4', title:"Xác nhận lịch tư vấn", text:"Tôi đã ghi nhận thông tin của anh/chị {{client_name}} — {{company}}.\n\n📅 Lịch tư vấn đã đặt:\n• Thời gian: {{meeting_time}}\n• Hình thức: {{meeting_type}}\n• Chuyên gia phụ trách: {{expert_name}}\n\nAnh/chị sẽ nhận email xác nhận trong vòng 30 phút.\nNếu cần điều chỉnh, vui lòng phản hồi lại tin nhắn này.\n\nTrân trọng,\nNLP Group", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'company',label:'Tên công ty'},{key:'meeting_time',label:'Thời gian họp'},{key:'meeting_type',label:'Hình thức (Zoom / Tại văn phòng / Thực địa)'},{key:'expert_name',label:'Tên chuyên gia'}] },
+    ]
+  },
+  {
+    group: "Nhóm 1: Điện Mặt Trời (NLP Energy)",
+    emoji: "☀️",
+    items: [
+      { id:'g1_1', title:"Giới thiệu giải pháp Solar", text:"NLP Energy cung cấp giải pháp điện mặt trời toàn diện:\n\n☀️ ĐIỆN MẶT TRỜI ÁP MÁI\n• Quy mô: 50 kW – 5 MW\n• Mô hình: Tự đầu tư hoặc PPA (0 đồng đầu tư)\n• Tiêu chuẩn: Tấm pin PERC / TOPCon, Inverter SMA / Huawei / Sungrow\n• Bảo hành: Tấm pin 25 năm, Inverter 10 năm\n\n🔋 HỆ THỐNG BESS (Lưu trữ điện)\n• Cắt giảm tiền điện giờ cao điểm tới 40%\n• Tích hợp Solar hoặc lưới điện EVN\n\nAnh/chị muốn tìm hiểu mô hình nào phù hợp nhất?" },
+      { id:'g1_2', title:"Thông tin cần cho khảo sát mái", text:"Để lập báo giá chính xác, đội kỹ thuật NLP Energy cần:\n\n📋 THÔNG TIN CẦN CHUẨN BỊ:\n1. Hóa đơn điện 3 tháng gần nhất\n2. Diện tích mái trống (m²) + loại mái (tôn / bê tông / ngói)\n3. Ảnh mái chụp từ nhiều góc\n4. Hóa đơn điện gần nhất (xác định 1 pha / 3 pha)\n\nĐội kỹ thuật sẽ đến khảo sát miễn phí tại: {{address}}.\nLịch khảo sát dự kiến: {{survey_date}}.", inputs:[{key:'address',label:'Địa chỉ khảo sát'},{key:'survey_date',label:'Ngày khảo sát dự kiến'}] },
+      { id:'g1_3', title:"Báo giá sơ bộ Solar", text:"Dựa trên thông tin khảo sát, NLP Energy đề xuất sơ bộ:\n\n📊 THÔNG SỐ HỆ THỐNG:\n• Công suất lắp đặt: {{capacity}} kWp\n• Sản lượng điện ước tính: {{output}} kWh/năm\n• Tiết kiệm điện/năm: {{saving}} VNĐ\n• Mức giảm CO₂: {{co2}} tấn/năm\n\n💰 CHI PHÍ ĐẦU TƯ:\n• Tổng đầu tư ước tính: {{investment}} VNĐ\n• Thời gian hoàn vốn: {{payback}} năm\n• IRR: {{irr}}%\n\n📄 Báo giá chi tiết sẽ gửi qua email {{email}} trong 24 giờ.", inputs:[{key:'capacity',label:'Công suất (kWp)'},{key:'output',label:'Sản lượng kWh/năm'},{key:'saving',label:'Tiết kiệm VNĐ/năm'},{key:'co2',label:'CO₂ giảm (tấn/năm)'},{key:'investment',label:'Tổng đầu tư (VNĐ)'},{key:'payback',label:'Hoàn vốn (năm)'},{key:'irr',label:'IRR (%)'},{key:'email',label:'Email khách hàng'}] },
+      { id:'g1_4', title:"Giải thích mô hình PPA", text:"MÔ HÌNH PPA — ĐẦU TƯ 0 ĐỒNG:\n\n✅ Cách hoạt động:\n• NLP Energy đầu tư 100% chi phí lắp đặt\n• Khách hàng trả tiền điện theo lượng tiêu thụ từ hệ thống Solar\n• Giá điện PPA thấp hơn 10–20% so với giá EVN\n• Thời hạn hợp đồng: 10–20 năm\n\n✅ Lợi ích:\n• Không cần vốn đầu tư ban đầu\n• Tiết kiệm chi phí điện ngay lập tức\n• Không lo bảo trì, vận hành\n• Quyền mua lại hệ thống sau {{buyout_year}} năm với giá ưu đãi\n\n❓ Anh/chị có muốn nhận hợp đồng PPA mẫu để tham khảo?", inputs:[{key:'buyout_year',label:'Năm có thể mua lại'}] },
+    ]
+  },
+  {
+    group: "Nhóm 2: Trạm Sạc EV (NLP EV Charging)",
+    emoji: "⚡",
+    items: [
+      { id:'g2_1', title:"Giới thiệu giải pháp EV Charging", text:"NLP EV Charging cung cấp giải pháp trạm sạc toàn diện:\n\n⚡ DÒNG SẠC AC: 7 kW (gia đình) · 11 kW (tòa nhà) · 22 kW (TTTM)\n⚡ DÒNG SẠC DC: 30–60 kW · 120–360 kW · 480 kW (T480Q siêu trạm)\n\n🔧 Hỗ trợ: CCS2, GB/T, Type 2\n📱 App quản lý + CSMS OCPP 2.0.1\n🛡️ Bảo hành 3 năm · NOC 24/7\n\nAnh/chị đang cần triển khai tại địa điểm nào?" },
+      { id:'g2_2', title:"Khảo sát địa điểm EV", text:"Để tư vấn giải pháp phù hợp, NLP EV Charging cần biết:\n\n📋 THÔNG TIN ĐỊA ĐIỂM:\n1. Loại địa điểm: {{location_type}}\n2. Địa chỉ: {{address}}\n3. Diện tích bãi đậu xe (m²)\n4. Số lượng xe EV dự kiến sạc mỗi ngày\n5. Công suất tủ điện hiện có (kW)\n6. Mục tiêu: thu phí / miễn phí nhân viên / nhượng quyền\n\nĐội kỹ thuật NLP khảo sát điện miễn phí và tư vấn phương án tối ưu.", inputs:[{key:'location_type',label:'Loại địa điểm (TTTM/Khách sạn/KCN/Cao tốc)'},{key:'address',label:'Địa chỉ'}] },
+      { id:'g2_3', title:"Mô hình nhượng quyền EV", text:"MÔ HÌNH NHƯỢNG QUYỀN TRẠM SẠC NLP — ĐẦU TƯ 0 ĐỒNG:\n\n✅ NLP đầu tư 100%: thiết bị + lắp đặt + CSMS + app\n✅ Đối tác cung cấp: mặt bằng + điện\n✅ Doanh thu chia theo tỷ lệ thỏa thuận\n\nNLP hỗ trợ: Vận hành từ xa, bảo trì NOC 24/7, marketing, báo cáo doanh thu tự động.\n\n💰 ROI bắt đầu từ tháng 18\n\nAnh/chị có mặt bằng tại {{location}} không? Tôi có thể gửi hồ sơ nhượng quyền chi tiết.", inputs:[{key:'location',label:'Tỉnh / Thành phố / Địa điểm cụ thể'}] },
+      { id:'g2_4', title:"Báo giá trụ sạc", text:"Dựa trên nhu cầu, NLP EV Charging đề xuất:\n\n📦 THIẾT BỊ: {{charger_type}} × {{quantity}} trụ · Tổng: {{total_kw}} kW\n\n💰 CHI PHÍ ƯỚC TÍNH:\n• Thiết bị: {{equipment_cost}} VNĐ\n• Thi công & lắp đặt: {{install_cost}} VNĐ\n• Hạ tầng điện: {{electrical_cost}} VNĐ\n• Tổng đầu tư: {{total_cost}} VNĐ\n\n⏱️ Thời gian triển khai: {{timeline}}\n📄 Báo giá chi tiết gửi qua email {{email}}.", inputs:[{key:'charger_type',label:'Loại trụ'},{key:'quantity',label:'Số lượng trụ'},{key:'total_kw',label:'Tổng kW'},{key:'equipment_cost',label:'Chi phí thiết bị'},{key:'install_cost',label:'Lắp đặt'},{key:'electrical_cost',label:'Hạ tầng điện'},{key:'total_cost',label:'Tổng đầu tư'},{key:'timeline',label:'Thời gian triển khai'},{key:'email',label:'Email khách hàng'}] },
+    ]
+  },
+  {
+    group: "Nhóm 3: Báo giá & Hợp đồng",
+    emoji: "📄",
+    items: [
+      { id:'g3_1', title:"Gửi báo giá chính thức", text:"Kính gửi Anh/Chị {{client_name}} — {{company}},\n\nNLP Group xin gửi báo giá chính thức cho dự án {{project_name}}:\n\n📄 Báo giá số: {{quote_number}}\n📅 Ngày lập: {{quote_date}} · Hiệu lực: 30 ngày\n\n💡 Điểm nổi bật:\n• {{highlight_1}}\n• {{highlight_2}}\n\nMọi thắc mắc vui lòng liên hệ:\n📞 {{contact_phone}} | ✉️ info@nlpgroup.vn\n\nTrân trọng,\n{{cs_name}} | NLP Group", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'company',label:'Tên công ty'},{key:'project_name',label:'Tên dự án'},{key:'quote_number',label:'Số báo giá'},{key:'quote_date',label:'Ngày lập'},{key:'highlight_1',label:'Điểm nổi bật 1'},{key:'highlight_2',label:'Điểm nổi bật 2'},{key:'contact_phone',label:'SĐT CS'},{key:'cs_name',label:'Tên CS'}] },
+      { id:'g3_2', title:"Follow-up báo giá (3–5 ngày)", text:"Kính anh/chị {{client_name}},\n\nTôi là {{cs_name}} từ NLP Group, muốn hỏi thăm về báo giá {{quote_number}} gửi ngày {{quote_date}}.\n\nNếu anh/chị có thắc mắc về thông số kỹ thuật, điều khoản thanh toán hay điều chỉnh phạm vi, NLP sẵn sàng hỗ trợ.\n\nAnh/chị dự kiến khi nào có thể phản hồi?", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'cs_name',label:'Tên CS'},{key:'quote_number',label:'Số báo giá'},{key:'quote_date',label:'Ngày gửi'}] },
+      { id:'g3_3', title:"Xác nhận ký hợp đồng", text:"Chào anh/chị {{client_name}},\n\nNLP Group xác nhận đã nhận hợp đồng {{contract_number}} từ {{company}}.\n\n✅ Bước tiếp theo:\n1. NLP ký + đóng dấu trong 2 ngày làm việc\n2. Xuất hóa đơn đặt cọc {{deposit_percent}}% = {{deposit_amount}} VNĐ\n3. Khảo sát kỹ thuật chi tiết: {{survey_date}}\n4. Khởi công dự kiến: {{start_date}}\n\n📞 PM dự án: {{pm_name}} — {{pm_phone}}\n\nCảm ơn anh/chị đã tin tưởng NLP Group!", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'contract_number',label:'Số hợp đồng'},{key:'company',label:'Tên công ty'},{key:'deposit_percent',label:'Tỷ lệ đặt cọc (%)'},{key:'deposit_amount',label:'Số tiền đặt cọc'},{key:'survey_date',label:'Ngày khảo sát'},{key:'start_date',label:'Ngày khởi công'},{key:'pm_name',label:'Tên PM NLP'},{key:'pm_phone',label:'SĐT PM'}] },
+    ]
+  },
+  {
+    group: "Nhóm 4: Kỹ thuật & Hậu mãi",
+    emoji: "🔧",
+    items: [
+      { id:'g4_1', title:"Tiếp nhận sự cố kỹ thuật", text:"Cảm ơn anh/chị đã báo cáo. Tôi đã ghi nhận sự cố:\n\n🔧 DỰ ÁN: {{project_name}}\n📝 MÔ TẢ LỖI: {{issue_description}}\n⏰ THỜI ĐIỂM: {{issue_time}}\n🚨 MỨC ĐỘ: {{severity}}\n\n📌 Mã ticket: {{ticket_id}}\n\nĐội kỹ thuật NLP phản hồi trong {{response_time}} giờ.\nKhẩn cấp: gọi hotline +84 936 611 163.", inputs:[{key:'project_name',label:'Tên dự án / Địa điểm'},{key:'issue_description',label:'Mô tả sự cố'},{key:'issue_time',label:'Thời điểm xảy ra'},{key:'severity',label:'Mức độ (Khẩn cấp / Trung bình / Thấp)'},{key:'ticket_id',label:'Mã Ticket'},{key:'response_time',label:'Thời gian phản hồi (4/8/24)'}] },
+      { id:'g4_2', title:"Cập nhật tiến độ xử lý", text:"Kính anh/chị {{client_name}},\n\nCập nhật ticket {{ticket_id}}:\n📊 TRẠNG THÁI: {{status}}\n\n🔍 Ghi chú kỹ thuật:\n{{tech_note}}\n\nBước tiếp theo: {{next_step}}\nDự kiến hoàn tất: {{eta}}\n\nLiên hệ kỹ thuật: {{tech_phone}}", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'ticket_id',label:'Mã Ticket'},{key:'status',label:'Trạng thái'},{key:'tech_note',label:'Ghi chú kỹ thuật'},{key:'next_step',label:'Bước tiếp theo'},{key:'eta',label:'Thời gian hoàn tất'},{key:'tech_phone',label:'SĐT kỹ thuật viên'}] },
+      { id:'g4_3', title:"Xác nhận bảo hành", text:"THÔNG TIN BẢO HÀNH:\n• Dự án: {{project_name}} — {{company}}\n• Nghiệm thu: {{commission_date}}\n\n🛡️ CHÍNH SÁCH:\n• Tấm pin: 25 năm (hiệu suất)\n• Inverter/Bộ sạc {{brand}}: 10 năm\n• Công trình thi công: 2 năm\n• Bảo trì định kỳ: {{maintenance_schedule}}\n\n📞 Bảo hành: +84 936 611 163 | warranty@nlpgroup.vn", inputs:[{key:'project_name',label:'Tên dự án'},{key:'company',label:'Tên công ty'},{key:'commission_date',label:'Ngày nghiệm thu'},{key:'brand',label:'Hãng thiết bị'},{key:'maintenance_schedule',label:'Lịch bảo trì'}] },
+      { id:'g4_4', title:"Cấp tài khoản CSMS / App", text:"THÔNG TIN ĐĂNG NHẬP HỆ THỐNG:\n\n💻 CSMS — EV CHARGING MANAGEMENT:\n• URL: {{csms_url}}\n• Tài khoản: {{csms_account}}\n• Mật khẩu tạm: {{csms_password}}\n\n📱 APP NLP ENERGY MONITOR (Solar):\n• Tải: App Store / CH Play — tìm 'NLP Energy'\n• Tài khoản: {{app_account}}\n\n⚠️ Vui lòng đổi mật khẩu ngay sau lần đăng nhập đầu tiên.\nHướng dẫn sử dụng chi tiết (PDF) đã gửi kèm email.", inputs:[{key:'csms_url',label:'URL CSMS'},{key:'csms_account',label:'Tài khoản CSMS'},{key:'csms_password',label:'Mật khẩu tạm CSMS'},{key:'app_account',label:'Tài khoản App'}] },
+    ]
+  },
+  {
+    group: "Nhóm 5: ESG / Carbon & Đối tác",
+    emoji: "🌿",
+    items: [
+      { id:'g5_1', title:"Giới thiệu dịch vụ ESG", text:"NLP ESG & Carbon cung cấp:\n\n🌿 DỊCH VỤ ESG:\n• Kiểm kê phát thải GHG (ISO 14064)\n• Báo cáo ESG theo GRI / TCFD\n• Lộ trình Net Zero 2030–2050\n• Tư vấn tuân thủ CBAM (thuế carbon EU)\n\n🌱 TÍN CHỈ CARBON:\n• Phát triển dự án VCS / Gold Standard\n• Môi giới mua bán tín chỉ carbon quốc tế\n• Đăng ký thị trường carbon Việt Nam\n\nDoanh nghiệp của anh/chị đang ở giai đoạn nào trong hành trình ESG?" },
+      { id:'g5_2', title:"Đề xuất hợp tác chiến lược", text:"Kính gửi {{partner_name}} — {{partner_company}},\n\nNLP Group trân trọng đề xuất hợp tác trong lĩnh vực {{partnership_area}}:\n\n🤝 MÔ HÌNH: {{model_description}}\n\n💡 GIÁ TRỊ:\n• Cho {{partner_company}}: {{value_for_partner}}\n• Cho NLP Group: {{value_for_nlp}}\n\n📋 BƯỚC TIẾP THEO:\n1. Ký MOU dự kiến: {{mou_date}}\n2. Kick-off lên kế hoạch chi tiết\n3. Thí điểm tại {{pilot_location}}\n\nNLP Group rất mong được hợp tác!", inputs:[{key:'partner_name',label:'Tên đại diện đối tác'},{key:'partner_company',label:'Tên công ty đối tác'},{key:'partnership_area',label:'Lĩnh vực hợp tác'},{key:'model_description',label:'Mô hình hợp tác'},{key:'value_for_partner',label:'Giá trị cho đối tác'},{key:'value_for_nlp',label:'Giá trị cho NLP'},{key:'mou_date',label:'Ngày ký MOU dự kiến'},{key:'pilot_location',label:'Địa điểm thí điểm'}] },
+      { id:'g5_3', title:"Kết quả kiểm kê carbon", text:"KẾT QUẢ KIỂM KÊ PHÁT THẢI — {{company}} ({{year}}):\n\n📊 TỔNG PHÁT THẢI: {{total_emission}} tấn CO₂e\n• Scope 1 (Trực tiếp): {{scope1}} tấn\n• Scope 2 (Điện): {{scope2}} tấn\n• Scope 3 (Chuỗi cung ứng): {{scope3}} tấn\n\n🎯 MỤC TIÊU: Giảm {{target_percent}}% vào năm {{target_year}}\n\n💡 GIẢI PHÁP NLP ĐỀ XUẤT:\n1. Solar {{solar_kw}} kWp → giảm {{solar_reduction}} tấn CO₂e/năm\n2. Mua tín chỉ carbon bù đắp: {{offset_tons}} tấn\n\nBáo cáo đầy đủ (PDF) đã gửi qua email.", inputs:[{key:'company',label:'Tên công ty'},{key:'year',label:'Năm kiểm kê'},{key:'total_emission',label:'Tổng phát thải'},{key:'scope1',label:'Scope 1'},{key:'scope2',label:'Scope 2'},{key:'scope3',label:'Scope 3'},{key:'target_percent',label:'Mục tiêu giảm (%)'},{key:'target_year',label:'Năm mục tiêu'},{key:'solar_kw',label:'Solar đề xuất (kWp)'},{key:'solar_reduction',label:'CO₂e giảm từ Solar'},{key:'offset_tons',label:'Tín chỉ carbon cần mua'}] },
+    ]
+  },
+  {
+    group: "Nhóm 6: Phản hồi nhanh & Phàn nàn",
+    emoji: "💬",
+    items: [
+      { id:'g6_1', title:"Báo khách chờ", text:"Cảm ơn anh/chị đã phản hồi. Tôi đang kiểm tra và sẽ trả lời trong vòng {{wait_time}}.\n\nMã tham chiếu: {{ref_code}}", inputs:[{key:'wait_time',label:'Thời gian (30 phút / 2 giờ)'},{key:'ref_code',label:'Mã tham chiếu (nếu có)'}] },
+      { id:'g6_2', title:"Chuyển lên cấp trên (Escalate)", text:"Tôi đã ghi nhận và chuyển vấn đề lên {{escalate_to}} để hỗ trợ tốt nhất.\n\nPhản hồi trong: {{eta}}\nMã theo dõi: {{ticket_id}}", inputs:[{key:'escalate_to',label:'Bộ phận / Người tiếp nhận'},{key:'eta',label:'Thời gian phản hồi'},{key:'ticket_id',label:'Mã Ticket'}] },
+      { id:'g6_3', title:"Xử lý phàn nàn (Empathy)", text:"Thưa anh/chị {{client_name}},\n\nTôi thành thật xin lỗi vì trải nghiệm chưa như kỳ vọng.\n\nNLP Group cam kết:\n• Điều tra nguyên nhân trong {{investigate_time}}\n• Phản hồi giải pháp cụ thể\n• Có biện pháp phòng ngừa tái diễn\n\nĐây là ưu tiên hàng đầu. Tôi sẽ cập nhật trực tiếp cho anh/chị.", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'investigate_time',label:'Thời gian điều tra'}] },
+      { id:'g6_4', title:"Từ chối khéo (Ngoài phạm vi)", text:"Cảm ơn anh/chị đã liên hệ NLP Group. Tuy nhiên, yêu cầu này nằm ngoài phạm vi bộ phận chúng tôi.\n\nAnh/chị vui lòng liên hệ:\n• {{correct_department}} — {{correct_contact}}\n\nHoặc gửi email info@nlpgroup.vn để được điều phối đúng bộ phận.", inputs:[{key:'correct_department',label:'Bộ phận đúng'},{key:'correct_contact',label:'Liên hệ bộ phận đó'}] },
+      { id:'g6_5', title:"Xác nhận hoàn tất + Đề nghị đánh giá", text:"Kính anh/chị {{client_name}},\n\nVấn đề '{{issue_summary}}' đã được xử lý hoàn tất.\n\nAnh/chị vui lòng kiểm tra. Nếu chưa đáp ứng kỳ vọng, đội ngũ NLP luôn sẵn sàng hỗ trợ tiếp.\n\n⭐ Nếu hài lòng, anh/chị vui lòng đánh giá dịch vụ:\n{{feedback_link}}\n\nTrân trọng cảm ơn anh/chị đã đồng hành cùng NLP Group!", inputs:[{key:'client_name',label:'Tên khách hàng'},{key:'issue_summary',label:'Tóm tắt vấn đề đã xử lý'},{key:'feedback_link',label:'Link đánh giá / Google Review'}] },
+    ]
+  },
+];
+
+const checklist = [
+  "Đã xưng hô đúng anh/chị + tên khách chưa?",
+  "Báo giá: số HĐ, ngày, tên dự án đã điền đủ chưa?",
+  "Ticket kỹ thuật: đã tạo mã ticket chưa?",
+  "Cấp tài khoản: đã dặn đổi mật khẩu ngay chưa?",
+  "Escalate: đã thông báo nội bộ người tiếp nhận chưa?",
+  "Cuối tin: ký tên + NLP Group đã có chưa?",
+];
+
+// ── State ────────────────────────────────────────────────────
+let selectedItem = null;
+let formValues = {};
+
+// ── Build sidebar ────────────────────────────────────────────
+function buildSidebar() {
+  const container = document.getElementById('sidebar-groups');
+  let totalCount = 0;
+  sopData.forEach(group => {
+    totalCount += group.items.length;
+    const label = document.createElement('div');
+    label.className = 'group-label';
+    label.textContent = group.emoji + ' ' + group.group;
+    container.appendChild(label);
+    group.items.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'sop-btn';
+      btn.textContent = item.title;
+      btn.dataset.id = item.id;
+      btn.addEventListener('click', () => selectItem(item, btn));
+      container.appendChild(btn);
+    });
+  });
+  document.getElementById('total-count').textContent = `${totalCount} kịch bản · ${sopData.length} nhóm`;
+}
+
+// ── Build checklist ──────────────────────────────────────────
+function buildChecklist() {
+  const container = document.getElementById('checklist-items');
+  checklist.forEach((text, i) => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox"> ${text}`;
+    container.appendChild(label);
+  });
+}
+
+// ── Select item ──────────────────────────────────────────────
+function selectItem(item, btn) {
+  // Deselect all
+  document.querySelectorAll('.sop-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedItem = item;
+  formValues = {};
+
+  // Show panel
+  document.getElementById('empty-state').style.display = 'none';
+  const panel = document.getElementById('selected-panel');
+  panel.classList.add('visible');
+  document.getElementById('panel-title-text').textContent = item.title;
+
+  // Build form
+  const formCard = document.getElementById('form-card');
+  const formGrid = document.getElementById('form-grid');
+  formGrid.innerHTML = '';
+  if (item.inputs && item.inputs.length > 0) {
+    formCard.style.display = 'block';
+    formGrid.className = 'form-grid' + (item.inputs.length <= 2 ? ' single' : '');
+    item.inputs.forEach(inp => {
+      formValues[inp.key] = '';
+      const div = document.createElement('div');
+      div.className = 'form-field';
+      div.innerHTML = `<label>${inp.label}</label><input type="text" placeholder="Nhập ${inp.label.toLowerCase()}…" data-key="${inp.key}">`;
+      div.querySelector('input').addEventListener('input', e => {
+        formValues[inp.key] = e.target.value;
+        updateOutput();
+      });
+      formGrid.appendChild(div);
+    });
+  } else {
+    formCard.style.display = 'none';
+  }
+  updateOutput();
+}
+
+// ── Generate & render output ─────────────────────────────────
+function generateText() {
+  if (!selectedItem) return '';
+  let text = selectedItem.text;
+  if (selectedItem.inputs) {
+    selectedItem.inputs.forEach(inp => {
+      const val = formValues[inp.key] || `[${inp.label.toUpperCase()}]`;
+      text = text.replace(new RegExp(`{{${inp.key}}}`, 'g'), val);
+    });
+  }
+  return text;
+}
+
+function updateOutput() {
+  document.getElementById('output-text').textContent = generateText();
+}
+
+// ── Copy ──────────────────────────────────────────────────────
+document.getElementById('copy-btn').addEventListener('click', () => {
+  const text = generateText();
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
+  document.body.appendChild(el);
+  el.focus(); el.select();
+  try {
+    document.execCommand('copy');
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  } catch(e) { console.error(e); }
+  finally { el.remove(); }
+});
+
+// ── Init ──────────────────────────────────────────────────────
+buildSidebar();
+buildChecklist();
+</script>
+</body>
+</html>

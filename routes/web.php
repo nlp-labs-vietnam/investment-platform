@@ -290,6 +290,10 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('/san-pham-nlp',         [FrontendController::class, 'page'])->defaults('slug', 'san-pham-nlp')->name('san-pham-nlp');
     Route::get('/tuyen-dung',           [FrontendController::class, 'page'])->defaults('slug', 'tuyen-dung')->name('tuyen-dung');
 
+    // ── NLP Internal Tools ─────────────────────────────────────────────
+    // CS Hub — redirect tới standalone HTML tool (phục vụ trực tiếp bởi nginx)
+    Route::get('/cs-hub', fn() => redirect('/chatbot-ai/nlp_b2b_cs_assistant.html'))->name('nlp.cs-hub');
+
     // ── NLP Icon tokens API — cho iOS app và JS consumers ──────────
     Route::get('/api/nlp-icons', function () {
         return response()->json(NlpIcon::all())

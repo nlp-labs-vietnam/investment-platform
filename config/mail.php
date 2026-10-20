@@ -91,17 +91,14 @@ return [
             'transport' => 'array',
         ],
 
+        // NLP Group failover chain: SMTP → MailerSend → log
+        // Khi SMTP down, tự động thử MailerSend; cuối cùng log để không mất email
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
                 'smtp',
-                'ses',
-                'postmark',
-                'mailgun',
                 'mailersend',
-                'sendinblue',
-                'sendgrid',
-                'mandrill'
+                'log',
             ],
         ],
     ],

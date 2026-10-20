@@ -55,6 +55,9 @@
             </div>
         </div>
 
+        {{-- ── NLP Group KPI Banner ─────────────────────────────────────── --}}
+        @include('admin.partials.dashboard.nlp_kpi')
+
         <div class="row">
             @include('admin.partials.dashboard.recentTran')
             @include('admin.partials.dashboard.record')

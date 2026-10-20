@@ -61,7 +61,7 @@
                     @endif
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Manage_Property.Profit_Schedule.permission.view'), config('permissionList.Manage_Property.Amenities.permission.view'), config('permissionList.Manage_Property.Address.permission.view'), config('permissionList.Manage_Property.Properties.permission.view'), config('permissionList.Manage_Property.Wishlist.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Manage Property')</span>
+                        <span class="dropdown-header mt-3">🏢 @lang('Manage Property')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         @if(adminAccessRoute(config('permissionList.Manage_Property.Profit_Schedule.permission.view')))
                             <div class="nav-item">
@@ -145,7 +145,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Manage_Investment.All_Investment.permission.view'), config('permissionList.Manage_Investment.Running_Investment.permission.view'), config('permissionList.Manage_Investment.Due_Investment.permission.view'), config('permissionList.Manage_Investment.Expired_Investment.permission.view'), config('permissionList.Manage_Investment.Completed_Investment.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Manage Investment')</span>
+                        <span class="dropdown-header mt-3">💰 @lang('Manage Investment')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                         @if(adminAccessRoute(config('permissionList.Manage_Investment.All_Investment.permission.view')))
@@ -201,7 +201,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Manage_Rank.All_Ranks.permission.view'), config('permissionList.Manage_Rank.Rank_Bonus.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Manage Rank')</span>
+                        <span class="dropdown-header mt-3">🏅 @lang('Manage Rank')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                         @if(adminAccessRoute(config('permissionList.Manage_Rank.All_Ranks.permission.view')))
@@ -227,7 +227,7 @@
 
 
                     @if(adminAccessRoute(config('permissionList.Manage_Commission.Referral.permission.view')))
-                        <span class="dropdown-header mt-3">@lang('Manage Commission')</span>
+                        <span class="dropdown-header mt-3">📊 @lang('Manage Commission')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             <a class="nav-link {{ menuActive(['admin.referral.commission']) }}"
@@ -239,7 +239,7 @@
                     @endif
 
                     @if(adminAccessRoute(config('permissionList.User_Panel.User_Management.permission.view')))
-                        <span class="dropdown-header mt-3"> @lang("User Panel")</span>
+                        <span class="dropdown-header mt-3">👥 @lang("User Panel")</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle {{ menuActive(['admin.users'], 3) }}"
@@ -305,7 +305,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Transactions.Transaction.permission.view'), config('permissionList.Transactions.Commission.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Transactions')</span>
+                        <span class="dropdown-header mt-3">💳 @lang('Transactions')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         @if(adminAccessRoute(config('permissionList.Transactions.Transaction.permission.view')))
                             <div class="nav-item">
@@ -329,7 +329,7 @@
                     @endif
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Payment_Transactions.Payment_Log.permission.view'), config('permissionList.Payment_Transactions.Payment_Request.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Payment Transactions')</span>
+                        <span class="dropdown-header mt-3">💵 @lang('Payment Transactions')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         @if(adminAccessRoute(config('permissionList.Payment_Transactions.Payment_Log.permission.view')))
                             <div class="nav-item">
@@ -361,7 +361,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Withdraw_Transactions.Withdraw_Log.permission.view'), config('permissionList.Withdraw_Transactions.Withdraw_Request.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang('Withdraw Transactions')</span>
+                        <span class="dropdown-header mt-3">🏧 @lang('Withdraw Transactions')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             @if(adminAccessRoute(config('permissionList.Withdraw_Transactions.Withdraw_Log.permission.view')))
@@ -390,7 +390,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Kyc_Management.Kyc_Settings.permission.view'), config('permissionList.Kyc_Management.Kyc_Request.permission.view'))))
-                        <span class="dropdown-header mt-3"> @lang('Kyc Management')</span>
+                        <span class="dropdown-header mt-3">🪪 @lang('Kyc Management')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         @if(adminAccessRoute(config('permissionList.Kyc_Management.Kyc_Settings.permission.view')))
                             <div class="nav-item">
@@ -447,7 +447,7 @@
                     @endif
 
                     @if(adminAccessRoute(config('permissionList.Ticket_Panel.Support_Tickets.permission.view')))
-                        <span class="dropdown-header mt-3"> @lang("Ticket Panel")</span>
+                        <span class="dropdown-header mt-3">🎫 @lang("Ticket Panel")</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle {{ menuActive(['admin.ticket', 'admin.ticket.search', 'admin.ticket.view'], 3) }}"
@@ -488,7 +488,7 @@
                     @endif
 
                     @if(adminAccessRoute(config('permissionList.Subscribers.Subscriber_List.permission.view')))
-                        <span class="dropdown-header mt-3">@lang('Subscribers')</span>
+                        <span class="dropdown-header mt-3">📧 @lang('Subscribers')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             <a class="nav-link {{ menuActive(['admin.subscribers']) }}"
@@ -501,7 +501,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Roles_And_Permission.Available_Roles.permission.view'), config('permissionList.Roles_And_Permission.Manage_Staff.permission.view'))))
-                        <span class="dropdown-header mt-3"> @lang('Role & Permission')</span>
+                        <span class="dropdown-header mt-3">🔐 @lang('Role & Permission')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle {{ menuActive(['admin.users'], 3) }}"
@@ -537,7 +537,7 @@
                     @endif
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Settings_Panel.Control_Panel.permission.view'), config('permissionList.Settings_Panel.Payment_Setting.permission.view'), config('permissionList.Settings_Panel.Withdraw_Setting.permission.view'))))
-                        <span class="dropdown-header mt-3"> @lang('SETTINGS PANEL')</span>
+                        <span class="dropdown-header mt-3">⚙️ @lang('SETTINGS PANEL')</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         @if(adminAccessRoute(config('permissionList.Settings_Panel.Control_Panel.permission.view')))
                             <div class="nav-item">
@@ -611,7 +611,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Theme_Settings.Pages.permission.view'), config('permissionList.Theme_Settings.Manage_Menu.permission.view'), config('permissionList.Theme_Settings.Manage_Theme.permission.view'), config('permissionList.Theme_Settings.Manage_Content.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang("Themes Settings")</span>
+                        <span class="dropdown-header mt-3">🎨 @lang("Themes Settings")</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div id="navbarVerticalThemeMenu">
 
@@ -697,7 +697,7 @@
 
 
                     @if(adminAccessRoute(array_merge(config('permissionList.Manage_Blog.Category.permission.view'), config('permissionList.Manage_Blog.Blog.permission.view'))))
-                        <span class="dropdown-header mt-3">@lang("Manage Blog")</span>
+                        <span class="dropdown-header mt-3">📝 @lang("Manage Blog")</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
                         <div id="navbarVerticalThemeMenu">
                             @if(adminAccessRoute(config('permissionList.Manage_Blog.Category.permission.view')))
@@ -732,6 +732,22 @@
                             </a>
                         </div>
 
+                    {{-- ── NLP Internal Tools ── --}}
+                    <span class="dropdown-header mt-3">🛠️ NLP Tools</span>
+                    <small class="bi-three-dots nav-subtitle-replacer"></small>
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ url('/chatbot-ai/nlp_b2b_cs_assistant.html') }}" target="_blank" rel="noopener">
+                            <i class="bi bi-chat-dots nav-icon"></i>
+                            <span class="nav-link-title">CS Hub B2B</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ url('/sitemap.xml') }}" target="_blank" rel="noopener">
+                            <i class="bi bi-diagram-3 nav-icon"></i>
+                            <span class="nav-link-title">Sitemap XML</span>
+                        </a>
+                    </div>
+
                     @foreach(collect(config('generalsettings.settings')) as $key => $setting)
                         <div class="nav-item d-none">
                             <a class="nav-link  {{ isMenuActive($setting['route']) }}"
@@ -746,7 +762,7 @@
                 <div class="navbar-vertical-footer">
                     <ul class="navbar-vertical-footer-list">
                         <li class="navbar-vertical-footer-list-item">
-                            <span class="dropdown-header">@lang('Version 2.0')</span>
+                            <span class="dropdown-header" title="NLP Group Platform v2.0">NLP Group · v2.0</span>
                         </li>
                         <li class="navbar-vertical-footer-list-item">
                             <div class="dropdown dropup">

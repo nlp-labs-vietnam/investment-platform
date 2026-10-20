@@ -7,6 +7,30 @@
 
 ## Trạng thái hiện tại
 
+### 🖥️ Stack kỹ thuật
+| Layer | Công nghệ | Phiên bản |
+|---|---|---|
+| Backend | PHP / Laravel | PHP 8.2.33 / Laravel 9.x |
+| Frontend runtime | Node.js | **v22.23.3 LTS** |
+| Build tool | Vite + SCSS | Vite 4.x |
+| Frontend lib | Vue.js | **2.7.16 LTS** (nâng từ 2.6.12) |
+| Database chính | MySQL | 8.0.46 (Ubuntu 24.04) |
+| Database backup | MySQL AWS (RDS) | `mysql_aws` connection |
+| Cache | Redis db1 | `CACHE_DRIVER=redis` |
+| Queue | Redis db0 | `QUEUE_CONNECTION=redis` |
+| Session | Redis db2 | `SESSION_DRIVER=redis` |
+| Web server | Apache/Nginx | Ubuntu 24.04 |
+| Repository | GitHub | `nlp-labs-vietnam/investment-platform` |
+
+### 📡 GitHub Repository
+| Mục | Chi tiết |
+|---|---|
+| Remote URL | `git@github.com:nlp-labs-vietnam/investment-platform.git` |
+| Authentication | **SSH key** (`~/.ssh/nlpgroup` — `contact@nlpgroup.vn`) |
+| Branch chính | `main` |
+| Commit mới nhất | `feat: Vue 2.7.16 LTS upgrade, Redis drivers, admin branding, CS Hub B2B, sitemap, robots.txt` |
+
+### ✅ Milestone đã hoàn thành
 | Hạng mục | Tình trạng |
 |---|---|
 | Website `nlpgroup.vn` | ✅ Online (HTTP 200) |
@@ -48,6 +72,7 @@
 | **Cache → Redis** | ✅ `CACHE_DRIVER=redis` (db1) · `QUEUE_CONNECTION=redis` (db0) · `SESSION_DRIVER=redis` (db2) |
 | **Mail failover** | ✅ `MAIL_MAILER=failover` — chain: SMTP → MailerSend → log · `MAILERSEND_API_KEY` cần điền |
 | **Vue 2 upgrade** | ✅ `vue.min.js` nâng từ 2.6.12 → **2.7.16 LTS** · Migration plan: `docs/VUE_MIGRATION_PLAN.md` |
+| **GitHub push via SSH** | ✅ Remote `git@github.com:nlp-labs-vietnam/investment-platform.git` · SSH key `nlpgroup` |
 
 ---
 

@@ -44,9 +44,9 @@
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",
         "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^0.7.5",
+        "laravel-vite-plugin": "^1.3.0",
         "sass": "^1.56.1",
-        "vite": "^4.0.0"
+        "vite": "^6.4.4"
     },
     "dependencies": {
         "@nlp-labs-vietnam/investment-ui": "^1.0.0"

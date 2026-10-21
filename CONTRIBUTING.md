@@ -32,32 +32,60 @@ Tóm tắt: **tôn trọng, xây dựng, không phân biệt**.
 ```bash
 node  --version   # ≥ 20
 pnpm  --version   # ≥ 9
+php   --version   # ≥ 8.2
 git   --version   # ≥ 2.38
 ```
 
-### Clone & cài đặt
+### Clone & cài đặt (development)
 
 ```bash
 # Fork repo trên GitHub, sau đó clone fork của bạn
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/<your-username>/investment-platform.git
+cd investment-platform
 
-# Cài dependencies
+# Cài JS dependencies
 pnpm install
 
-# Build toàn bộ workspace
+# Build frontend assets
 pnpm build
 
-# Chạy dev mode
+# Cài PHP dependencies
+composer install
+
+# Chạy dev mode (Vite)
 pnpm dev
 ```
 
-### Cấu trúc workspace
+### Deploy lên server (production)
+
+```bash
+# Full install — tự phát hiện OS (Ubuntu/Debian/RHEL/macOS/cPanel)
+sudo bash scripts/install.sh install --domain nlpgroup.vn --ssl
+
+# Chỉ update code (CI/CD)
+sudo bash scripts/install.sh deploy --yes --domain nlpgroup.vn
+
+# Fix quyền sau deploy
+sudo bash scripts/install.sh permissions
+
+# Kiểm tra requirements
+bash scripts/install.sh check
+
+# Xem trước không thực thi
+bash scripts/install.sh permissions --dry-run
+```
+
+### Cấu trúc repo
 
 ```
-packages/   ← Shared libraries — đóng góp vào đây nếu thêm logic tái sử dụng
-apps/       ← Deployable apps — UI, docs, showcase
-services/   ← Backend microservices (investment-platform)
+app/            ← Laravel application (Controllers, Models, Jobs...)
+resources/      ← Views, CSS, JS source
+routes/         ← Web & API routes
+packages/       ← Shared packages (sdk, types, utils)
+scripts/        ← Shell scripts (install.sh, backup.sh, fix-permissions.sh)
+docs/           ← Technical documentation
+database/       ← Migrations, seeders, factories
+public/         ← Web root (served by Nginx/Apache)
 ```
 
 ---
@@ -132,7 +160,7 @@ Dự án dùng **Conventional Commits** — changelog và versioning được t�
 | Repo | Scopes thường dùng |
 |---|---|
 | `ios-design-system` | `tokens`, `core`, `react`, `vue`, `blade`, `icons`, `docs` |
-| `investment-platform` | `ingestion`, `sentiment`, `ner`, `orchestrator`, `gateway`, `dashboard`, `sdk` |
+| `investment-platform` | `property`, `auth`, `admin`, `api`, `dashboard`, `sdk`, `scripts`, `ci` |
 | `core-nlp` | `models`, `pipeline`, `research`, `vi-tokenizer` |
 | `wikialisa-labs` | `tree-sitter`, `standards`, `tools` |
 

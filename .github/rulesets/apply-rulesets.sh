@@ -31,6 +31,32 @@ if ! command -v jq &>/dev/null; then
   exit 1
 fi
 
+# ── Hàm curl wrapper với timeout & kiểm tra HTTP status ─────────────────────
+gh_api() {
+  local method="$1"; shift
+  local url="$1";    shift
+  local http_code body tmp
+  tmp=$(mktemp)
+
+  http_code=$(curl -s -o "$tmp" -w "%{http_code}" \
+    --max-time 15 \
+    -X "$method" \
+    -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    "$@" \
+    "$url")
+
+  body=$(cat "$tmp"); rm -f "$tmp"
+
+  if [[ "$http_code" -ge 400 ]]; then
+    echo -e "${RED}[✗]${RESET} HTTP ${http_code} — $(echo "$body" | jq -r '.message // .error // .')" >&2
+    return 1
+  fi
+
+  echo "$body"
+}
+
 # ── Hàm apply ruleset ────────────────────────────────────────────────────────
 apply_ruleset() {
   local file="$1"
@@ -39,40 +65,35 @@ apply_ruleset() {
 
   echo -e "\n${YELLOW}[→]${RESET} Xử lý ruleset: ${name}"
 
-  # Kiểm tra ruleset đã tồn tại chưa
-  existing_id=$(curl -sf \
-    -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-    -H "Accept: application/vnd.github+json" \
-    -H "X-GitHub-Api-Version: 2022-11-28" \
-    "${API}" | jq -r --arg name "$name" '.[] | select(.name == $name) | .id' 2>/dev/null || true)
+  # Lấy danh sách rulesets hiện có
+  existing_list=$(gh_api GET "${API}") || { echo -e "${RED}[✗]${RESET} Không lấy được danh sách rulesets"; return 1; }
+
+  existing_id=$(echo "$existing_list" | jq -r --arg name "$name" '.[] | select(.name == $name) | .id')
 
   if [[ -n "$existing_id" ]]; then
-    # Cập nhật ruleset hiện có
-    response=$(curl -sf -X PUT \
-      -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-      -H "Accept: application/vnd.github+json" \
-      -H "X-GitHub-Api-Version: 2022-11-28" \
+    gh_api PUT "${API}/${existing_id}" \
       -H "Content-Type: application/json" \
-      --data @"$file" \
-      "${API}/${existing_id}")
+      --data @"$file" > /dev/null
     echo -e "${GREEN}[✔]${RESET} Đã cập nhật ruleset '${name}' (id: ${existing_id})"
   else
-    # Tạo mới
-    response=$(curl -sf -X POST \
-      -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-      -H "Accept: application/vnd.github+json" \
-      -H "X-GitHub-Api-Version: 2022-11-28" \
+    response=$(gh_api POST "${API}" \
       -H "Content-Type: application/json" \
-      --data @"$file" \
-      "${API}")
+      --data @"$file")
     new_id=$(echo "$response" | jq -r '.id')
     echo -e "${GREEN}[✔]${RESET} Đã tạo ruleset '${name}' (id: ${new_id})"
   fi
 }
 
-# ── Apply từng ruleset ────────────────────────────────────────────────────────
+# ── Kiểm tra kết nối & quyền trước khi chạy ─────────────────────────────────
 echo -e "${GREEN}Applying GitHub Rulesets → ${REPO}${RESET}"
+echo -e "${YELLOW}[→]${RESET} Kiểm tra token..."
 
+user=$(gh_api GET "https://api.github.com/user" | jq -r '.login') \
+  || { echo -e "${RED}[✗]${RESET} Token không hợp lệ hoặc không có quyền."; exit 1; }
+
+echo -e "${GREEN}[✔]${RESET} Xác thực thành công — user: ${user}"
+
+# ── Apply từng ruleset ────────────────────────────────────────────────────────
 for ruleset_file in \
   "${SCRIPT_DIR}/protect-main.json" \
   "${SCRIPT_DIR}/protect-develop.json" \

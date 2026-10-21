@@ -1,5 +1,6 @@
-name: Deploy to VPS
+name: Deploy to Production
 
+# Trigger: push lên main hoặc dispatch thủ công
 on:
   push:
     branches: [main]
@@ -14,41 +15,75 @@ on:
 
 concurrency:
   group: deploy-${{ github.ref }}
-  cancel-in-progress: false   # không huỷ deploy đang chạy
+  cancel-in-progress: false   # không cancel deploy đang chạy
 
 jobs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 1. Build frontend assets trên GitHub Actions (không cần hardware)
+  # ─────────────────────────────────────────────────────────────────────────────
+  build:
+    name: Build Frontend Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Vite assets
+        run: pnpm build
+        env:
+          NODE_ENV: production
+
+      - name: Upload built assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-assets-${{ github.sha }}
+          path: public/build/
+          retention-days: 1
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 2. Deploy lên VPS qua SSH (cần secrets: xem README Deploy)
+  # ─────────────────────────────────────────────────────────────────────────────
   deploy:
     name: Deploy → ${{ github.event.inputs.environment || 'production' }}
     runs-on: ubuntu-latest
+    needs: build
     environment: ${{ github.event.inputs.environment || 'production' }}
 
     steps:
-      # ── Checkout ──────────────────────────────────────────────────────────────
       - uses: actions/checkout@v4
 
-      # ── Build assets trước khi đẩy lên server ────────────────────────────────
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download built assets
+        uses: actions/download-artifact@v4
         with:
-          node-version: 20
-          cache: npm
+          name: frontend-assets-${{ github.sha }}
+          path: public/build/
 
-      - name: Install & build frontend
-        run: npm ci && npm run build
-
-      # ── Đóng gói source (không kèm node_modules/vendor) ──────────────────────
-      - name: Package source
+      - name: Package release archive
         run: |
-          tar --exclude='.git' \
-              --exclude='node_modules' \
-              --exclude='vendor' \
-              --exclude='*.tar.gz' \
-              --exclude='.env' \
-              -czf /tmp/deploy_${{ github.sha }}.tar.gz .
+          tar \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='vendor' \
+            --exclude='*.tar.gz' \
+            --exclude='.env' \
+            --exclude='tests' \
+            -czf /tmp/deploy_${{ github.sha }}.tar.gz .
+          echo "Archive size: $(du -sh /tmp/deploy_${{ github.sha }}.tar.gz | cut -f1)"
 
-      # ── Sao chép lên server qua SCP ───────────────────────────────────────────
-      - name: Copy archive to server
-        uses: appleboy/scp-action@v0.1.7
+      - name: Upload archive to server
+        uses: appleboy/scp-action@v1.0.0
         with:
           host:     ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
@@ -56,11 +91,9 @@ jobs:
           port:     ${{ secrets.DEPLOY_PORT || 22 }}
           source:   /tmp/deploy_${{ github.sha }}.tar.gz
           target:   /tmp/
-          strip_components: 1   # scp-action không hỗ trợ strip; bỏ qua nếu báo lỗi
 
-      # ── Chạy lệnh deploy trên server ─────────────────────────────────────────
-      - name: Run deploy commands
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Run deploy on server
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host:     ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
@@ -68,35 +101,78 @@ jobs:
           port:     ${{ secrets.DEPLOY_PORT || 22 }}
           script: |
             set -euo pipefail
-            DEPLOY_PATH="${{ secrets.DEPLOY_PATH || '/var/www/nlp-labs-vietnam' }}"
-            ARCHIVE="/tmp/deploy_${{ github.sha }}.tar.gz"
 
-            echo "==> Giải nén archive..."
-            mkdir -p "${DEPLOY_PATH}"
-            tar -xzf "${ARCHIVE}" -C "${DEPLOY_PATH}"
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH || '/var/www/investment-platform' }}"
+            ARCHIVE="/tmp/deploy_${{ github.sha }}.tar.gz"
+            TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+            RELEASE_DIR="${DEPLOY_PATH}/releases/${TIMESTAMP}"
+            CURRENT_LINK="${DEPLOY_PATH}/current"
+
+            echo "▶ [1/7] Giải nén release mới..."
+            mkdir -p "${RELEASE_DIR}"
+            tar -xzf "${ARCHIVE}" -C "${RELEASE_DIR}"
             rm -f "${ARCHIVE}"
 
-            cd "${DEPLOY_PATH}"
+            echo "▶ [2/7] Symlink .env từ shared..."
+            ln -sf "${DEPLOY_PATH}/shared/.env" "${RELEASE_DIR}/.env"
 
-            echo "==> Cài PHP dependencies..."
-            composer install --no-dev --optimize-autoloader --no-interaction
+            echo "▶ [3/7] Symlink storage từ shared..."
+            rm -rf "${RELEASE_DIR}/storage"
+            ln -sf "${DEPLOY_PATH}/shared/storage" "${RELEASE_DIR}/storage"
 
-            echo "==> Chạy migrations..."
-            php artisan migrate --force
+            echo "▶ [4/7] Cài PHP dependencies..."
+            cd "${RELEASE_DIR}"
+            composer install --no-dev --optimize-autoloader --no-interaction --quiet
 
-            echo "==> Clear & cache lại config/routes/views..."
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            echo "▶ [5/7] Chạy migrations..."
+            php artisan migrate --force --no-interaction
 
-            echo "==> Phân quyền..."
-            chown -R www-data:www-data storage bootstrap/cache
-            chmod -R 775 storage bootstrap/cache
+            echo "▶ [6/7] Tối ưu Laravel..."
+            php artisan config:cache  --no-interaction
+            php artisan route:cache   --no-interaction
+            php artisan view:cache    --no-interaction
+            php artisan event:cache   --no-interaction
+            php artisan storage:link  --no-interaction 2>/dev/null || true
 
-            echo "==> Reload PHP-FPM..."
-            sudo systemctl reload php8.2-fpm || true
+            echo "▶ [7/7] Phân quyền & atomic swap..."
+            chown -R www-data:developers "${RELEASE_DIR}"
+            find "${RELEASE_DIR}" -type d -exec chmod 755 {} +
+            find "${RELEASE_DIR}" -type f -exec chmod 644 {} +
+            chmod 750 "${RELEASE_DIR}/artisan"
+            chmod 640 "${RELEASE_DIR}/.env"
 
-            echo "==> Reload Nginx..."
-            sudo nginx -t && sudo systemctl reload nginx
+            # Atomic swap: current → new release
+            ln -sfn "${RELEASE_DIR}" "${CURRENT_LINK}"
 
-            echo "✔ Deploy hoàn tất: $(date '+%Y-%m-%d %H:%M:%S')"
+            # Reload PHP-FPM & Nginx gracefully
+            sudo systemctl reload php8.2-fpm 2>/dev/null || true
+            sudo nginx -t && sudo systemctl reload nginx 2>/dev/null || true
+
+            # Giữ lại 3 release gần nhất
+            ls -dt "${DEPLOY_PATH}/releases"/*/ 2>/dev/null | tail -n +4 | xargs rm -rf 2>/dev/null || true
+
+            echo "✔ Deploy hoàn tất: $(date '+%Y-%m-%d %H:%M:%S') | SHA: ${{ github.sha }}"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 3. Smoke test sau deploy
+  # ─────────────────────────────────────────────────────────────────────────────
+  smoke:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: success()
+
+    steps:
+      - name: Wait for server to be ready
+        run: sleep 10
+
+      - name: Check homepage responds 200
+        run: |
+          URL="https://${{ secrets.DEPLOY_HOST }}"
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "${URL}" || echo "000")
+          echo "HTTP status: ${STATUS}"
+          if [[ "${STATUS}" != "200" ]]; then
+            echo "❌ Smoke test FAILED: ${URL} returned ${STATUS}"
+            exit 1
+          fi
+          echo "✔ Smoke test passed"

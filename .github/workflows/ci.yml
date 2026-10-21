@@ -5,24 +5,133 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  ci:
-    name: Lint · Typecheck · Test · Build
+  # ────────────────────────────────────────────────────────────────────────────
+  # 1. Frontend — Lint · Typecheck · Test · Build (pnpm + Turbo)
+  # ────────────────────────────────────────────────────────────────────────────
+  frontend:
+    name: Frontend (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20]
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           cache: pnpm
 
-      - name: Cài đặt dependencies
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Lint + Typecheck + Test + Build
         run: pnpm turbo run lint typecheck test build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: frontend-build-node${{ matrix.node }}
+          path: public/build/
+          retention-days: 1
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # 2. Backend — PHP lint · Test (PHPUnit/Pest) · Composer audit
+  # ────────────────────────────────────────────────────────────────────────────
+  backend:
+    name: Backend (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ["8.2"]
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: investment_test
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_mysql, redis, gd, zip, bcmath, intl, opcache
+          coverage: xdebug
+          tools: composer:v2
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-php${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-php${{ matrix.php }}-
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Copy .env.testing
+        run: cp .env.example .env.testing
+
+      - name: Configure test environment
+        run: |
+          sed -i 's/^APP_ENV=.*/APP_ENV=testing/'          .env.testing
+          sed -i 's/^APP_DEBUG=.*/APP_DEBUG=true/'          .env.testing
+          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=mysql/'  .env.testing
+          sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/'          .env.testing
+          sed -i 's/^DB_PORT=.*/DB_PORT=3306/'               .env.testing
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=investment_test/' .env.testing
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=root/'        .env.testing
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=secret/'      .env.testing
+          sed -i 's/^CACHE_DRIVER=.*/CACHE_DRIVER=redis/'     .env.testing
+          sed -i 's/^QUEUE_CONNECTION=.*/QUEUE_CONNECTION=sync/' .env.testing
+          sed -i 's/^SESSION_DRIVER=.*/SESSION_DRIVER=array/' .env.testing
+
+      - name: Generate app key
+        run: php artisan key:generate --env=testing
+
+      - name: Run database migrations
+        run: php artisan migrate --env=testing --force
+
+      - name: Run PHP tests
+        run: php artisan test --env=testing --parallel --coverage-clover=coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        if: success()
+        with:
+          files: coverage.xml
+          flags: backend-php${{ matrix.php }}
+          fail_ci_if_error: false
+
+      - name: Composer security audit
+        run: composer audit

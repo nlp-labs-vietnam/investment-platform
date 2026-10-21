@@ -1346,7 +1346,7 @@ show_help() {
     echo -e "  ${CYAN}bash install.sh optimize${RESET}"
     echo ""
     echo -e "  ${DIM}# One-liner remote install:${RESET}"
-    echo -e "  ${CYAN}sudo bash -c \"\$(curl -fsSL https://nlpgroup.vn/install.sh)\" -- install --domain nlpgroup.vn --ssl${RESET}"
+    echo -e "  ${CYAN}sudo bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/nlp-labs-vietnam/investment-platform/main/scripts/install.sh)\" -- install --domain nlpgroup.vn --ssl${RESET}"
     echo ""
     echo -e "${BOLD}LINKS${RESET}"
     echo -e "  Docs    : ${CYAN}${HOMEPAGE_URL}${RESET}"

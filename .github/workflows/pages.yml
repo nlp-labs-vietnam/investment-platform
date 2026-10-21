@@ -6,11 +6,11 @@ on:
     paths:
       - 'docs/**'
       - 'public/**'
+      - 'scripts/install.sh'
       - 'README.md'
       - 'CHANGELOG.md'
       - 'ROADMAP.md'
       - 'ARCHITECTURE.md'
-      - 'install.sh'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -164,7 +164,7 @@ jobs:
 <div class="section">
   <div class="install-strip">
     <h2>&#x26A1; One-liner install</h2>
-    <code>sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nlp-labs-vietnam/investment-platform/main/install.sh)" -- install --domain nlpgroup.vn --ssl</code>
+    <code>sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nlp-labs-vietnam/investment-platform/main/scripts/install.sh)" -- install --domain nlpgroup.vn --ssl</code>
   </div>
 
   <div class="section-title">Commands</div>

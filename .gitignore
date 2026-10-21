@@ -20,20 +20,22 @@ yarn-error.log
 
 # Archives / backups
 *.zip
+*.tar.gz
 *.sql
 nlpgroup_backup_*.zip
+/storage/app/backups/
 
 # Export/build artifacts
-/exports/*.ipa
-/exports/*.apk
+/storage/app/exports/*.ipa
+/storage/app/exports/*.apk
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Sensitive credential files — never commit
-/firebase-service.json
-/firebase-messaging-sw.js
+/storage/app/firebase/firebase-service.json
+/storage/app/firebase/firebase-messaging-sw.js
 /assets/upload/
 /assets/main-cedar-391910-cd7c5ebfdd8b.json
 

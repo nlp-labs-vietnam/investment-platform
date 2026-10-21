@@ -33,7 +33,7 @@
 | Route `/nlp-ev-products` | ✅ Hoạt động HTTP 200 |
 | Route `/nlp-energy-products` | ✅ Hoạt động HTTP 200 |
 | Route `/nlp-ai-digital` | ✅ Hoạt động HTTP 200 |
-| DB export `nlp03448_nlpgroup.sql` | ✅ Xuất tại `/var/www/investment-platform/` (492 KB) |
+| DB export `nlp03448_nlpgroup.sql` | ✅ Xuất tại `storage/app/backups/` (492 KB) |
 
 ---
 
@@ -216,7 +216,7 @@
 
 ### 6.1 Bảo trì định kỳ
 
-- [x] Cron job: `* * * * * /usr/bin/php /var/www/investment-platform/artisan schedule:run`
+- [x] Cron job: `* * * * * /usr/bin/php ./nlp-labs-vietnam/artisan schedule:run`
 - [x] Log: `/var/log/nlpgroup-scheduler.log`
 - [x] Schedule tasks: cache:warm · cache:prune · main:cron · badge:cron · UpdatePropertyJob · model:prune · payout-currency:update · payout-crypto-currency-update-cron
 - [ ] Backup DB tự động hàng ngày (hiện có `backup.sh` — cần gắn vào cron)
@@ -234,9 +234,9 @@
 
 ```bash
 # Chạy lại nếu bị reset sau deploy
-chown -R www-data:www-data /var/www/investment-platform/storage/
-chmod -R 775 /var/www/investment-platform/storage/
-chmod -R 775 /var/www/investment-platform/bootstrap/cache/
+chown -R www-data:www-data ./nlp-labs-vietnam/storage/
+chmod -R 775 ./nlp-labs-vietnam/storage/
+chmod -R 775 ./nlp-labs-vietnam/bootstrap/cache/
 ```
 
 ### 6.4 Database

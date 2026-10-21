@@ -1,0 +1,102 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: production
+        type: choice
+        options: [production, staging]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false   # không huỷ deploy đang chạy
+
+jobs:
+  deploy:
+    name: Deploy → ${{ github.event.inputs.environment || 'production' }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+
+    steps:
+      # ── Checkout ──────────────────────────────────────────────────────────────
+      - uses: actions/checkout@v4
+
+      # ── Build assets trước khi đẩy lên server ────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install & build frontend
+        run: npm ci && npm run build
+
+      # ── Đóng gói source (không kèm node_modules/vendor) ──────────────────────
+      - name: Package source
+        run: |
+          tar --exclude='.git' \
+              --exclude='node_modules' \
+              --exclude='vendor' \
+              --exclude='*.tar.gz' \
+              --exclude='.env' \
+              -czf /tmp/deploy_${{ github.sha }}.tar.gz .
+
+      # ── Sao chép lên server qua SCP ───────────────────────────────────────────
+      - name: Copy archive to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key:      ${{ secrets.DEPLOY_SSH_KEY }}
+          port:     ${{ secrets.DEPLOY_PORT || 22 }}
+          source:   /tmp/deploy_${{ github.sha }}.tar.gz
+          target:   /tmp/
+          strip_components: 1   # scp-action không hỗ trợ strip; bỏ qua nếu báo lỗi
+
+      # ── Chạy lệnh deploy trên server ─────────────────────────────────────────
+      - name: Run deploy commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:     ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key:      ${{ secrets.DEPLOY_SSH_KEY }}
+          port:     ${{ secrets.DEPLOY_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH || '/var/www/nlp-labs-vietnam' }}"
+            ARCHIVE="/tmp/deploy_${{ github.sha }}.tar.gz"
+
+            echo "==> Giải nén archive..."
+            mkdir -p "${DEPLOY_PATH}"
+            tar -xzf "${ARCHIVE}" -C "${DEPLOY_PATH}"
+            rm -f "${ARCHIVE}"
+
+            cd "${DEPLOY_PATH}"
+
+            echo "==> Cài PHP dependencies..."
+            composer install --no-dev --optimize-autoloader --no-interaction
+
+            echo "==> Chạy migrations..."
+            php artisan migrate --force
+
+            echo "==> Clear & cache lại config/routes/views..."
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            echo "==> Phân quyền..."
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 775 storage bootstrap/cache
+
+            echo "==> Reload PHP-FPM..."
+            sudo systemctl reload php8.2-fpm || true
+
+            echo "==> Reload Nginx..."
+            sudo nginx -t && sudo systemctl reload nginx
+
+            echo "✔ Deploy hoàn tất: $(date '+%Y-%m-%d %H:%M:%S')"

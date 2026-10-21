@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write   # cần để tạo GitHub Release
+
+jobs:
+  release:
+    name: Build & Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── Checkout (full history để lấy changelog) ──────────────────────────────
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── Node / Vite build ─────────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install & build frontend
+        run: npm ci && npm run build
+
+      # ── PHP / Composer ────────────────────────────────────────────────────────
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Install PHP dependencies (production)
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      # ── Đóng gói release artifact ─────────────────────────────────────────────
+      - name: Create release archive
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          ARCHIVE="investment-platform-${VERSION}.tar.gz"
+
+          tar --exclude='.git' \
+              --exclude='node_modules' \
+              --exclude='*.tar.gz' \
+              --exclude='.env' \
+              --exclude='tests' \
+              --transform "s|^\.|investment-platform-${VERSION}|" \
+              -czf "/tmp/${ARCHIVE}" .
+
+          echo "ARCHIVE=/tmp/${ARCHIVE}" >> "${GITHUB_ENV}"
+          echo "ARCHIVE_NAME=${ARCHIVE}"  >> "${GITHUB_ENV}"
+
+      # ── Tự động sinh changelog từ git log ────────────────────────────────────
+      - name: Generate release notes
+        id: notes
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | sed -n '2p')
+          if [[ -n "$PREV_TAG" ]]; then
+            NOTES=$(git log "${PREV_TAG}..HEAD" --pretty="format:- %s (%h)" --no-merges)
+          else
+            NOTES=$(git log --pretty="format:- %s (%h)" --no-merges | head -30)
+          fi
+          echo "RELEASE_NOTES<<EOF" >> "${GITHUB_ENV}"
+          echo "${NOTES}"           >> "${GITHUB_ENV}"
+          echo "EOF"                >> "${GITHUB_ENV}"
+
+      # ── Tạo GitHub Release ────────────────────────────────────────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Investment Platform ${{ github.ref_name }}"
+          body: |
+            ## What's changed
+            ${{ env.RELEASE_NOTES }}
+
+            ---
+            **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...HEAD
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
+          files: ${{ env.ARCHIVE }}
+          generate_release_notes: false

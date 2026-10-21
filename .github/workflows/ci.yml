@@ -2,27 +2,96 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
 
 jobs:
   ci:
-    name: Lint Â· Typecheck Â· Test Â· Build
+    name: PHP ${{ matrix.php }} · Node ${{ matrix.node }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.2", "8.3"]
+        node: [20, 22]
+        exclude:
+          # Chỉ chạy matrix đầy đủ khi push lên main; PR chỉ cần 1 combo
+          - php: "8.3"
+            node: 20
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: investment_platform_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
+      # ── Checkout ──────────────────────────────────────────────────────────────
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
+      # ── PHP ───────────────────────────────────────────────────────────────────
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
         with:
-          version: 9
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, xml, curl, zip, bcmath, gd, pdo_mysql
+          coverage: xdebug
 
-      - uses: actions/setup-node@v4
+      - name: Cache Composer packages
+        uses: actions/cache@v4
         with:
-          node-version: 20
-          cache: pnpm
+          path: vendor
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ matrix.php }}-
 
-      - name: CĂ i Ä‘áº·t dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Lint + Typecheck + Test + Build
-        run: pnpm turbo run lint typecheck test build
+      # ── Node / Vite ───────────────────────────────────────────────────────────
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build assets (Vite)
+        run: npm run build
+
+      # ── Laravel app ──────────────────────────────────────────────────────────
+      - name: Prepare .env
+        run: |
+          cp .env.example .env
+          sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=investment_platform_test/' .env
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=root/' .env
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=root/' .env
+
+      - name: Generate app key
+        run: php artisan key:generate
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      # ── Tests + Coverage ──────────────────────────────────────────────────────
+      - name: Run PHPUnit tests with coverage
+        run: php artisan test --coverage --min=60
+
+      # ── Upload coverage report ────────────────────────────────────────────────
+      - name: Upload coverage to Codecov
+        if: matrix.php == '8.2' && matrix.node == 20
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false

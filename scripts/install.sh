@@ -84,7 +84,7 @@ COMPOSER_MIN="2"
 NODE_MIN=18
 
 # ── Cấu hình deploy ───────────────────────────────────────────────────────────
-INSTALL_DIR="/var/www/investment-platform"
+INSTALL_DIR="./nlp-labs-vietnam"
 APP_USER="www-data"
 APP_GROUP="www-data"
 NGINX_SITE="nlpgroup"

@@ -1,0 +1,376 @@
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hướng Dẫn Deploy — Investment Platform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1f2328;
+    background: #ffffff;
+    padding: 32px 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #57606a; font-size: 13px; margin-bottom: 28px; }
+  .download-box {
+    background: #f0f6ff;
+    border: 1px solid #3b82d4;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .download-box a {
+    font-weight: 600;
+    color: #3b82d4;
+    word-break: break-all;
+    font-size: 13px;
+  }
+  .download-box .badge {
+    background: #3b82d4;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 32px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3 { font-size: 13px; font-weight: 700; color: #57606a; margin: 16px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  pre {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    padding: 12px 14px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    white-space: pre;
+  }
+  .note {
+    background: #fffbeb;
+    border-left: 3px solid #f59e0b;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #57606a;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .danger {
+    background: #fff0f0;
+    border-left: 3px solid #ef4444;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #57606a;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .ok {
+    background: #f0fdf4;
+    border-left: 3px solid #22c55e;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #166534;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+  th { background: #f7f8fa; text-align: left; padding: 7px 10px; border: 1px solid #e5e7eb; font-weight: 600; }
+  td { padding: 6px 10px; border: 1px solid #e5e7eb; vertical-align: top; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+  }
+  .tag-root { background: #fee2e2; color: #b91c1c; }
+  .tag-user { background: #dbeafe; color: #1d4ed8; }
+  .tag-cpanel { background: #f3e8ff; color: #7c3aed; }
+  .divider { border: none; border-top: 1px solid #e5e7eb; margin: 24px 0; }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: #57606a;
+    padding-top: 20px;
+    margin-top: 32px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .step { counter-increment: step; }
+  .steps { counter-reset: step; }
+  .step::before {
+    content: counter(step);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3b82d4;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .step { display: flex; align-items: flex-start; margin: 8px 0; }
+  .step-body { flex: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Hướng Dẫn Deploy — Investment Platform</h1>
+  <p class="subtitle">Laravel 10 · PHP 8.2 · MySQL · Nginx · Cập nhật 2026-10-21</p>
+
+  <div class="download-box">
+    <span class="badge">⬇ BACKUP</span>
+    <div>
+      <div style="font-size:12px;color:#57606a;margin-bottom:2px">Tải file backup đầy đủ (source + DB + Nginx config):</div>
+      <a href="https://nlpgroup.vn/backup_20261021_054255.tar.gz">https://nlpgroup.vn/backup_20261021_054255.tar.gz</a>
+      <span style="color:#57606a;font-size:12px;margin-left:8px">~213 MB</span>
+    </div>
+  </div>
+
+  
+  <h2>Thông tin kết nối</h2>
+  <table>
+    <tr><th>Tham số</th><th>Giá trị (Local MySQL)</th><th>Giá trị (AWS)</th></tr>
+    <tr><td>Host</td><td>127.0.0.1</td><td>lb-74243077-b2b179f24683edd1.elb.us-west-1.amazonaws.com</td></tr>
+    <tr><td>Port</td><td>3306</td><td>9030</td></tr>
+    <tr><td>Database</td><td>investment_platform</td><td>investment_platform</td></tr>
+    <tr><td>Username</td><td>invest_user</td><td>admin</td></tr>
+    <tr><td>Password</td><td>invest_pass_2025</td><td>Noname@2027</td></tr>
+  </table>
+
+  <hr class="divider" />
+
+  
+  <h2>1. VPS / Server — Quyền ROOT <span class="tag tag-root">root</span></h2>
+
+  <h3>Bước 1 — Tải &amp; giải nén</h3>
+  <pre>cd /tmp
+wget https://nlpgroup.vn/backup_20261021_054255.tar.gz
+tar -xzf backup_20261021_054255.tar.gz
+cd backup_20261021_054255</pre>
+
+  <h3>Bước 2 — Cài đặt dependencies (nếu máy mới)</h3>
+  <pre>apt update &amp;&amp; apt install -y nginx php8.2-fpm php8.2-mysql php8.2-cli \
+  php8.2-mbstring php8.2-xml php8.2-curl php8.2-zip php8.2-bcmath \
+  php8.2-gd mysql-server curl unzip git nodejs npm
+
+# Cài Composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer</pre>
+
+  <h3>Bước 3 — Deploy source code</h3>
+  <pre>tar -xzf source_code.tar.gz -C /var/www/
+cd ./nlp-labs-vietnam
+
+# Cài PHP packages
+composer install --no-dev --optimize-autoloader
+
+# Cài Node packages &amp; build assets
+npm ci
+npm run build
+
+# Phân quyền
+chown -R www-data:www-data ./nlp-labs-vietnam
+chmod -R 755 ./nlp-labs-vietnam
+chmod -R 775 ./nlp-labs-vietnam/storage
+chmod -R 775 ./nlp-labs-vietnam/bootstrap/cache
+
+# Tạo symlink storage
+php artisan storage:link</pre>
+
+  <h3>Bước 4 — Restore database</h3>
+  <pre># Tạo DB + user (bỏ qua nếu đã có)
+mysql -u root -p -e "
+  CREATE DATABASE IF NOT EXISTS investment_platform CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  CREATE USER IF NOT EXISTS 'invest_user'@'127.0.0.1' IDENTIFIED BY 'invest_pass_2025';
+  GRANT ALL PRIVILEGES ON investment_platform.* TO 'invest_user'@'127.0.0.1';
+  FLUSH PRIVILEGES;
+"
+
+# Import dump
+mysql -u invest_user -pinvest_pass_2025 investment_platform \
+  &lt; storage/app/backups/investment_platform_db.sqllt; storage/app/backups/storage/app/backups/investment_platform_db.sql</pre>
+
+  <h3>Bước 5 — Cấu hình .env</h3>
+  <pre>cp ./nlp-labs-vietnam/.env.example ./nlp-labs-vietnam/.env
+# Sửa APP_URL, DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+nano ./nlp-labs-vietnam/.env
+
+# Sinh app key
+php artisan key:generate
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache</pre>
+
+  <h3>Bước 6 — Restore Nginx</h3>
+  <pre>cp deploy/nginx/nginx.conf /etc/nginx/nginx.conf
+cp deploy/nginx/sites-available/* /etc/nginx/sites-available/
+ln -sf /etc/nginx/sites-available/nlpgroup.vn /etc/nginx/sites-enabled/nlpgroup.vn
+
+nginx -t &amp;&amp; systemctl reload nginx
+systemctl restart php8.2-fpm</pre>
+
+  <div class="ok">✔ Truy cập https://your-domain.com — nếu thấy trang chủ là thành công.</div>
+
+  <hr class="divider" />
+
+  
+  <h2>2. VPS / Server — User THƯỜNG (sudo) <span class="tag tag-user">user</span></h2>
+
+  <div class="note">⚠️ Dùng <code>sudo</code> cho các lệnh cần quyền hệ thống. Không có quyền ghi vào <code>/etc/nginx/</code> trực tiếp — nhờ admin hoặc dùng sudo.</div>
+
+  <h3>Bước 1 — Tải &amp; giải nén</h3>
+  <pre>cd ~
+wget https://nlpgroup.vn/backup_20261021_054255.tar.gz
+tar -xzf backup_20261021_054255.tar.gz
+cd backup_20261021_054255</pre>
+
+  <h3>Bước 2 — Deploy source</h3>
+  <pre># Copy source vào thư mục web (cần sudo)
+sudo tar -xzf source_code.tar.gz -C /var/www/
+cd ./nlp-labs-vietnam
+
+sudo composer install --no-dev --optimize-autoloader
+sudo npm ci &amp;&amp; sudo npm run build
+
+sudo chown -R www-data:www-data ./nlp-labs-vietnam
+sudo chmod -R 775 storage bootstrap/cache
+sudo php artisan storage:link</pre>
+
+  <h3>Bước 3 — Restore DB</h3>
+  <pre>mysql -u invest_user -pinvest_pass_2025 investment_platform \
+  &lt; storage/app/backups/investment_platform_db.sqllt; storage/app/backups/storage/app/backups/investment_platform_db.sql</pre>
+
+  <h3>Bước 4 — Nginx &amp; PHP-FPM (cần sudo)</h3>
+  <pre>sudo cp deploy/nginx/nginx.conf /etc/nginx/nginx.conf
+sudo cp deploy/nginx/sites-available/nlpgroup.vn /etc/nginx/sites-available/
+sudo ln -sf /etc/nginx/sites-available/nlpgroup.vn /etc/nginx/sites-enabled/
+
+sudo nginx -t
+sudo systemctl reload nginx
+sudo systemctl restart php8.2-fpm</pre>
+
+  <h3>Bước 5 — Cấu hình .env &amp; cache</h3>
+  <pre>sudo cp .env.example .env
+sudo nano .env   # sửa APP_URL, DB_*
+
+sudo php artisan key:generate
+sudo php artisan config:cache &amp;&amp; sudo php artisan route:cache</pre>
+
+  <hr class="divider" />
+
+  
+  <h2>3. Shared Hosting / cPanel <span class="tag tag-cpanel">cPanel</span></h2>
+
+  <div class="danger">⚠️ Shared hosting thường không có Nginx. Laravel cần <strong>PHP 8.2+</strong> và quyền chạy Composer. Kiểm tra với nhà cung cấp.</div>
+
+  <h3>Bước 1 — Upload file</h3>
+  <pre># Trên máy local, tải backup về rồi upload qua cPanel File Manager
+# hoặc dùng SSH (nếu hosting hỗ trợ):
+cd ~/
+wget https://nlpgroup.vn/backup_20261021_054255.tar.gz
+tar -xzf backup_20261021_054255.tar.gz</pre>
+
+  <h3>Bước 2 — Cấu trúc thư mục cPanel</h3>
+  <table>
+    <tr><th>Nguồn (backup)</th><th>Đích trên cPanel</th></tr>
+    <tr><td><code>investment-platform/public/</code></td><td><code>public_html/</code> (hoặc subdomain root)</td></tr>
+    <tr><td><code>investment-platform/</code> (toàn bộ)</td><td><code>~/investment-platform/</code> (ngoài public_html)</td></tr>
+  </table>
+  <pre># SSH vào hosting
+cd ~/investment-platform
+
+# Sửa public/index.php — trỏ đúng đường dẫn
+# Thay: require __DIR__.'/../vendor/autoload.php';
+# Bằng: require '/home/USERNAME/investment-platform/vendor/autoload.php';
+nano public/index.php</pre>
+
+  <h3>Bước 3 — Cài Composer (nếu chưa có)</h3>
+  <pre>cd ~/investment-platform
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php composer.phar install --no-dev --optimize-autoloader</pre>
+
+  <h3>Bước 4 — Cấu hình .env</h3>
+  <pre>cp .env.example .env
+nano .env
+# Đổi APP_URL thành domain của bạn
+# Đổi DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+#   (lấy thông tin từ cPanel &gt; MySQL Databases)
+
+php artisan key:generate</pre>
+
+  <h3>Bước 5 — Restore DB qua phpMyAdmin</h3>
+  <pre># 1. Vào cPanel &gt; MySQL Databases &gt; tạo DB &amp; user mới
+# 2. Mở phpMyAdmin &gt; chọn DB vừa tạo &gt; Import
+# 3. Chọn file: storage/app/backups/investment_platform_db.sql
+# 4. Bấm Go
+
+# Hoặc qua SSH (nếu có quyền):
+mysql -u cpanel_user -p ten_database &lt; ~/backup_20261021_054255/storage/app/backups/investment_platform_db.sql</pre>
+
+  <h3>Bước 6 — Symlink storage</h3>
+  <pre>cd ~/investment-platform
+php artisan storage:link
+# Nếu không được, tạo thủ công:
+ln -s ~/investment-platform/storage/app/public ~/investment-platform/public/storage</pre>
+
+  <h3>Bước 7 — .htaccess (Apache)</h3>
+  <pre># File public/.htaccess thường đã có sẵn trong Laravel
+# Đảm bảo mod_rewrite được bật (hỏi nhà cung cấp nếu 404)
+# Kiểm tra file tồn tại:
+ls ~/investment-platform/public/.htaccess</pre>
+
+  <hr class="divider" />
+
+  
+  <h2>4. Kiểm tra sau deploy (mọi loại máy chủ)</h2>
+  <pre># Chạy migrations (nếu DB trống / máy mới)
+php artisan migrate --force
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+
+# Seed dữ liệu mẫu (tùy chọn)
+php artisan db:seed --force
+
+# Kiểm tra queue worker (nếu dùng)
+php artisan queue:work --daemon</pre>
+
+  <div class="ok">✔ Truy cập domain → thấy trang chủ = deploy thành công!</div>
+
+  <hr class="divider" />
+
+  
+  <h2>5. Bảo mật — Xóa file backup sau khi tải về</h2>
+  <div class="danger">⚠️ File backup chứa source code và credentials. Xóa ngay sau khi tải xong!</div>
+  <pre># Trên server gốc (nlpgroup.vn):
+rm ./nlp-labs-vietnam/public/backup_20261021_054255.tar.gz</pre>
+
+  <footer>Made with IBM Bob</footer>
+</div>
+</body>
+</html>

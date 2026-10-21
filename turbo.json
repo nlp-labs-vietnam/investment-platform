@@ -5,9 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "build/**"]
     },
-    "dev": {
-      "cache": false,
-      "persistent": true
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
     },
     "test": {
       "dependsOn": ["build"],
@@ -16,9 +16,13 @@
     "lint": {
       "outputs": []
     },
-    "typecheck": {
-      "dependsOn": ["^build"],
-      "outputs": []
+    "publish": {
+      "dependsOn": ["build", "test"],
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
     },
     "clean": {
       "cache": false

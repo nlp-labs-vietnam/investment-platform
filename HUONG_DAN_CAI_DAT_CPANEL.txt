@@ -17,10 +17,10 @@ BƯỚC 1 — TẠO DATABASE MYSQL TRÊN CPANEL
   1. Đăng nhập cPanel → kéo xuống mục "Databases"
   2. Click "MySQL Databases"
   3. Tạo database mới:
-       Tên database : nlpgroup_db   (ghi nhớ lại)
+       Tên database : nlp03448_db   (ghi nhớ lại)
   4. Tạo user mới:
-       Tên user     : nlp_user      (ghi nhớ lại)
-       Mật khẩu    : ************   (ghi nhớ lại — tối thiểu 8 ký tự)
+       Tên user     : nlp03448_user      (ghi nhớ lại)
+       Mật khẩu    : nlp03448   (ghi nhớ lại — tối thiểu 8 ký tự)
   5. Gán user vào database:
        Chọn user "nlp_user" + database "nlpgroup_db" → Add User To Database
        → Tích "ALL PRIVILEGES" → Make Changes
@@ -35,7 +35,7 @@ BƯỚC 2 — TẢI MÃ NGUỒN QUA SSH (wget)
 
   ── Chuyển vào thư mục public_html ──────────────────────────────────────────
 
-    cd /domains/nlpgroup.com/public_html
+    cd  ./domains/nlpgroup.com/public_html
 
   ── Tải file zip từ máy chủ NLP Group ──────────────────────────────────────
 
@@ -65,10 +65,10 @@ BƯỚC 3 — CHẠY SCRIPT CÀI ĐẶT TỰ ĐỘNG
 
   Script sẽ hỏi lần lượt:
     • Thư mục cài đặt   → nhấn Enter (dùng thư mục hiện tại)
-    • Tên miền          → nhập: nlpgroup.com
-    • Tên Database      → nhập: nlpgroup_db   (đã tạo ở Bước 1)
-    • Tên User MySQL    → nhập: nlp_user
-    • Mật khẩu MySQL    → nhập mật khẩu đã tạo ở Bước 1
+    • Tên miền          → nhập: vnegreen.com
+    • Tên Database      → nhập: nlp03448_db  (đã tạo ở Bước 1)
+    • Tên User MySQL    → nhập: nlp03448_db
+    • Mật khẩu MySQL    → nlp03448_db
     • DB Host           → nhấn Enter (mặc định: localhost)
     • Email quản trị    → nhập email của bạn
     • Xác nhận          → nhập: y
@@ -88,12 +88,12 @@ BƯỚC 4 — CẤU HÌNH DOCUMENT ROOT TRÊN CPANEL
 
   Cách 1 — Qua cPanel Domains:
     cPanel → Domains → tìm nlpgroup.com → Edit → Document Root
-    → Đổi thành: /domains/nlpgroup.com/public_html/public
+    → Đổi thành:  ./domains/nlpgroup.com/public_html/public
     → Save
 
   Cách 2 — Qua Subdomains (nếu dùng subdomain):
     cPanel → Subdomains → tìm domain → Edit Document Root
-    → Đổi thành: /domains/nlpgroup.com/public_html/public
+    → Đổi thành:  ./domains/nlpgroup.com/public_html/public
 
   Cách 3 — File .htaccess (nếu không đổi được Document Root):
     File .htaccess đã được tạo tự động tại public_html/
@@ -116,13 +116,13 @@ BƯỚC 6 — THIẾT LẬP CRON JOB
 
   Cài đặt thời gian: * * * * * (mỗi phút)
   Command:
-    php /domains/nlpgroup.com/public_html/artisan schedule:run >> /dev/null 2>&1
+    php  ./domains/nlpgroup.com/public_html/artisan schedule:run >> /dev/null 2>&1
 
 ================================================================================
 LỆNH QUẢN LÝ QUA SSH
 ================================================================================
 
-  cd /domains/nlpgroup.com/public_html
+  cd  ./domains/nlpgroup.com/public_html
 
   # Xóa cache khi cần
   php artisan optimize:clear

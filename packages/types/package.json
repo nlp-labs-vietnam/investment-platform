@@ -1,0 +1,35 @@
+{
+  "name": "@nlp-labs-vietnam/investment-types",
+  "version": "1.0.0",
+  "description": "TypeScript type definitions for NLP Investment Platform domain models",
+  "keywords": ["investment", "types", "typescript", "nlp-group", "vietnam"],
+  "homepage": "https://nlpgroup.vn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nlp-labs-vietnam/investment-platform.git",
+    "directory": "packages/types"
+  },
+  "license": "UNLICENSED",
+  "author": "NLP Group <dev@nlpgroup.vn> (https://nlpgroup.vn)",
+  "type": "module",
+  "main": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist/", "src/"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

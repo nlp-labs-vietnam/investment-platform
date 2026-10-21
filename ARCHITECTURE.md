@@ -86,92 +86,240 @@
 
 ---
 
-## 📈 `investment-platform` — AI-Driven Financial Intelligence Engine
+## 📈 `investment-platform` — NLP Group Investment Platform (Laravel + npm Monorepo)
 
-> Apache Kafka · RabbitMQ · Fine-tuned Transformers · RAG (Milvus) · gRPC/WebSocket
+> Laravel 11 · Sanctum · MySQL/AWS RDS · pnpm workspaces · Turborepo · npmjs.com
+
+### Kiến trúc tổng quan — tách tầng 4 lớp
 
 ```
-📁 investment-platform/
+┌─────────────────────────────────────────────────────────────────────┐
+│                     TẦNG npm CORE (publishable)                     │
+│   @nlp-labs-vietnam/investment-types                                │
+│   @nlp-labs-vietnam/investment-utils                                │
+│   @nlp-labs-vietnam/investment-sdk                                  │
+│   @nlp-labs-vietnam/investment-ui                                   │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │ HTTP REST (Sanctum Bearer token)
+┌────────────────────────────▼────────────────────────────────────────┐
+│                  TẦNG BACKEND — services/api/                       │
+│   Laravel 11 · 15 API Controllers · Sanctum Auth                   │
+│   routes/api.php — 40+ endpoints                                    │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │ Eloquent ORM
+┌────────────────────────────▼────────────────────────────────────────┐
+│                  TẦNG DATABASE                                      │
+│   MySQL (local) · mysql_aws (AWS RDS)                               │
+│   55 Models · 75+ migrations                                        │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Cấu trúc thư mục monorepo
+
+```
+📁 investment-platform/              ← repo hiện tại (github.com/nlp-labs-vietnam/investment-platform)
 │
-├── 🔄 services/                  Microservices (event-driven architecture)
-│   │
-│   ├── 🌊 ingestion/             Apache Kafka Consumer
-│   │   ├── src/consumers/        — Topic subscribers (news, social, filings)
-│   │   ├── src/connectors/       — Source connectors (Reuters, Bloomberg APIs)
-│   │   └── src/schemas/          — Avro / Protobuf message schemas
-│   │
-│   ├── 🧠 nlp-sentiment/         Sentiment Analysis Microservice
-│   │   ├── src/model/            — Fine-tuned FinBERT / multilingual transformer
-│   │   ├── src/inference/        — Batch + streaming inference engine
-│   │   ├── src/rag/              — RAG pipeline (Milvus vector DB queries)
-│   │   └── src/rl/               — Reinforcement learning feedback loop
-│   │
-│   ├── 🔍 nlp-ner/               Financial Named Entity Recognition
-│   │   ├── src/model/            — Domain-specific NER model (company, ticker, event)
-│   │   ├── src/pipeline/         — spaCy + custom transformer pipeline
-│   │   └── src/dict/             — Financial lexicon & entity dictionaries
-│   │
-│   ├── 🐇 orchestrator/          RabbitMQ Message Broker
-│   │   ├── src/queues/           — Queue definitions & routing rules
-│   │   ├── src/workers/          — Task dispatchers → NLP workers
-│   │   └── src/dlq/              — Dead-letter queue handlers
-│   │
-│   └── 🌐 api-gateway/           Client-facing API layer
-│       ├── src/grpc/             — gRPC service definitions (.proto)
-│       ├── src/rest/             — REST endpoints (Express / Fastify)
-│       ├── src/ws/               — WebSocket streaming (real-time signals)
-│       └── src/auth/             — JWT + API key middleware
+├── 📋 pnpm-workspace.yaml           ← workspaces: packages/*, apps/*, services/*, tools/*
+├── 🔧 turbo.json                    ← Turborepo pipeline: build → test → publish
 │
-├── 📦 packages/                  Shared libraries
-│   ├── 🛠 nlp-sdk/               Client SDK — TypeScript
-│   │   ├── src/client.ts         — SDK entry point
-│   │   ├── src/types/            — Signal, SentimentScore, EntityResult
-│   │   └── dist/                 — ESM + CJS + type declarations
+├── 📦 packages/                     ← npm packages → publish lên npmjs.com
 │   │
-│   └── 🗂 shared-types/          Shared DTOs & Protobuf definitions
-│       ├── proto/                — .proto files
-│       └── src/                  — Generated TypeScript types
-│
-├── 🖥 apps/
-│   └── 📊 dashboard/             Investment Intelligence UI
+│   ├── 🗂 types/                    @nlp-labs-vietnam/investment-types
+│   │   ├── src/
+│   │   │   ├── property.d.ts        — Property, PropertySeo, Image, Address, Amenity
+│   │   │   ├── user.d.ts            — User, UserKyc, UserSocial, Rank, Referral
+│   │   │   ├── investment.d.ts      — Investment, PropertyShare, PropertyOffer
+│   │   │   ├── finance.d.ts         — Deposit, Payout, Transaction, Fund, Gateway
+│   │   │   ├── content.d.ts         — Page, Blog, BlogCategory, Content, ManageMenu
+│   │   │   └── index.ts             — re-export tất cả types
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   │
+│   ├── 🛠 utils/                    @nlp-labs-vietnam/investment-utils
+│   │   ├── src/
+│   │   │   ├── currency.ts          — formatVND(), fractionNumber(), investmentRange()
+│   │   │   │                          (chuyển đổi từ helpers.php: fractionNumber, getAmount)
+│   │   │   ├── date.ts              — customDate(), customDateTime(), isExpired()
+│   │   │   │                          (chuyển đổi từ helpers.php: customDate, dateTime)
+│   │   │   ├── validators.ts        — validateInvestAmount(), validateKycField()
+│   │   │   ├── string.ts            — stringToTitle(), getTitle(), hex2rgba()
+│   │   │   │                          (chuyển đổi từ helpers.php: stringToTitle, hex2rgba)
+│   │   │   └── index.ts
+│   │   ├── package.json
+│   │   └── vite.lib.config.ts
+│   │
+│   ├── 🌐 sdk/                      @nlp-labs-vietnam/investment-sdk
+│   │   ├── src/
+│   │   │   ├── client.ts            — NLPInvestmentClient (axios instance + Sanctum)
+│   │   │   ├── auth.ts              — login(), register(), logout(), passwordReset()
+│   │   │   │                          (từ routes/api.php: /register, /login, /logout)
+│   │   │   ├── property.ts          — list(), detail(), invest(), investHistory()
+│   │   │   │                          (từ routes/api.php: /property, /invest/property)
+│   │   │   ├── deposit.ts           — addFund(), paymentRequest(), cardPayment()
+│   │   │   │                          (từ routes/api.php: /add/fund, /payment/request)
+│   │   │   ├── payout.ts            — payout(), checkAmount(), submit()
+│   │   │   │                          (từ routes/api.php: /payout, /payout/submit/confirm)
+│   │   │   ├── profile.ts           — getProfile(), updateProfile(), kycs()
+│   │   │   │                          (từ routes/api.php: /user/profile, /kyc-submit)
+│   │   │   ├── collection.ts        — wishlist(), addWishlist(), removeWishlist()
+│   │   │   ├── support.ts           — ticketList(), ticketStore(), ticketReply()
+│   │   │   └── index.ts             — export NLPInvestmentClient
+│   │   ├── package.json
+│   │   └── vite.lib.config.ts
+│   │
+│   └── 🎨 ui/                       @nlp-labs-vietnam/investment-ui  (đã đặt tên trong package.json gốc)
 │       ├── src/
-│       │   ├── pages/            — Market overview, alerts, portfolio
-│       │   ├── components/       — Built on @alisababivip/react
-│       │   ├── stores/           — Zustand state (signals, watchlist)
-│       │   └── hooks/            — useSignalStream (WebSocket)
-│       └── public/
+│       │   ├── tokens.scss          — NLP brand colors, typography, spacing
+│       │   │                          (mở rộng từ resources/sass/_variables.scss)
+│       │   ├── components.scss      — button, card, badge, property-card NLP custom
+│       │   └── index.scss           — @forward tất cả
+│       ├── package.json
+│       └── vite.lib.config.ts
 │
-├── 🔧 turbo.json
-├── 📋 pnpm-workspace.yaml
-└── 📝 CODEOWNERS                 → @nhamlapquoc @Dennis-nham
+├── 🖥 apps/                         ← Consumer apps — KHÔNG publish lên npm
+│   └── web/                         Frontend app (Vue/React — tương lai)
+│       ├── src/
+│       │   ├── pages/               — Dashboard, Properties, Portfolio, Profile
+│       │   ├── components/          — Dùng @nlp/ui + @alisababivip/vue
+│       │   └── composables/         — Dùng @nlp/sdk để gọi API
+│       └── package.json
+│
+├── ⚙️  services/                    ← Backend services
+│   └── api/                         ← Laravel app (toàn bộ code PHP hiện tại)
+│       ├── app/
+│       │   ├── Http/Controllers/Api/  — 15 API controllers (Auth, Property, Deposit...)
+│       │   ├── Models/                — 55 Eloquent models
+│       │   ├── Services/              — InvestmentService, BasicService, Gateway/*
+│       │   └── Helpers/helpers.php    — fractionNumber(), basicControl(), footerData()
+│       ├── routes/
+│       │   ├── api.php              — 40+ REST endpoints (Sanctum protected)
+│       │   ├── web.php              — Blade frontend routes
+│       │   └── admin.php            — Admin panel routes
+│       ├── database/
+│       │   └── migrations/          — 75+ migrations từ 2014 → 2026
+│       ├── resources/
+│       │   ├── js/                  — app.js, bootstrap.js (axios + Bootstrap 5)
+│       │   └── sass/                — app.scss, _variables.scss
+│       └── composer.json
+│
+└── 🔧 tools/
+    └── scripts/
+        ├── gen-types.ts             — Tự động sinh TypeScript types từ PHP models
+        └── check-api-sync.ts        — Kiểm tra endpoints trong sdk/ khớp routes/api.php
 ```
 
-### Data flow diagram
+### Dependency graph giữa packages
 
 ```
-  🌍 External Data Sources
-  (News APIs · Social · SEC Filings · VN Stock Exchange)
-            │
-            ▼
-  🌊 ingestion/          ← Apache Kafka (millions of events/sec)
-     Topic: raw.documents
-            │
-            ▼
-  🐇 orchestrator/       ← RabbitMQ routes tasks to workers
-     ┌──────┴──────┐
-     ▼             ▼
-  🧠 nlp-         🔍 nlp-
-     sentiment/      ner/
-  (FinBERT+RAG)  (Entity extraction)
-     └──────┬──────┘
-            │  structured signals
-            ▼
-  🌐 api-gateway/        ← gRPC · REST · WebSocket
-            │
-            ▼
-  📊 dashboard/          ← Real-time trading signals UI
-  🔌 Enterprise clients  ← SDK: @nlp-labs-vietnam/nlp-sdk
+@nlp-labs-vietnam/investment-types     (zero dependency — làm trước)
+              │
+     ┌────────┴────────┐
+     ▼                 ▼
+  utils/           sdk/               (peer dep: axios ^1.x)
+     │                │
+     └────────┬────────┘
+              ▼
+           ui/                        (SCSS — không phụ thuộc JS packages)
+              │
+              ▼
+         apps/web                     (consumer — không publish)
 ```
+
+### Data flow: Frontend → SDK → API → DB
+
+```
+  apps/web (Vue/React)
+       │  import NLPInvestmentClient
+       ▼
+  @nlp-labs-vietnam/investment-sdk
+       │  axios.post('/api/invest/property/42', payload)
+       │  Header: Authorization: Bearer <sanctum_token>
+       ▼
+  services/api/  (Laravel 11)
+       │  routes/api.php → PropertyController@investProperty
+       │  InvestmentService@profitLossCalculate
+       ▼
+  Database (MySQL / AWS RDS)
+       │  investments table, transactions table
+       ▼
+  JSON response → SDK → apps/web
+```
+
+### API endpoints đã có (routes/api.php)
+
+| Nhóm | Endpoints | Controller |
+|---|---|---|
+| **Auth** | POST /register · /login · /logout · /password/reset | `AuthController` |
+| **Property** | GET /property · /property-details/{id} · /investment/properties | `PropertyController` |
+| **Investment** | POST /invest/property/{id} · GET /invest/history | `PropertyController` |
+| **Deposit** | GET /add/fund · POST /payment/request · /card/payment | `DepositController` |
+| **Payout** | GET /payout · POST /payout/submit/confirm | `PayoutController` |
+| **Profile** | GET /user/profile · POST /update/user/profile · /kyc-submit | `ProfileController` |
+| **Collection** | GET /wishlists · POST /wishlist/add · /wishlist/remove | `CollectionController` |
+| **Market** | GET /share/market · POST /direct/buy/share/{id} | `PropertyController` |
+| **Offer** | POST /property/make/offer · /offer/accept · /offer/reject | `PropertyController` |
+| **Support** | GET /support/ticket/list · POST /support/ticket/store | `SupportTicketController` |
+| **Transfer** | GET /money/transfer · POST /money/transfer/store | `MoneyTransferController` |
+| **Ranking** | GET /rankings · /referral · /referral/bonus | `RankingController` |
+
+### Lộ trình thực thi (thứ tự phụ thuộc)
+
+```
+Bước 1  git mv → đưa Laravel vào services/api/
+        (giữ nguyên 100% code PHP, chỉ thay vị trí trong repo)
+
+Bước 2  tạo packages/types/
+        Viết interface TypeScript từ 55 Eloquent models
+        Không có dependency → build độc lập hoàn toàn
+
+Bước 3  tạo packages/utils/
+        Chuyển đổi helpers.php sang TypeScript
+        fractionNumber() → currency.ts
+        customDate()     → date.ts
+        stringToTitle()  → string.ts
+
+Bước 4  tạo packages/sdk/
+        Ánh xạ 40+ endpoints từ routes/api.php
+        Vite lib mode → xuất ESM + CJS + .d.ts
+
+Bước 5  nâng cấp packages/ui/
+        Mở rộng _variables.scss → design tokens đầy đủ
+        Tách Blade components → SCSS độc lập
+
+Bước 6  CI/CD: pnpm changeset → npm publish
+        GitHub Actions: release.yml
+        turbo run build → turbo run publish
+```
+
+### Turbo pipeline (cập nhật)
+
+```jsonc
+// turbo.json
+{
+  "pipeline": {
+    "build":   { "dependsOn": ["^build"], "outputs": ["dist/**"] },
+    "test":    { "dependsOn": ["build"] },
+    "typecheck": { "dependsOn": ["^build"] },
+    "publish": { "dependsOn": ["build", "test"], "cache": false },
+    "clean":   { "cache": false }
+  }
+}
+// Thứ tự Turbo tự tính: types → utils → sdk → ui → apps/web
+```
+
+### Tech stack — investment-platform
+
+| Tầng | Công nghệ |
+|---|---|
+| **Backend** | Laravel 11 · PHP 8.1 · Sanctum · Eloquent ORM |
+| **Database** | MySQL (local) · AWS RDS · Redis (cache) |
+| **Payment gateways** | Stripe · Razorpay · Flutterwave · VietQR · 10+ gateways |
+| **Frontend (hiện tại)** | Blade templates · Bootstrap 5 · Vite · SCSS |
+| **Frontend (tương lai)** | Vue 3 / React 18 · `apps/web/` |
+| **npm packages** | `@nlp-labs-vietnam/investment-types/utils/sdk/ui` |
+| **Monorepo** | pnpm workspaces · Turborepo |
+| **CI/CD** | GitHub Actions · pnpm changeset · npm publish |
+| **Auth** | Laravel Sanctum (Bearer token) · Socialite (OAuth) · 2FA |
 
 ---
 

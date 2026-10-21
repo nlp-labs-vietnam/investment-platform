@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PayoutLogController;
 use App\Http\Controllers\Admin\PayoutMethodController;
 use App\Http\Controllers\Admin\PluginController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\PropertyImageController;
 use App\Http\Controllers\Admin\PusherConfigController;
 use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\ReferralCommissionController;
@@ -133,6 +134,19 @@ Route::group(['prefix' => $basicControl->admin_prefix ?? 'admin', 'as' => 'admin
             //wishlist
             Route::get('property/wishlist', [PropertyController::class, 'propertyWishlist'])->name('property.wishlist');
             Route::delete('property/wishlist/delete/{id}', [PropertyController::class, 'propertyWishlistDelete'])->name('property.wishlist.delete');
+
+            // Property Image Manager (AJAX)
+            Route::delete('property/image/{id}', [PropertyImageController::class, 'destroy'])->name('property.image.destroy');
+            Route::patch('property/image/reorder', [PropertyImageController::class, 'reorder'])->name('property.image.reorder');
+            Route::patch('property/image/{id}/meta', [PropertyImageController::class, 'updateMeta'])->name('property.image.meta');
+            Route::post('property/image/{id}/crop', [PropertyImageController::class, 'crop'])->name('property.image.crop');
+
+            // Property SEO
+            Route::post('property/{id}/seo', [PropertyController::class, 'seoStore'])->name('property.seo.store');
+
+            // Property Revisions
+            Route::get('property/{id}/revisions', [PropertyController::class, 'revisions'])->name('property.revisions');
+            Route::post('property/rollback/{revId}', [PropertyController::class, 'rollback'])->name('property.rollback');
 
             // Manage Investments
             Route::get('investments', [InvestmentController::class, 'investments'])->name('investments');

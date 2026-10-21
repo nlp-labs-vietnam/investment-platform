@@ -36,3 +36,9 @@ Thumbs.db
 /firebase-messaging-sw.js
 /assets/upload/
 /assets/main-cedar-391910-cd7c5ebfdd8b.json
+
+# Backup files in public
+*.tar.gz
+*.tar
+/public/backup_*
+/public/h-ng-d-n-deploy-*.html

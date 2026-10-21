@@ -78,14 +78,24 @@ bash scripts/install.sh permissions --dry-run
 ### Cấu trúc repo
 
 ```
-app/            ← Laravel application (Controllers, Models, Jobs...)
-resources/      ← Views, CSS, JS source
-routes/         ← Web & API routes
-packages/       ← Shared packages (sdk, types, utils)
-scripts/        ← Shell scripts (install.sh, backup.sh, fix-permissions.sh)
-docs/           ← Technical documentation
-database/       ← Migrations, seeders, factories
-public/         ← Web root (served by Nginx/Apache)
+investment-platform/
+├── app/                ← Laravel core (Controllers, Models, Jobs, Policies...)
+│   ├── Http/           ← Controllers, Middleware, Requests, Resources
+│   └── Models/         ← Eloquent models
+├── resources/          ← Views (Blade), CSS, JS source
+├── routes/             ← web.php, api.php, admin.php
+├── config/             ← Laravel & package configuration
+├── database/           ← Migrations, seeders, factories
+├── packages/           ← Shared packages: sdk, types, utils
+│   ├── sdk/
+│   ├── types/
+│   └── utils/
+├── scripts/            ← Shell CLI: install.sh, backup.sh, fix-permissions.sh
+├── docs/               ← Technical docs (ARCHITECTURE, ROADMAP, guides)
+├── tests/              ← Feature & unit tests (PHPUnit + Pest)
+├── public/             ← Web root (Nginx/Apache document root)
+├── assets/             ← Raw assets (images, fonts trước khi build)
+└── deploy/             ← Deploy configs, Docker, CI/CD helpers
 ```
 
 ---

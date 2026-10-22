@@ -168,8 +168,9 @@ class PropertyController extends Controller
             'address_id' => 'required|exists:addresses,id',
             'amenity_id' => 'nullable|exists:amenities,id',
             'location' => 'nullable|url',
-            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
-            'thumbnail' => 'required|mimes:jpg,jpeg,png|max:5120',
+            'video'      => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video_file' => ['nullable', 'file', 'mimes:mp4,webm,ogg,mov,avi', 'max:204800'], // 200 MB
+            'thumbnail'  => 'required|mimes:jpg,jpeg,png|max:5120',
             'property_image.*' => 'nullable|mimes:jpeg,png,jpg',
             'installment_duration' => 'nullable|numeric|min:1',
             'fixed_amount' => 'nullable|numeric|min:1',
@@ -268,6 +269,22 @@ class PropertyController extends Controller
             $property->amenity_id = $request->amenity_id ?? null;
             $property->video = $request->video ?? null;
             $property->details = $request->details;
+
+            // Video file upload — ưu tiên hơn URL embed
+            if ($request->hasFile('video_file')) {
+                // Xoá file cũ nếu có
+                if (!empty($property->video_file)) {
+                    $this->fileDelete($property->video_driver ?? 'local', $property->video_file);
+                }
+                $videoData = $this->fileUpload(
+                    $request->video_file,
+                    config('filelocation.propertyVideo.path'),
+                    null, null, null, null, null, null
+                );
+                throw_if(!$videoData, __('Video could not be uploaded.'));
+                $property->video_file   = $videoData['path'];
+                $property->video_driver = $videoData['driver'];
+            }
 
             $input_form = [];
             if ($request->has('faq_title')) {
@@ -389,7 +406,8 @@ class PropertyController extends Controller
             'address_id' => 'required|exists:addresses,id',
             'amenity_id' => 'nullable|exists:amenities,id',
             'location' => 'nullable|url',
-            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video'      => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video_file' => ['nullable', 'file', 'mimes:mp4,webm,ogg,mov,avi', 'max:204800'], // 200 MB
             'property_image.*' => 'nullable|mimes:jpeg,png,jpg',
             'installment_duration' => 'nullable|numeric|min:1',
             'fixed_amount' => 'nullable|numeric|min:1',
@@ -487,6 +505,21 @@ class PropertyController extends Controller
             $property->amenity_id = $request->amenity_id ?? null;
             $property->video = $request->video ?? null;
             $property->details = $request->details;
+
+            // Video file upload — ưu tiên hơn URL embed
+            if ($request->hasFile('video_file')) {
+                if (!empty($property->video_file)) {
+                    $this->fileDelete($property->video_driver ?? 'local', $property->video_file);
+                }
+                $videoData = $this->fileUpload(
+                    $request->video_file,
+                    config('filelocation.propertyVideo.path'),
+                    null, null, null, null, null, null
+                );
+                throw_if(!$videoData, __('Video could not be uploaded.'));
+                $property->video_file   = $videoData['path'];
+                $property->video_driver = $videoData['driver'];
+            }
 
             $input_form = [];
             if ($request->has('faq_title')) {

@@ -141,7 +141,7 @@
 
 
                                             <div class="col-md-12">
-                                                <label for="video" class="form-label">@lang("Video Url")</label>
+                                                <label for="video" class="form-label">@lang("Video URL (YouTube embed)")</label>
                                                 <div class="input-group input-group-sm-vertical">
                                                     <input type="text" class="form-control change_name_input"
                                                            name="video"
@@ -150,6 +150,28 @@
                                                            autocomplete="off">
                                                 </div>
                                                 @error("video")
+                                                <span class="invalid-feedback d-block">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col-md-12 mt-3">
+                                                <label for="video_file" class="form-label">
+                                                    @lang("Video File (Upload lên server)")
+                                                    <small class="text-muted ms-1">@lang("mp4, webm, ogg, mov, avi — tối đa 200 MB. Ưu tiên hơn URL YouTube.")</small>
+                                                </label>
+                                                @if(!empty($singleProperty->video_file))
+                                                <div class="mb-2">
+                                                    <video controls style="max-width:320px;max-height:180px;border-radius:6px;">
+                                                        <source src="{{ getFile($singleProperty->video_driver ?? 'local', $singleProperty->video_file) }}"
+                                                                type="video/mp4">
+                                                    </video>
+                                                    <p class="small text-muted mt-1">@lang("Video hiện tại. Upload file mới để thay thế.")</p>
+                                                </div>
+                                                @endif
+                                                <input type="file" class="form-control"
+                                                       name="video_file" id="video_file"
+                                                       accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-msvideo">
+                                                @error("video_file")
                                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                                                 @enderror
                                             </div>

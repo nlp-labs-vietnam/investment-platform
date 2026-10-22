@@ -82,7 +82,7 @@ return new class extends Migration
             'status'               => 0,            // mặc định tắt — admin bật sau khi cấu hình
             'parameters'           => $parameters,
             'currencies'           => null,
-            'extra_parameters'     => null,
+            'extra_parameters'     => json_encode(['webhook_url' => 'vietqr.ipn']),
             'supported_currency'   => $supportedCurrency,
             'receivable_currencies'=> $receivableCurrencies,
             'description'          => 'Thanh toán qua mã QR ngân hàng Việt Nam (VietQR). Tự động xác nhận qua webhook SePay hoặc Casso.',

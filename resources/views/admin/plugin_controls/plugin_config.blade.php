@@ -188,6 +188,33 @@
                                         </div>
                                     </div>
                                     <!-- End Item -->
+
+                                    <!-- Item: Popup Chat -->
+                                    <div class="list-group-item">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                                <span class="avatar avatar-xs avatar-4x3 list-group-icon d-flex align-items-center justify-content-center"
+                                                      style="width:38px;height:38px;background:#0068FF;border-radius:6px;">
+                                                    <i class="fa-solid fa-comments" style="color:#fff;font-size:18px;"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm mb-2 mb-sm-0">
+                                                        <h4 class="mb-0">@lang('Popup Chat')</h4>
+                                                        <p class="fs-5 text-body mb-0">@lang("Widget chat nổi ở chân trang: Zalo, WhatsApp, Phone hoặc Custom URL.")</p>
+                                                    </div>
+                                                    <div class="col-sm-auto">
+                                                        <a class="btn btn-white btn-sm"
+                                                           href="{{ route('admin.popup.chat.configuration') }}">
+                                                            <i class="bi-pencil-fill me-1"></i> @lang("Edit")
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Item: Popup Chat -->
                                 </div>
                         </div>
                     </div>

@@ -345,6 +345,8 @@ Route::group(['prefix' => $basicControl->admin_prefix ?? 'admin', 'as' => 'admin
             Route::get('plugin/manual-recaptcha', [PluginController::class, 'manualRecaptcha'])->name('manual.recaptcha');
             Route::post('plugin/manual-recaptcha/update', [PluginController::class, 'manualRecaptchaUpdate'])->name('manual.recaptcha.update');
             Route::post('plugin/active-recaptcha', [PluginController::class, 'activeRecaptcha'])->name('active.recaptcha');
+            Route::get('plugin/popup-chat', [PluginController::class, 'popupChatConfiguration'])->name('popup.chat.configuration');
+            Route::post('plugin/popup-chat/update', [PluginController::class, 'popupChatConfigurationUpdate'])->name('popup.chat.configuration.update');
 
             /* ===== ADMIN GOOGLE API SETTING ===== */
             Route::get('translate-api-setting', [TranslateAPISettingController::class, 'translateAPISetting'])->name('translate.api.setting');

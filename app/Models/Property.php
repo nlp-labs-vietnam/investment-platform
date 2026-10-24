@@ -40,7 +40,17 @@ class Property extends Model
 
     public function image()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable')->orderBy('sort_order');
+    }
+
+    public function seo()
+    {
+        return $this->hasOne(PropertySeo::class);
+    }
+
+    public function revisions()
+    {
+        return $this->hasMany(PropertyRevision::class)->latest('created_at');
     }
 
     public function getLimitAmenityAttribute()

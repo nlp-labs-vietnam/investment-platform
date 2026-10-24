@@ -1,0 +1,104 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── Frontend build (pnpm) ─────────────────────────────────────────────────
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build frontend assets
+        run: pnpm build
+        env:
+          NODE_ENV: production
+
+      # ── PHP / Composer ────────────────────────────────────────────────────────
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, pdo_mysql, gd, zip, bcmath, intl
+          tools: composer:v2
+
+      - name: Cache Composer packages
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: composer-8.2-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-8.2-
+
+      - name: Install PHP dependencies (production)
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      # ── Đóng gói release artifact ─────────────────────────────────────────────
+      - name: Create release archive
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          ARCHIVE="investment-platform-${VERSION}.tar.gz"
+
+          tar \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='*.tar.gz' \
+            --exclude='.env' \
+            --exclude='tests' \
+            --transform "s|^\.|investment-platform-${VERSION}|" \
+            -czf "/tmp/${ARCHIVE}" .
+
+          echo "ARCHIVE=/tmp/${ARCHIVE}"   >> "${GITHUB_ENV}"
+          echo "ARCHIVE_NAME=${ARCHIVE}"   >> "${GITHUB_ENV}"
+          echo "Archive: $(du -sh /tmp/${ARCHIVE} | cut -f1)"
+
+      # ── Tự động sinh changelog từ git log ────────────────────────────────────
+      - name: Generate release notes
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | sed -n '2p')
+          if [[ -n "$PREV_TAG" ]]; then
+            NOTES=$(git log "${PREV_TAG}..HEAD" --pretty="format:- %s (%h)" --no-merges)
+          else
+            NOTES=$(git log --pretty="format:- %s (%h)" --no-merges | head -30)
+          fi
+          {
+            echo "RELEASE_NOTES<<EOF"
+            echo "${NOTES}"
+            echo "EOF"
+          } >> "${GITHUB_ENV}"
+
+      # ── Tạo GitHub Release ────────────────────────────────────────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Investment Platform ${{ github.ref_name }}"
+          body: |
+            ## What's changed
+            ${{ env.RELEASE_NOTES }}
+
+            ---
+            **Full changelog**: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...HEAD
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
+          files: ${{ env.ARCHIVE }}

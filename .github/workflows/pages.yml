@@ -1,0 +1,85 @@
+name: GitHub Pages — Deploy Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'public/**'
+      - 'scripts/install.sh'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'ROADMAP.md'
+      - 'ARCHITECTURE.md'
+      - '.nojekyll'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build GitHub Pages site
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build _site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+
+          # Disable Jekyll
+          touch _site/.nojekyll
+
+          # CNAME for custom domain
+          [ -f public/CNAME ] && cp public/CNAME _site/CNAME
+
+          # Landing page from docs/index.html
+          [ -f docs/index.html ] && cp docs/index.html _site/index.html
+
+          # Markdown docs
+          for f in README.md CHANGELOG.md ROADMAP.md ARCHITECTURE.md CONTRIBUTING.md MAINTAINERS.md; do
+            [ -f "$f" ] && cp "$f" "_site/$f" || true
+          done
+
+          # docs/ directory (guides, etc.)
+          [ -d docs ] && cp -r docs/. _site/ || true
+
+          # Public static assets
+          [ -f public/robots.txt  ] && cp public/robots.txt  _site/robots.txt
+          [ -f public/sitemap.xml ] && cp public/sitemap.xml _site/sitemap.xml
+
+          echo "=== _site contents ==="
+          ls -la _site/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

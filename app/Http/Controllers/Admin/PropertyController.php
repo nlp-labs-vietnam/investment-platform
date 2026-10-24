@@ -9,9 +9,12 @@ use App\Models\Favourite;
 use App\Models\Image;
 use App\Models\ManageTime;
 use App\Models\Property;
+use App\Models\PropertyRevision;
+use App\Models\PropertySeo;
 use App\Traits\Upload;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -535,6 +538,17 @@ class PropertyController extends Controller
                 }
             }
 
+            // Snapshot revision trước khi lưu
+            PropertyRevision::create([
+                'property_id'    => $property->id,
+                'editor_id'      => Auth::guard('admin')->id(),
+                'change_summary' => 'Updated via admin panel',
+                'payload'        => $property->only([
+                    'title', 'details', 'thumbnail', 'amenity_id', 'location', 'video',
+                    'total_investment_amount', 'profit', 'start_date', 'expire_date', 'status',
+                ]),
+            ]);
+
             $saveProperty = $property->save();
 
             throw_if(!$saveProperty, 'Something went wrong while inserting property information!');
@@ -676,5 +690,83 @@ class PropertyController extends Controller
         $favourite = Favourite::findOrFail($id);
         $favourite->delete();
         return back()->with('success', 'Wishlist deleted successfully!');
+    }
+
+    /**
+     * POST /admin/property/{id}/seo — Tạo hoặc cập nhật SEO meta
+     */
+    public function seoStore(Request $request, $id)
+    {
+        $property = Property::findOrFail($id);
+
+        $this->validate($request, [
+            'meta_title'       => 'nullable|string|max:191',
+            'meta_description' => 'nullable|string|max:500',
+            'slug'             => 'nullable|string|max:191|unique:property_seo,slug,' . optional($property->seo)->id,
+            'og_image_id'      => 'nullable|exists:images,id',
+        ]);
+
+        PropertySeo::updateOrCreate(
+            ['property_id' => $property->id],
+            [
+                'meta_title'       => $request->meta_title,
+                'meta_description' => $request->meta_description,
+                'slug'             => $request->slug ? Str::slug($request->slug) : null,
+                'og_image_id'      => $request->og_image_id,
+            ]
+        );
+
+        return back()->with('success', __('SEO settings saved.'));
+    }
+
+    /**
+     * GET /admin/property/{id}/revisions — JSON danh sách lịch sử (20 bản gần nhất)
+     */
+    public function revisions(Request $request, $id)
+    {
+        abort_if(!$request->ajax(), 404);
+
+        $revisions = PropertyRevision::where('property_id', $id)
+            ->with('editor:id,name')
+            ->latest('created_at')
+            ->limit(20)
+            ->get()
+            ->map(fn($r) => [
+                'id'             => $r->id,
+                'editor_name'    => optional($r->editor)->name,
+                'change_summary' => $r->change_summary,
+                'created_at'     => $r->created_at?->format('d/m/Y H:i'),
+            ]);
+
+        return response()->json($revisions);
+    }
+
+    /**
+     * POST /admin/property/rollback/{revId} — Khôi phục property từ snapshot
+     */
+    public function rollback(Request $request, $revId)
+    {
+        abort_if(!$request->ajax(), 404);
+
+        $revision = PropertyRevision::findOrFail($revId);
+        $property = Property::findOrFail($revision->property_id);
+
+        // Restore các trường đã snapshot
+        $property->fill($revision->payload);
+
+        // Snapshot hiện tại trước khi rollback
+        PropertyRevision::create([
+            'property_id'    => $property->id,
+            'editor_id'      => Auth::guard('admin')->id(),
+            'change_summary' => 'Rollback to revision #' . $revision->id,
+            'payload'        => $property->only([
+                'title', 'details', 'thumbnail', 'amenity_id', 'location', 'video',
+                'total_investment_amount', 'profit', 'start_date', 'expire_date', 'status',
+            ]),
+        ]);
+
+        $property->save();
+
+        return response()->json(['success' => true, 'message' => __('Rollback successful.')]);
     }
 }

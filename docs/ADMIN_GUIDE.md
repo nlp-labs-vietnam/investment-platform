@@ -305,7 +305,7 @@ Tạo các tag tiện ích gắn vào dự án (VD: OCPP 2.0.1, Bảo hành 24 t
 
 > ⚠️ **Cần làm ngay:** Đặt `APP_DEBUG=false` trong file `.env` tại server:
 > ```bash
-> nano /var/www/investment-platform/.env
+> nano ./nlp-labs-vietnam/.env
 > # Sửa: APP_DEBUG=false
 > php artisan config:clear
 > ```
@@ -447,7 +447,7 @@ Cấu hình SMS gateway nếu cần thông báo qua tin nhắn.
 
 ### 17.1 Cron Job (Scheduler)
 ```
-* * * * * /usr/bin/php /var/www/investment-platform/artisan schedule:run >> /var/log/nlpgroup-scheduler.log 2>&1
+* * * * * /usr/bin/php ./nlp-labs-vietnam/artisan schedule:run >> /var/log/nlpgroup-scheduler.log 2>&1
 ```
 **Kiểm tra log:**
 ```bash
@@ -468,24 +468,24 @@ tail -50 /var/log/nlpgroup-scheduler.log
 ```bash
 # Backup thủ công
 mysqldump -u invest_user -pinvest_pass_2025 -h 127.0.0.1 investment_platform 2>/dev/null \
-  > /var/www/investment-platform/backup_$(date +%Y%m%d_%H%M%S).sql
+  > ./nlp-labs-vietnam/backup_$(date +%Y%m%d_%H%M%S).sql
 
 # Backup tự động hàng ngày (thêm vào crontab)
-0 2 * * * /bin/bash /var/www/investment-platform/backup.sh >> /var/log/nlpgroup-backup.log 2>&1
+0 2 * * * /bin/bash ./nlp-labs-vietnam/backup.sh >> /var/log/nlpgroup-backup.log 2>&1
 ```
 
 ### 17.4 Xem log lỗi ứng dụng
 ```bash
 # Log Laravel realtime
-tail -f /var/www/investment-platform/storage/logs/laravel.log
+tail -f ./nlp-labs-vietnam/storage/logs/laravel.log
 
 # 50 dòng cuối
-tail -50 /var/www/investment-platform/storage/logs/laravel.log | grep -E "ERROR|CRITICAL"
+tail -50 ./nlp-labs-vietnam/storage/logs/laravel.log | grep -E "ERROR|CRITICAL"
 ```
 
 ### 17.5 Lệnh quản lý thường dùng
 ```bash
-cd /var/www/investment-platform
+cd ./nlp-labs-vietnam
 
 # Xoá toàn bộ cache
 php artisan optimize:clear
@@ -522,14 +522,14 @@ chmod -R 775 storage/ bootstrap/cache/
 
 ### ❌ Lỗi 500 Internal Server Error
 ```bash
-tail -50 /var/www/investment-platform/storage/logs/laravel.log
+tail -50 ./nlp-labs-vietnam/storage/logs/laravel.log
 php artisan config:clear && php artisan cache:clear
 ```
 
 ### ❌ Trang trắng
 ```bash
 # Kiểm tra APP_DEBUG
-grep APP_DEBUG /var/www/investment-platform/.env
+grep APP_DEBUG ./nlp-labs-vietnam/.env
 
 # Bật debug tạm thời để xem lỗi
 # APP_DEBUG=true (nhớ tắt lại sau khi fix)
@@ -558,7 +558,7 @@ mysql -u invest_user -p investment_platform -e "SELECT name, slug FROM pages WHE
 ### ❌ Email không gửi được
 ```bash
 # Kiểm tra cấu hình mail
-grep MAIL /var/www/investment-platform/.env
+grep MAIL ./nlp-labs-vietnam/.env
 
 # Test gửi mail
 php artisan tinker
@@ -571,7 +571,7 @@ php artisan tinker
 php artisan storage:link
 
 # Kiểm tra quyền
-ls -la /var/www/investment-platform/storage/app/public/
+ls -la ./nlp-labs-vietnam/storage/app/public/
 ```
 
 ### ❌ Lỗi "No application encryption key"
@@ -591,7 +591,7 @@ php artisan config:clear
 | Theme | green |
 | Admin prefix | `/admin` |
 | PHP path | `/usr/bin/php` |
-| App path | `/var/www/investment-platform` |
+| App path | `./nlp-labs-vietnam` |
 | Log scheduler | `/var/log/nlpgroup-scheduler.log` |
 | DB name | `investment_platform` |
 | DB user | `invest_user` |

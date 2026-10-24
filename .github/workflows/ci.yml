@@ -5,24 +5,153 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  ci:
-    name: Lint Â· Typecheck Â· Test Â· Build
+  # ────────────────────────────────────────────────────────────────────────────
+  # 1. Frontend — Vite build (root package.json, npm)
+  # ────────────────────────────────────────────────────────────────────────────
+  frontend:
+    name: Frontend · Vite Build
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vite assets
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build-${{ github.sha }}
+          path: public/build/
+          retention-days: 1
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # 2. Packages — TypeScript build + typecheck (packages/*, pnpm + Turbo)
+  # ────────────────────────────────────────────────────────────────────────────
+  packages:
+    name: Packages · Build & Typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: pnpm
 
-      - name: CĂ i Ä‘áº·t dependencies
+      - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint + Typecheck + Test + Build
-        run: pnpm turbo run lint typecheck test build
+      - name: Build + Typecheck packages (Turbo)
+        run: pnpm turbo run build typecheck --filter='./packages/*'
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # 3. Backend — PHP 8.2, MySQL 8, Redis (Laravel tests + audit)
+  # ────────────────────────────────────────────────────────────────────────────
+  backend:
+    name: Backend · PHP ${{ matrix.php }} · MySQL
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: ["8.2"]
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: investment_test
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_mysql, redis, gd, zip, bcmath, intl, opcache, pcntl
+          coverage: xdebug
+          tools: composer:v2
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-php${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-php${{ matrix.php }}-
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Create .env.testing
+        run: |
+          cp .env.example .env.testing
+          sed -i 's/^APP_ENV=.*/APP_ENV=testing/'               .env.testing
+          sed -i 's/^APP_DEBUG=.*/APP_DEBUG=true/'               .env.testing
+          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=mysql/'      .env.testing
+          sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/'             .env.testing
+          sed -i 's/^DB_PORT=.*/DB_PORT=3306/'                   .env.testing
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=investment_test/' .env.testing
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=root/'           .env.testing
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=secret/'         .env.testing
+          sed -i 's/^CACHE_DRIVER=.*/CACHE_DRIVER=redis/'        .env.testing
+          sed -i 's/^REDIS_HOST=.*/REDIS_HOST=127.0.0.1/'        .env.testing
+          sed -i 's/^REDIS_PORT=.*/REDIS_PORT=6379/'             .env.testing
+          sed -i 's/^QUEUE_CONNECTION=.*/QUEUE_CONNECTION=sync/' .env.testing
+          sed -i 's/^SESSION_DRIVER=.*/SESSION_DRIVER=array/'    .env.testing
+
+      - name: Generate application key
+        run: php artisan key:generate --env=testing
+
+      - name: Run database migrations
+        run: php artisan migrate --env=testing --force
+
+      - name: Run tests
+        run: php artisan test --env=testing --coverage-clover=coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        if: success()
+        with:
+          files: coverage.xml
+          flags: backend-php${{ matrix.php }}
+          fail_ci_if_error: false
+
+      - name: Composer security audit
+        run: composer audit

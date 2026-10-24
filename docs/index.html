@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NLP Group Investment Platform — Hệ sinh thái đầu tư thông minh, deploy đa nền tảng">
+  <meta property="og:title" content="NLP Group Investment Platform">
+  <meta property="og:description" content="Laravel 11 · PHP 8.2 · Unified CLI Installer">
+  <meta property="og:url" content="https://nlp-labs-vietnam.github.io/investment-platform">
+  <title>NLP Group Investment Platform</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117; --surface: #161b22; --border: #30363d;
+      --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+      --green: #3fb950; --red: #f87171; --purple: #a78bfa;
+    }
+    body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+           background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    /* ── Hero ── */
+    .hero { max-width: 780px; margin: 0 auto; padding: 72px 24px 56px; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700;
+               color: var(--accent); margin-bottom: 14px; letter-spacing: -0.5px; }
+    .hero p  { font-size: 1.05rem; color: var(--muted); margin-bottom: 36px; }
+    .badges  { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px; }
+    .badge   { padding: 3px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+               border: 1px solid; display: inline-block; }
+    .b-laravel { background: #2a1414; color: var(--red);    border-color: #7f1d1d; }
+    .b-php     { background: #1e1a2e; color: var(--purple); border-color: #4c1d95; }
+    .b-node    { background: #132a13; color: var(--green);  border-color: #14532d; }
+    .b-os      { background: #0f1f30; color: var(--accent); border-color: #1d4ed8; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn { display: inline-block; padding: 11px 26px; border-radius: 7px;
+           text-decoration: none; font-weight: 600; font-size: 0.92rem;
+           transition: opacity .15s; }
+    .btn:hover { opacity: .82; }
+    .btn-green  { background: #238636; color: #fff; }
+    .btn-dark   { background: var(--surface); color: var(--accent); border: 1px solid var(--border); }
+
+    /* ── Cards ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 0 20px 72px; }
+    .section-title { font-size: 1.1rem; font-weight: 700; color: var(--muted);
+                     text-transform: uppercase; letter-spacing: 1px;
+                     margin-bottom: 20px; padding-bottom: 10px;
+                     border-bottom: 1px solid var(--border); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .card { background: var(--surface); border: 1px solid var(--border);
+            border-radius: 10px; padding: 22px; }
+    .card h3 { color: var(--accent); margin-bottom: 8px; font-size: 0.97rem; }
+    .card p  { color: var(--muted); font-size: 0.88rem; margin-bottom: 12px; }
+    .card code { display: block; background: var(--bg); padding: 10px 13px;
+                 border-radius: 6px; font-family: 'SFMono-Regular', 'Courier New', monospace;
+                 font-size: 0.8rem; color: #7ee787; border: 1px solid #21262d;
+                 white-space: pre; overflow-x: auto; }
+
+    /* ── Install strip ── */
+    .install-strip { background: var(--surface); border: 1px solid var(--border);
+                     border-radius: 10px; padding: 24px 28px; margin-bottom: 72px; }
+    .install-strip h2 { font-size: 1rem; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+    .install-strip code { display: block; background: var(--bg); padding: 13px 16px;
+                          border-radius: 7px; font-family: monospace; font-size: 0.84rem;
+                          color: #7ee787; border: 1px solid #21262d; white-space: pre; }
+
+    /* ── Footer ── */
+    footer { text-align: center; padding: 28px 24px 36px; color: #484f58;
+             font-size: 0.83rem; border-top: 1px solid var(--border); }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>NLP Group Investment Platform</h1>
+  <p>Hệ sinh thái đầu tư thông minh &mdash; Kiến tạo đổi mới bền vững</p>
+  <div class="badges">
+    <span class="badge b-laravel">Laravel 11</span>
+    <span class="badge b-php">PHP 8.2</span>
+    <span class="badge b-node">Node.js 18+</span>
+    <span class="badge b-os">Ubuntu &middot; Debian &middot; RHEL &middot; macOS &middot; cPanel</span>
+  </div>
+  <div class="cta">
+    <a href="https://github.com/nlp-labs-vietnam/investment-platform" class="btn btn-green">GitHub Repository</a>
+    <a href="https://github.com/nlp-labs-vietnam/investment-platform/releases" class="btn btn-dark">Releases</a>
+    <a href="https://github.com/nlp-labs-vietnam/investment-platform/blob/main/ARCHITECTURE.md" class="btn btn-dark">Architecture</a>
+    <a href="https://github.com/nlp-labs-vietnam/investment-platform/blob/main/ROADMAP.md" class="btn btn-dark">Roadmap</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="install-strip">
+    <h2>&#x26A1; One-liner install</h2>
+    <code>sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nlp-labs-vietnam/investment-platform/main/scripts/install.sh)" -- install --domain nlpgroup.vn --ssl</code>
+  </div>
+
+  <div class="section-title">Commands</div>
+  <div class="grid">
+    <div class="card">
+      <h3>install &mdash; Full server setup</h3>
+      <p>Tự động cài PHP, MySQL, Nginx, Composer, deploy code, SSL và firewall.</p>
+      <code>sudo bash install.sh install \
+  --domain nlpgroup.vn --ssl</code>
+    </div>
+    <div class="card">
+      <h3>deploy &mdash; Update code only</h3>
+      <p>Git pull, composer install, migrate, optimize. Dùng cho CI/CD pipeline.</p>
+      <code>sudo bash install.sh deploy \
+  --yes --domain nlpgroup.vn</code>
+    </div>
+    <div class="card">
+      <h3>permissions &mdash; Fix quyền</h3>
+      <p>www-data:developers, storage 775, .env 640, setgid inheritance. Chạy sau deploy.</p>
+      <code>sudo bash install.sh permissions</code>
+    </div>
+    <div class="card">
+      <h3>cpanel &mdash; Shared hosting</h3>
+      <p>cPanel / CloudLinux, phát hiện EasyApache PHP tự động, không cần root.</p>
+      <code>bash install.sh cpanel \
+  --domain app.nlpgroup.vn</code>
+    </div>
+    <div class="card">
+      <h3>check &mdash; Health check</h3>
+      <p>Kiểm tra PHP, Composer, MySQL, Nginx, Node.js và toàn bộ quyền thư mục.</p>
+      <code>bash install.sh check</code>
+    </div>
+    <div class="card">
+      <h3>optimize &mdash; Laravel cache</h3>
+      <p>config:cache, route:cache, view:cache, event:cache, storage:link.</p>
+      <code>bash install.sh optimize</code>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Options</div>
+  <div class="grid">
+    <div class="card">
+      <h3>--dry-run &mdash; Xem trước</h3>
+      <p>In tất cả lệnh sẽ chạy mà không thực thi bất kỳ thay đổi nào.</p>
+      <code>bash install.sh permissions \
+  --dry-run</code>
+    </div>
+    <div class="card">
+      <h3>--yes &mdash; Non-interactive</h3>
+      <p>Trả lời yes cho mọi prompt. Phù hợp cho CI/CD automation.</p>
+      <code>sudo bash install.sh install \
+  --yes --domain nlpgroup.vn</code>
+    </div>
+    <div class="card">
+      <h3>--dir --domain --db-*</h3>
+      <p>Override mọi thông số qua flag. Không cần interactive prompt.</p>
+      <code>sudo bash install.sh install \
+  --dir /var/www/app \
+  --domain nlpgroup.vn \
+  --db-name mydb --ssl</code>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <a href="https://nlp-labs-vietnam.github.io/investment-platform">nlp-labs-vietnam.github.io/investment-platform</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/nlp-labs-vietnam/investment-platform">GitHub</a>
+    &nbsp;&middot;&nbsp;
+    <a href="mailto:dev@nlpgroup.vn">dev@nlpgroup.vn</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://nlpgroup.vn">nlpgroup.vn</a>
+  </p>
+  <p style="margin-top:8px">NLP Group &copy; 2024 &mdash; Made with IBM Bob</p>
+</footer>
+
+</body>
+</html>

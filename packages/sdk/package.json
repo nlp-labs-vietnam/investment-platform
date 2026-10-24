@@ -1,0 +1,46 @@
+{
+  "name": "@nlp-labs-vietnam/investment-sdk",
+  "version": "1.0.0",
+  "description": "HTTP client SDK for NLP Investment Platform REST API (Laravel Sanctum)",
+  "keywords": ["investment", "sdk", "api-client", "sanctum", "nlp-group", "vietnam"],
+  "homepage": "https://nlpgroup.vn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nlp-labs-vietnam/investment-platform.git",
+    "directory": "packages/sdk"
+  },
+  "license": "UNLICENSED",
+  "author": "NLP Group <dev@nlpgroup.vn> (https://nlpgroup.vn)",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist/", "src/"],
+  "scripts": {
+    "build": "vite build --config vite.lib.config.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nlp-labs-vietnam/investment-types": "workspace:*"
+  },
+  "peerDependencies": {
+    "axios": "^1.x"
+  },
+  "devDependencies": {
+    "axios": "^1.1.2",
+    "typescript": "^5.0.0",
+    "vite": "^6.4.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

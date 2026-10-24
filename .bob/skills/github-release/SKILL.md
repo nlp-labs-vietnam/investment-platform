@@ -25,7 +25,7 @@ Skill này hướng dẫn quy trình đầy đủ từ commit → tag → GitHub
 Chạy lệnh để xem git status và log mới nhất:
 
 ```bash
-cd /var/www/investment-platform
+cd ./nlp-labs-vietnam
 git status --short
 git log --oneline -5
 git tag | sort -V | tail -5
@@ -76,7 +76,7 @@ Sau khi tag đã push, tạo Release chính thức trên GitHub:
 
 ```bash
 # Đọc token từ .env
-GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' /var/www/investment-platform/.env | cut -d'=' -f2)
+GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' ./nlp-labs-vietnam/.env | cut -d'=' -f2)
 
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
@@ -100,7 +100,7 @@ curl -s -X POST \
 Sau khi push tag, GitHub Actions sẽ tự động chạy `.github/workflows/publish-npm.yml`:
 
 ```bash
-GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' /var/www/investment-platform/.env | cut -d'=' -f2)
+GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' ./nlp-labs-vietnam/.env | cut -d'=' -f2)
 
 # Liệt kê workflow runs mới nhất
 curl -s \
@@ -128,7 +128,7 @@ git push origin main
 Nếu remote chưa được cấu hình với token (HTTPS):
 
 ```bash
-GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' /var/www/investment-platform/.env | cut -d'=' -f2)
+GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' ./nlp-labs-vietnam/.env | cut -d'=' -f2)
 git remote set-url origin "https://${GITHUB_TOKEN}@github.com/nlp-labs-vietnam/investment-platform.git"
 git push origin main
 ```
@@ -140,8 +140,8 @@ git push origin main
 Xem trạng thái GitHub Sponsors cho tài khoản liên kết:
 
 ```bash
-GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' /var/www/investment-platform/.env | cut -d'=' -f2)
-SPONSOR_URL=$(grep '^GITHUB_SPONSOR_URL=' /var/www/investment-platform/.env | cut -d'=' -f2-)
+GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' ./nlp-labs-vietnam/.env | cut -d'=' -f2)
+SPONSOR_URL=$(grep '^GITHUB_SPONSOR_URL=' ./nlp-labs-vietnam/.env | cut -d'=' -f2-)
 
 echo "Sponsor URL: $SPONSOR_URL"
 
@@ -162,8 +162,8 @@ Sau khi thêm biến mới vào `.env`, đồng bộ key (không có value) vào
 ```bash
 # Kiểm tra các key có trong .env nhưng chưa có trong .env.example
 comm -23 \
-  <(grep -oP '^[A-Z_]+(?==)' /var/www/investment-platform/.env | sort) \
-  <(grep -oP '^[A-Z_]+(?==)' /var/www/investment-platform/.env.example | sort)
+  <(grep -oP '^[A-Z_]+(?==)' ./nlp-labs-vietnam/.env | sort) \
+  <(grep -oP '^[A-Z_]+(?==)' ./nlp-labs-vietnam/.env.example | sort)
 ```
 
 Thêm các key còn thiếu vào `.env.example` với value rỗng.

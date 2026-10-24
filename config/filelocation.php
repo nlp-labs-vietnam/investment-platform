@@ -116,8 +116,11 @@ return [
     ],
 
     'blog' => [
-    'path' => 'blog'
-]
+        'path' => 'blog'
+    ],
 
+    'propertyVideo' => [
+        'path' => 'property/video',
+    ],
 
 ];

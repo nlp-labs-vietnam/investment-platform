@@ -173,6 +173,51 @@ class PluginController extends Controller
     }
 
 
+    public function popupChatConfiguration()
+    {
+        $basicControl = basicControl();
+        return view('admin.plugin_controls.popup_chat_control', compact('basicControl'));
+    }
+
+    public function popupChatConfigurationUpdate(Request $request)
+    {
+        try {
+            $request->validate([
+                'popup_chat_status'       => 'required|integer|in:0,1',
+                'popup_chat_greeting'     => 'nullable|string|max:255',
+                'popup_chat_tagline'      => 'nullable|string|max:255',
+                'popup_chat_agent_name'   => 'nullable|string|max:100',
+                'popup_chat_agent_avatar' => 'nullable|string|max:500',
+                // channels: array of {type, label, value, icon, color}
+                'channels'                => 'nullable|array|max:6',
+                'channels.*.type'         => 'required|string|in:zalo,whatsapp,phone,email,custom',
+                'channels.*.label'        => 'required|string|max:80',
+                'channels.*.value'        => 'required|string|max:255',
+                'channels.*.icon'         => 'nullable|string|max:80',
+                'channels.*.color'        => 'nullable|string|max:20',
+            ]);
+
+            // Build channels JSON — filter out rows with empty value
+            $channels = collect($request->input('channels', []))
+                ->filter(fn($c) => !empty($c['value']))
+                ->values()
+                ->toArray();
+
+            basicControl()->update([
+                'popup_chat_status'       => $request->popup_chat_status,
+                'popup_chat_greeting'     => $request->popup_chat_greeting,
+                'popup_chat_tagline'      => $request->popup_chat_tagline,
+                'popup_chat_agent_name'   => $request->popup_chat_agent_name,
+                'popup_chat_agent_avatar' => $request->popup_chat_agent_avatar,
+                'popup_chat_channels'     => json_encode($channels),
+            ]);
+
+            return back()->with('success', 'Popup chat B2B đã được cập nhật thành công.');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
     public function activeRecaptcha(Request $request)
     {
 

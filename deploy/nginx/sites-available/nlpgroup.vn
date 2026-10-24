@@ -1,0 +1,106 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name nlpgroup.vn www.nlpgroup.vn;
+
+    # Redirect HTTP → HTTPS (sẽ được Certbot fill sau)
+    return 301 https://nlpgroup.vn$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name nlpgroup.vn www.nlpgroup.vn;
+
+    # Document root — project deploy flat (index.php ở root)
+    root ./nlp-labs-vietnam;
+    index index.php;
+
+    charset utf-8;
+
+    # Tăng giới hạn upload — phải khớp với post_max_size bên PHP
+    client_max_body_size 64M;
+
+    access_log /var/log/nginx/nlpgroup.vn.access.log;
+    error_log  /var/log/nginx/nlpgroup.vn.error.log;
+
+    # SSL — Let's Encrypt cert cho nlpgroup.vn
+    ssl_certificate     /etc/letsencrypt/live/nlpgroup.vn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/nlpgroup.vn/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    add_header Referrer-Policy "strict-origin-when-cross-origin";
+
+    # Gzip
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript
+               text/xml application/xml image/svg+xml font/woff font/woff2;
+    gzip_min_length 1024;
+
+    # Static assets — serve trực tiếp, không qua PHP
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|webp|eot|ttf|map)$ {
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+        try_files $uri =404;
+        access_log off;
+    }
+
+    # Chatbot-AI tools — serve HTML files trực tiếp
+    location ^~ /chatbot-ai/ {
+        root ./nlp-labs-vietnam/public;
+        try_files $uri =404;
+        add_header Cache-Control "no-cache";
+        add_header X-Frame-Options "SAMEORIGIN";
+    }
+
+    # Laravel public/build assets (Vite manifest)
+    location /build/ {
+        alias ./nlp-labs-vietnam/public/build/;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    # Uploaded files / storage symlink
+    location /assets/storage/ {
+        alias ./nlp-labs-vietnam/storage/app/public/;
+        expires 7d;
+        add_header Cache-Control "public";
+        access_log off;
+    }
+
+    # Block access to sensitive files
+    location ~ /\. {
+        deny all;
+    }
+    location ~ ^/(\.env|composer\.(json|lock)|package\.json|artisan|phpunit\.xml) {
+        deny all;
+        return 404;
+    }
+    location ~ /vendor/ {
+        deny all;
+        return 404;
+    }
+
+    # Main PHP handler — route everything through index.php (Laravel)
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize=64M \n post_max_size=64M";
+        fastcgi_read_timeout 120;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+}

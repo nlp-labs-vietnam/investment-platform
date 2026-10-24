@@ -10,7 +10,7 @@
 #   bash backup-db.sh
 #
 # Cách thêm vào cron (chạy lúc 2:30 AM hàng ngày):
-#   30 2 * * * /var/www/investment-platform/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
+#   30 2 * * * ./nlp-labs-vietnam/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
 #
 # Tác giả: NLP Group <dev@nlpgroup.vn>
 # =============================================================================
@@ -18,7 +18,7 @@
 set -euo pipefail
 
 # ── Cấu hình ──────────────────────────────────────────────────────────────────
-APP_DIR="/var/www/investment-platform"
+APP_DIR="./nlp-labs-vietnam"
 BACKUP_DIR="/var/backups/nlpgroup-db"
 KEEP_DAYS=7
 TIMESTAMP="$(date +%Y%m%d_%H%M%S)"

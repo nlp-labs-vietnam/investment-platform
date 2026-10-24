@@ -45,6 +45,30 @@ $arr = [
                 'delete' => ['admin.property.delete'],
             ],
         ],
+        "Property_Images" => [
+            'permission' => [
+                'view' => [],
+                'add' => [],
+                'edit' => ['admin.property.image.meta', 'admin.property.image.crop', 'admin.property.image.reorder'],
+                'delete' => ['admin.property.image.destroy'],
+            ],
+        ],
+        "Property_Seo" => [
+            'permission' => [
+                'view' => [],
+                'add' => ['admin.property.seo.store'],
+                'edit' => ['admin.property.seo.store'],
+                'delete' => [],
+            ],
+        ],
+        "Property_Revisions" => [
+            'permission' => [
+                'view' => ['admin.property.revisions'],
+                'add' => [],
+                'edit' => ['admin.property.rollback'],
+                'delete' => [],
+            ],
+        ],
         "Wishlist" => [
             'permission' => [
                 'view' => ['admin.property.wishlist', 'admin.internationallyViewShipment', 'admin.internationallyShipmentInvoice'],

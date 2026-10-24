@@ -9,9 +9,12 @@ use App\Models\Favourite;
 use App\Models\Image;
 use App\Models\ManageTime;
 use App\Models\Property;
+use App\Models\PropertyRevision;
+use App\Models\PropertySeo;
 use App\Traits\Upload;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -165,8 +168,9 @@ class PropertyController extends Controller
             'address_id' => 'required|exists:addresses,id',
             'amenity_id' => 'nullable|exists:amenities,id',
             'location' => 'nullable|url',
-            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
-            'thumbnail' => 'required|mimes:jpg,jpeg,png|max:5120',
+            'video'      => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video_file' => ['nullable', 'file', 'mimes:mp4,webm,ogg,mov,avi', 'max:204800'], // 200 MB
+            'thumbnail'  => 'required|mimes:jpg,jpeg,png|max:5120',
             'property_image.*' => 'nullable|mimes:jpeg,png,jpg',
             'installment_duration' => 'nullable|numeric|min:1',
             'fixed_amount' => 'nullable|numeric|min:1',
@@ -265,6 +269,22 @@ class PropertyController extends Controller
             $property->amenity_id = $request->amenity_id ?? null;
             $property->video = $request->video ?? null;
             $property->details = $request->details;
+
+            // Video file upload — ưu tiên hơn URL embed
+            if ($request->hasFile('video_file')) {
+                // Xoá file cũ nếu có
+                if (!empty($property->video_file)) {
+                    $this->fileDelete($property->video_driver ?? 'local', $property->video_file);
+                }
+                $videoData = $this->fileUpload(
+                    $request->video_file,
+                    config('filelocation.propertyVideo.path'),
+                    null, null, null, null, null, null
+                );
+                throw_if(!$videoData, __('Video could not be uploaded.'));
+                $property->video_file   = $videoData['path'];
+                $property->video_driver = $videoData['driver'];
+            }
 
             $input_form = [];
             if ($request->has('faq_title')) {
@@ -386,7 +406,8 @@ class PropertyController extends Controller
             'address_id' => 'required|exists:addresses,id',
             'amenity_id' => 'nullable|exists:amenities,id',
             'location' => 'nullable|url',
-            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video'      => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            'video_file' => ['nullable', 'file', 'mimes:mp4,webm,ogg,mov,avi', 'max:204800'], // 200 MB
             'property_image.*' => 'nullable|mimes:jpeg,png,jpg',
             'installment_duration' => 'nullable|numeric|min:1',
             'fixed_amount' => 'nullable|numeric|min:1',
@@ -485,6 +506,21 @@ class PropertyController extends Controller
             $property->video = $request->video ?? null;
             $property->details = $request->details;
 
+            // Video file upload — ưu tiên hơn URL embed
+            if ($request->hasFile('video_file')) {
+                if (!empty($property->video_file)) {
+                    $this->fileDelete($property->video_driver ?? 'local', $property->video_file);
+                }
+                $videoData = $this->fileUpload(
+                    $request->video_file,
+                    config('filelocation.propertyVideo.path'),
+                    null, null, null, null, null, null
+                );
+                throw_if(!$videoData, __('Video could not be uploaded.'));
+                $property->video_file   = $videoData['path'];
+                $property->video_driver = $videoData['driver'];
+            }
+
             $input_form = [];
             if ($request->has('faq_title')) {
                 for ($a = 0; $a < count($request->faq_title); $a++) {
@@ -534,6 +570,17 @@ class PropertyController extends Controller
                     $property->driver = $thumbnail['driver'] ?? 'local';
                 }
             }
+
+            // Snapshot revision trước khi lưu
+            PropertyRevision::create([
+                'property_id'    => $property->id,
+                'editor_id'      => Auth::guard('admin')->id(),
+                'change_summary' => 'Updated via admin panel',
+                'payload'        => $property->only([
+                    'title', 'details', 'thumbnail', 'amenity_id', 'location', 'video',
+                    'total_investment_amount', 'profit', 'start_date', 'expire_date', 'status',
+                ]),
+            ]);
 
             $saveProperty = $property->save();
 
@@ -676,5 +723,83 @@ class PropertyController extends Controller
         $favourite = Favourite::findOrFail($id);
         $favourite->delete();
         return back()->with('success', 'Wishlist deleted successfully!');
+    }
+
+    /**
+     * POST /admin/property/{id}/seo — Tạo hoặc cập nhật SEO meta
+     */
+    public function seoStore(Request $request, $id)
+    {
+        $property = Property::findOrFail($id);
+
+        $this->validate($request, [
+            'meta_title'       => 'nullable|string|max:191',
+            'meta_description' => 'nullable|string|max:500',
+            'slug'             => 'nullable|string|max:191|unique:property_seo,slug,' . optional($property->seo)->id,
+            'og_image_id'      => 'nullable|exists:images,id',
+        ]);
+
+        PropertySeo::updateOrCreate(
+            ['property_id' => $property->id],
+            [
+                'meta_title'       => $request->meta_title,
+                'meta_description' => $request->meta_description,
+                'slug'             => $request->slug ? Str::slug($request->slug) : null,
+                'og_image_id'      => $request->og_image_id,
+            ]
+        );
+
+        return back()->with('success', __('SEO settings saved.'));
+    }
+
+    /**
+     * GET /admin/property/{id}/revisions — JSON danh sách lịch sử (20 bản gần nhất)
+     */
+    public function revisions(Request $request, $id)
+    {
+        abort_if(!$request->ajax(), 404);
+
+        $revisions = PropertyRevision::where('property_id', $id)
+            ->with('editor:id,name')
+            ->latest('created_at')
+            ->limit(20)
+            ->get()
+            ->map(fn($r) => [
+                'id'             => $r->id,
+                'editor_name'    => optional($r->editor)->name,
+                'change_summary' => $r->change_summary,
+                'created_at'     => $r->created_at?->format('d/m/Y H:i'),
+            ]);
+
+        return response()->json($revisions);
+    }
+
+    /**
+     * POST /admin/property/rollback/{revId} — Khôi phục property từ snapshot
+     */
+    public function rollback(Request $request, $revId)
+    {
+        abort_if(!$request->ajax(), 404);
+
+        $revision = PropertyRevision::findOrFail($revId);
+        $property = Property::findOrFail($revision->property_id);
+
+        // Restore các trường đã snapshot
+        $property->fill($revision->payload);
+
+        // Snapshot hiện tại trước khi rollback
+        PropertyRevision::create([
+            'property_id'    => $property->id,
+            'editor_id'      => Auth::guard('admin')->id(),
+            'change_summary' => 'Rollback to revision #' . $revision->id,
+            'payload'        => $property->only([
+                'title', 'details', 'thumbnail', 'amenity_id', 'location', 'video',
+                'total_investment_amount', 'profit', 'start_date', 'expire_date', 'status',
+            ]),
+        ]);
+
+        $property->save();
+
+        return response()->json(['success' => true, 'message' => __('Rollback successful.')]);
     }
 }

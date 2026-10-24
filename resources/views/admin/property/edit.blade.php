@@ -20,6 +20,38 @@
         </div>
 
 
+        {{-- ── Tab Navigation ── --}}
+        <ul class="nav nav-tabs mb-4" id="propertyEditTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-content-btn" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab">
+                    <i class="bi-file-text me-1"></i> @lang('Nội Dung')
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-images-btn" data-bs-toggle="tab" data-bs-target="#tab-images" type="button" role="tab">
+                    <i class="bi-images me-1"></i> @lang('Hình Ảnh')
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-seo-btn" data-bs-toggle="tab" data-bs-target="#tab-seo" type="button" role="tab">
+                    <i class="bi-search me-1"></i> @lang('SEO')
+                </button>
+            </li>
+            @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Revisions.permission.view')))
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-history-btn" data-bs-toggle="tab" data-bs-target="#tab-history" type="button" role="tab">
+                    <i class="bi-clock-history me-1"></i> @lang('Lịch Sử')
+                </button>
+            </li>
+            @endif
+        </ul>
+
+        <div class="tab-content" id="propertyEditTabsContent">
+
+        {{-- ══════════════════════════════════
+             TAB 1 — NỘI DUNG (form gốc)
+        ══════════════════════════════════ --}}
+        <div class="tab-pane fade show active" id="tab-content" role="tabpanel">
         <form action="{{ route("admin.property.update", $singleProperty->id) }}" method="post"
               enctype="multipart/form-data">
             @csrf
@@ -109,7 +141,7 @@
 
 
                                             <div class="col-md-12">
-                                                <label for="video" class="form-label">@lang("Video Url")</label>
+                                                <label for="video" class="form-label">@lang("Video URL (YouTube embed)")</label>
                                                 <div class="input-group input-group-sm-vertical">
                                                     <input type="text" class="form-control change_name_input"
                                                            name="video"
@@ -118,6 +150,28 @@
                                                            autocomplete="off">
                                                 </div>
                                                 @error("video")
+                                                <span class="invalid-feedback d-block">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col-md-12 mt-3">
+                                                <label for="video_file" class="form-label">
+                                                    @lang("Video File (Upload lên server)")
+                                                    <small class="text-muted ms-1">@lang("mp4, webm, ogg, mov, avi — tối đa 200 MB. Ưu tiên hơn URL YouTube.")</small>
+                                                </label>
+                                                @if(!empty($singleProperty->video_file))
+                                                <div class="mb-2">
+                                                    <video controls style="max-width:320px;max-height:180px;border-radius:6px;">
+                                                        <source src="{{ getFile($singleProperty->video_driver ?? 'local', $singleProperty->video_file) }}"
+                                                                type="video/mp4">
+                                                    </video>
+                                                    <p class="small text-muted mt-1">@lang("Video hiện tại. Upload file mới để thay thế.")</p>
+                                                </div>
+                                                @endif
+                                                <input type="file" class="form-control"
+                                                       name="video_file" id="video_file"
+                                                       accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-msvideo">
+                                                @error("video_file")
                                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -837,6 +891,286 @@
                 </div>
             </div>
         </form>
+        </div>{{-- /tab-pane #tab-content --}}
+
+        {{-- ══════════════════════════════════
+             TAB 2 — HÌNH ẢNH
+        ══════════════════════════════════ --}}
+        <div class="tab-pane fade" id="tab-images" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    {{-- Thumbnail --}}
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="card-title h4 mb-0">@lang('Property Thumbnail')</h2>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.property.update', $singleProperty->id) }}" method="post" enctype="multipart/form-data" id="thumbnailForm">
+                                @csrf
+                                <input type="hidden" name="_thumbnail_only" value="1">
+                                <div class="d-flex align-items-start gap-4 flex-wrap">
+                                    <img id="thumbPreview"
+                                         src="{{ getFile($singleProperty->driver, $singleProperty->thumbnail) }}"
+                                         class="rounded border"
+                                         style="width:200px;height:130px;object-fit:cover;"
+                                         alt="@lang('Thumbnail')">
+                                    <div>
+                                        <label class="form-label">@lang('Replace Thumbnail')</label>
+                                        <input type="file" class="form-control" name="thumbnail" id="thumbInput"
+                                               accept=".jpg,.jpeg,.png">
+                                        <small class="text-muted d-block mt-1">@lang('JPG/PNG, max 5MB. Auto-converted to WebP.')</small>
+                                        <button type="submit" class="btn btn-primary btn-sm mt-2">@lang('Save Thumbnail')</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    {{-- Gallery Images --}}
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="card-title h4 mb-0">@lang('Gallery Images')</h2>
+                            @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Images.permission.add')))
+                            <label class="btn btn-sm btn-outline-primary mb-0">
+                                <i class="bi-plus-circle me-1"></i> @lang('Add Images')
+                                <input type="file" id="galleryUploadInput" multiple accept=".jpg,.jpeg,.png" class="d-none">
+                            </label>
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted small mb-3">@lang('Drag cards to reorder. Click the pencil to edit alt text / caption. Click the crop icon to crop.')</p>
+                            <div id="galleryGrid" class="row g-3">
+                                @foreach($singleProperty->image as $img)
+                                <div class="col-6 col-md-4 gallery-item" data-id="{{ $img->id }}">
+                                    <div class="card h-100 border">
+                                        <div class="position-relative">
+                                            <img src="{{ asset(getFile($img->driver, $img->image)) }}"
+                                                 class="card-img-top"
+                                                 style="height:130px;object-fit:cover;"
+                                                 alt="{{ $img->alt_text ?? '' }}">
+                                            <div class="position-absolute top-0 end-0 p-1 d-flex gap-1">
+                                                @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Images.permission.edit')))
+                                                <button type="button" class="btn btn-xs btn-light btn-crop-img"
+                                                        data-id="{{ $img->id }}"
+                                                        data-src="{{ asset(getFile($img->driver, $img->image)) }}"
+                                                        title="@lang('Crop')">
+                                                    <i class="bi-crop"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-xs btn-light btn-edit-meta"
+                                                        data-id="{{ $img->id }}"
+                                                        data-alt="{{ $img->alt_text }}"
+                                                        data-caption="{{ $img->caption }}"
+                                                        title="@lang('Edit meta')">
+                                                    <i class="bi-pencil"></i>
+                                                </button>
+                                                @endif
+                                                @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Images.permission.delete')))
+                                                <button type="button" class="btn btn-xs btn-danger btn-delete-img"
+                                                        data-id="{{ $img->id }}"
+                                                        title="@lang('Delete')">
+                                                    <i class="bi-trash"></i>
+                                                </button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <p class="small text-muted mb-0 text-truncate" title="{{ $img->alt_text }}">
+                                                {{ $img->alt_text ?: '—' }}
+                                            </p>
+                                            <p class="small text-muted mb-0 text-truncate" title="{{ $img->caption }}">
+                                                {{ $img->caption ?: '—' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal: Edit Alt / Caption --}}
+            <div class="modal fade" id="metaModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">@lang('Edit Image Meta')</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="metaImageId">
+                            <div class="mb-3">
+                                <label class="form-label">@lang('Alt Text')</label>
+                                <input type="text" class="form-control" id="metaAltText" maxlength="191">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">@lang('Caption')</label>
+                                <input type="text" class="form-control" id="metaCaption" maxlength="255">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('Cancel')</button>
+                            <button type="button" class="btn btn-primary" id="saveMetaBtn">@lang('Save')</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal: Crop --}}
+            <div class="modal fade" id="cropModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">@lang('Crop Image')</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <input type="hidden" id="cropImageId">
+                            <img id="cropImageEl" src="" style="max-width:100%;">
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="cropRatio169">16:9</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="cropRatio43">4:3</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="cropRatio11">1:1</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="cropRatioFree">@lang('Free')</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('Cancel')</button>
+                                <button type="button" class="btn btn-primary" id="saveCropBtn">@lang('Save Cropped')</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Inline Upload Form (hidden) - dùng AJAX --}}
+            <form id="galleryUploadForm" action="{{ route('admin.property.update', $singleProperty->id) }}"
+                  method="post" enctype="multipart/form-data" class="d-none">
+                @csrf
+                <input type="hidden" name="_gallery_only" value="1">
+                <input type="file" name="property_image[]" id="galleryUploadFiles" multiple>
+            </form>
+        </div>{{-- /tab-pane #tab-images --}}
+
+        {{-- ══════════════════════════════════
+             TAB 3 — SEO
+        ══════════════════════════════════ --}}
+        <div class="tab-pane fade" id="tab-seo" role="tabpanel">
+            @php $seo = $singleProperty->seo; @endphp
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title h4 mb-0">@lang('SEO Meta')</h2>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.property.seo.store', $singleProperty->id) }}" method="post">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label">@lang('Meta Title') <small class="text-muted">(@lang('max 60 chars'))</small></label>
+                                    <input type="text" class="form-control" name="meta_title" maxlength="191"
+                                           value="{{ old('meta_title', $seo->meta_title ?? $singleProperty->title) }}"
+                                           id="seoMetaTitle">
+                                    <div class="d-flex justify-content-end">
+                                        <small class="text-muted"><span id="metaTitleCount">0</span>/60</small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">@lang('Meta Description') <small class="text-muted">(@lang('max 160 chars'))</small></label>
+                                    <textarea class="form-control" name="meta_description" rows="3" maxlength="500"
+                                              id="seoMetaDesc">{{ old('meta_description', $seo->meta_description ?? '') }}</textarea>
+                                    <div class="d-flex justify-content-end">
+                                        <small class="text-muted"><span id="metaDescCount">0</span>/160</small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">@lang('Custom Slug') <small class="text-muted">(@lang('optional'))</small></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text text-muted">/property/</span>
+                                        <input type="text" class="form-control" name="slug"
+                                               value="{{ old('slug', $seo->slug ?? \Illuminate\Support\Str::slug($singleProperty->title)) }}">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">@lang('OG Image') <small class="text-muted">(@lang('choose from gallery'))</small></label>
+                                    <div class="d-flex flex-wrap gap-2" id="ogImagePicker">
+                                        @foreach($singleProperty->image as $img)
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="og_image_id" value="{{ $img->id }}"
+                                                   class="d-none og-image-radio"
+                                                {{ ($seo->og_image_id ?? null) == $img->id ? 'checked' : '' }}>
+                                            <img src="{{ asset(getFile($img->driver, $img->image)) }}"
+                                                 class="rounded border og-image-thumb {{ ($seo->og_image_id ?? null) == $img->id ? 'border-primary border-3' : '' }}"
+                                                 style="width:80px;height:56px;object-fit:cover;"
+                                                 alt="">
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                {{-- Google SERP Preview --}}
+                                <div class="card bg-light border-0 mb-3">
+                                    <div class="card-body py-2 px-3">
+                                        <p class="small text-muted mb-1">@lang('Google preview')</p>
+                                        <div id="serpTitle" class="text-primary fw-semibold" style="font-size:18px;"></div>
+                                        <div class="text-success small">{{ url('/property') }}/<span id="serpSlug"></span></div>
+                                        <div id="serpDesc" class="small text-muted"></div>
+                                    </div>
+                                </div>
+
+                                @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Seo.permission.edit')))
+                                <button type="submit" class="btn btn-primary">@lang('Save SEO')</button>
+                                @endif
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>{{-- /tab-pane #tab-seo --}}
+
+        {{-- ══════════════════════════════════
+             TAB 4 — LỊCH SỬ
+        ══════════════════════════════════ --}}
+        @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Revisions.permission.view')))
+        <div class="tab-pane fade" id="tab-history" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="card-title h4 mb-0">@lang('Revision History')</h2>
+                            <small class="text-muted">@lang('Last 20 changes')</small>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>@lang('Editor')</th>
+                                            <th>@lang('Summary')</th>
+                                            <th>@lang('Date')</th>
+                                            @if(adminAccessRoute(config('permissionList.Manage_Property.Property_Revisions.permission.edit')))
+                                            <th>@lang('Action')</th>
+                                            @endif
+                                        </tr>
+                                    </thead>
+                                    <tbody id="revisionsTbody">
+                                        <tr><td colspan="5" class="text-center text-muted py-4">
+                                            <span class="spinner-border spinner-border-sm me-2"></span> @lang('Loading...')
+                                        </td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>{{-- /tab-pane #tab-history --}}
+        @endif
+
+        </div>{{-- /tab-content --}}
     </div>
 @endsection
 
@@ -845,6 +1179,15 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/tom-select.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/global/css/image-uploader.css') }}"/>
     <link href="{{ asset('assets/global/css/flatpickr.min.css') }}" rel="stylesheet">
+    {{-- Cropper.js --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+    <style>
+        .btn-xs { padding: 2px 6px; font-size: 11px; line-height: 1.4; }
+        .gallery-item { cursor: grab; }
+        .gallery-item.sortable-ghost { opacity: .4; }
+        .og-image-thumb.border-primary { box-shadow: 0 0 0 3px #0d6efd; }
+        .cursor-pointer { cursor: pointer; }
+    </style>
 @endpush
 
 @push('js-lib')
@@ -853,6 +1196,9 @@
     <script src="{{ asset("assets/admin/js/hs-file-attach.min.js") }}"></script>
     <script src="{{ asset('assets/global/js/image-uploader.js') }}"></script>
     <script src="{{ asset('assets/global/js/flatpickr.js') }}"></script>
+    {{-- SortableJS + Cropper.js (CDN) --}}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
 @endpush
 
 @push('script')
@@ -1007,5 +1353,187 @@
         function deleteFaqField(id) {
             $(`#removeFaqField${id}`).remove();
         }
+
+        // ── Thumbnail live preview ──────────────────────────────────────
+        $('#thumbInput').on('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => $('#thumbPreview').attr('src', e.target.result);
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // ── Gallery: SortableJS drag-and-drop ──────────────────────────
+        const galleryGrid = document.getElementById('galleryGrid');
+        if (galleryGrid) {
+            Sortable.create(galleryGrid, {
+                animation: 150,
+                ghostClass: 'sortable-ghost',
+                handle: '.gallery-item',
+                onEnd: function () {
+                    const ids = [...galleryGrid.querySelectorAll('.gallery-item')].map(el => el.dataset.id);
+                    $.ajax({
+                        url: '{{ route("admin.property.image.reorder") }}',
+                        method: 'PATCH',
+                        data: { ids, _token: '{{ csrf_token() }}' },
+                        success: () => toastr.success('{{ __("Image order saved.") }}'),
+                        error: () => toastr.error('{{ __("Could not save order.") }}')
+                    });
+                }
+            });
+        }
+
+        // ── Gallery: Delete image ──────────────────────────────────────
+        $(document).on('click', '.btn-delete-img', function () {
+            if (!confirm('{{ __("Delete this image?") }}')) return;
+            const btn = $(this);
+            const id = btn.data('id');
+            $.ajax({
+                url: `/admin/property/image/${id}`,
+                method: 'DELETE',
+                data: { _token: '{{ csrf_token() }}' },
+                success: function () {
+                    btn.closest('.gallery-item').remove();
+                    toastr.success('{{ __("Image deleted.") }}');
+                },
+                error: () => toastr.error('{{ __("Delete failed.") }}')
+            });
+        });
+
+        // ── Gallery: Edit Meta (alt/caption) ──────────────────────────
+        $(document).on('click', '.btn-edit-meta', function () {
+            $('#metaImageId').val($(this).data('id'));
+            $('#metaAltText').val($(this).data('alt') || '');
+            $('#metaCaption').val($(this).data('caption') || '');
+            new bootstrap.Modal('#metaModal').show();
+        });
+
+        $('#saveMetaBtn').on('click', function () {
+            const id = $('#metaImageId').val();
+            $.ajax({
+                url: `/admin/property/image/${id}/meta`,
+                method: 'PATCH',
+                data: {
+                    alt_text: $('#metaAltText').val(),
+                    caption:  $('#metaCaption').val(),
+                    _token:   '{{ csrf_token() }}'
+                },
+                success: function () {
+                    bootstrap.Modal.getInstance(document.getElementById('metaModal')).hide();
+                    toastr.success('{{ __("Metadata saved.") }}');
+                },
+                error: () => toastr.error('{{ __("Save failed.") }}')
+            });
+        });
+
+        // ── Gallery: Crop ──────────────────────────────────────────────
+        let cropperInstance = null;
+        $(document).on('click', '.btn-crop-img', function () {
+            const id  = $(this).data('id');
+            const src = $(this).data('src');
+            $('#cropImageId').val(id);
+            const el = document.getElementById('cropImageEl');
+            el.src = src;
+            if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+            new bootstrap.Modal('#cropModal').show();
+            document.getElementById('cropModal').addEventListener('shown.bs.modal', () => {
+                cropperInstance = new Cropper(el, { aspectRatio: 16/9, viewMode: 1 });
+            }, { once: true });
+        });
+
+        ['169', '43', '11'].forEach(key => {
+            const ratios = { '169': 16/9, '43': 4/3, '11': 1 };
+            $(`#cropRatio${key}`).on('click', () => cropperInstance && cropperInstance.setAspectRatio(ratios[key]));
+        });
+        $('#cropRatioFree').on('click', () => cropperInstance && cropperInstance.setAspectRatio(NaN));
+
+        $('#saveCropBtn').on('click', function () {
+            if (!cropperInstance) return;
+            const id      = $('#cropImageId').val();
+            const canvas  = cropperInstance.getCroppedCanvas({ maxWidth: 1920 });
+            const imgData = canvas.toDataURL('image/webp', 0.9);
+            $.ajax({
+                url: `/admin/property/image/${id}/crop`,
+                method: 'POST',
+                data: { image_data: imgData, _token: '{{ csrf_token() }}' },
+                success: function (res) {
+                    // Cập nhật src ảnh trong gallery
+                    $(`.gallery-item[data-id="${id}"] img`).attr('src', res.src + '?t=' + Date.now());
+                    $(`.btn-crop-img[data-id="${id}"]`).data('src', res.src);
+                    bootstrap.Modal.getInstance(document.getElementById('cropModal')).hide();
+                    toastr.success('{{ __("Image cropped.") }}');
+                },
+                error: () => toastr.error('{{ __("Crop failed.") }}')
+            });
+        });
+
+        // ── Gallery: Add new images (upload) ──────────────────────────
+        $('#galleryUploadInput').on('change', function () {
+            const dt = new DataTransfer();
+            [...this.files].forEach(f => dt.items.add(f));
+            document.getElementById('galleryUploadFiles').files = dt.files;
+            const form = document.getElementById('galleryUploadForm');
+            const fd = new FormData(form);
+            $.ajax({
+                url: form.action,
+                method: 'POST',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: () => { toastr.success('{{ __("Images uploaded.") }}'); location.reload(); },
+                error: () => toastr.error('{{ __("Upload failed.") }}')
+            });
+        });
+
+        // ── SEO tab: character counters & SERP preview ────────────────
+        function updateSerp() {
+            const title = $('#seoMetaTitle').val() || '';
+            const desc  = $('#seoMetaDesc').val()  || '';
+            const slug  = $('input[name="slug"]').val() || '';
+            $('#serpTitle').text(title.substring(0, 60));
+            $('#serpDesc').text(desc.substring(0, 160));
+            $('#serpSlug').text(slug);
+            $('#metaTitleCount').text(title.length);
+            $('#metaDescCount').text(desc.length);
+        }
+        $('#seoMetaTitle, #seoMetaDesc, input[name="slug"]').on('input', updateSerp);
+        updateSerp();
+
+        // OG image highlight on select
+        $(document).on('change', '.og-image-radio', function () {
+            $('.og-image-thumb').removeClass('border-primary border-3');
+            $(this).siblings('img').addClass('border-primary border-3');
+        });
+
+        // ── Revision History lazy load ─────────────────────────────────
+        $('#tab-history-btn').one('click', function () {
+            $.get('{{ route("admin.property.revisions", $singleProperty->id) }}', function (data) {
+                let html = '';
+                if (!data.length) {
+                    html = '<tr><td colspan="5" class="text-center text-muted py-3">{{ __("No revisions yet.") }}</td></tr>';
+                } else {
+                    data.forEach((r, i) => {
+                        const canRollback = {{ adminAccessRoute(config('permissionList.Manage_Property.Property_Revisions.permission.edit')) ? 'true' : 'false' }};
+                        html += `<tr>
+                            <td>${i+1}</td>
+                            <td>${r.editor_name || '—'}</td>
+                            <td>${r.change_summary || '—'}</td>
+                            <td>${r.created_at}</td>
+                            ${canRollback ? `<td><button class="btn btn-xs btn-outline-warning btn-rollback" data-id="${r.id}">Rollback</button></td>` : ''}
+                        </tr>`;
+                    });
+                }
+                $('#revisionsTbody').html(html);
+            });
+        });
+
+        $(document).on('click', '.btn-rollback', function () {
+            if (!confirm('{{ __("Restore this version? Current data will be overwritten.") }}')) return;
+            const id = $(this).data('id');
+            $.post(`/admin/property/rollback/${id}`, { _token: '{{ csrf_token() }}' })
+                .done(() => { toastr.success('{{ __("Rollback successful.") }}'); setTimeout(() => location.reload(), 1200); })
+                .fail(() => toastr.error('{{ __("Rollback failed.") }}'));
+        });
     </script>
 @endpush

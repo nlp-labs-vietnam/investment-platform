@@ -94,16 +94,28 @@
                             </div>
                         </div>
 
+                        @if(!empty($singlePropertyDetails->video_file) || !empty($singlePropertyDetails->video))
                         <div id="amenities" class="video-box">
                             <h4 class="mb-4">@lang('Video')</h4>
                             <div class="row gy-4">
-                                <iframe width="100%" height="100%"
-                                        src="{{ $singlePropertyDetails->video }}"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                @if(!empty($singlePropertyDetails->video_file))
+                                    <video controls style="width:100%;border-radius:8px;max-height:480px;" preload="metadata">
+                                        <source src="{{ getFile($singlePropertyDetails->video_driver ?? 'local', $singlePropertyDetails->video_file) }}"
+                                                type="video/mp4">
+                                        @lang('Trình duyệt không hỗ trợ phát video.')
+                                    </video>
+                                @else
+                                    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+                                        <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                                                src="{{ $singlePropertyDetails->video }}"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                @endif
                             </div>
                         </div>
+                        @endif
 
 
                         <div class="map-box">

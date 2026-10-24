@@ -77,7 +77,7 @@
 mysqldump -u USER -p DB_NAME > nlp03448_nlpgroup.sql
 
 # Auto backup cron (02:30 AM daily)
-30 2 * * * /var/www/investment-platform/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
+30 2 * * * ./nlp-labs-vietnam/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
 # Lưu tại: /var/backups/nlpgroup-db/ — giữ 7 bản
 ```
 
@@ -280,10 +280,10 @@ php artisan queue:restart
 
 ```bash
 # Laravel Scheduler (chạy mỗi phút)
-* * * * * /usr/bin/php /var/www/investment-platform/artisan schedule:run >> /var/log/nlpgroup-scheduler.log 2>&1
+* * * * * /usr/bin/php ./nlp-labs-vietnam/artisan schedule:run >> /var/log/nlpgroup-scheduler.log 2>&1
 
 # DB Backup (02:30 AM hàng ngày)
-30 2 * * * /var/www/investment-platform/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
+30 2 * * * ./nlp-labs-vietnam/backup-db.sh >> /var/log/nlpgroup-db-backup.log 2>&1
 ```
 
 **Schedule tasks trong `Kernel.php`:**

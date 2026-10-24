@@ -1,0 +1,39 @@
+{
+  "name": "@nlp-labs-vietnam/investment-utils",
+  "version": "1.0.0",
+  "description": "Currency formatters, date helpers and validators for NLP Investment Platform",
+  "keywords": ["investment", "utils", "currency", "vnd", "nlp-group", "vietnam"],
+  "homepage": "https://nlpgroup.vn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nlp-labs-vietnam/investment-platform.git",
+    "directory": "packages/utils"
+  },
+  "license": "UNLICENSED",
+  "author": "NLP Group <dev@nlpgroup.vn> (https://nlpgroup.vn)",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist/", "src/"],
+  "scripts": {
+    "build": "vite build --config vite.lib.config.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^8.3.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
